@@ -1,502 +1,811 @@
-# Importando as bibliotecas
-import pandas as pd
+"""Scraper do ZAP Imoveis para venda de apartamentos e casas em Fortaleza.
+
+Saida final do CSV:
+listing_id,titulo,apartamento_ou_casa,tipo_imovel,estado,cidade,bairro,rua,numero,endereco,metragem,quartos,banheiros,suites,andar,estacionamentos,preco_anuncio,latitude,longitude,tem_portaria_24h,tem_vista_pro_mar,tem_condominio_fechado,tem_piscina,tem_deck,tem_varanda_gourmet,tem_varanda,tem_academia,tem_salao_festas,tem_salao_jogos,tem_quadra_campo,descricao,anuncio_criado,corretora,nota_media,url,imagem_url
+
+O site bloqueia requests diretos, entao este scraper usa Playwright.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import html
+import json
 import re
-from selenium.webdriver.common.keys import Keys
-import random
-import re
+import sys
 import time
-import logging
-import random
-from typing import List, Dict, Optional
-import undetected_chromedriver as uc 
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException, WebDriverException, NoSuchElementException
-from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import unicodedata
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Optional
+from urllib.parse import urljoin, urlparse
 
-# configurações de logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(message)s"
-)
-logger = logging.getLogger(__name__)
 
-def carregar_cards_zap_imoveis(driver):
-    for i in range(30):
-        subir_pagina(driver)
-        time.sleep(random.uniform(0.1, 2.0))
-        descer_pagina(driver)
-    
-def subir_pagina(driver):
-    for i in range(6):
-        body_element = driver.find_element(By.TAG_NAME, "body")
-        body_element.send_keys(Keys.PAGE_UP)
-        #time.sleep(1) # Pequena pausa
-
-def descer_pagina(driver):
-    resultado = random.choice([True,False])
-    if resultado:
-        for i in range(12):
-            body_element = driver.find_element(By.TAG_NAME, "body")
-            body_element.send_keys(Keys.PAGE_DOWN)
-            #time.sleep(2)
-    else:
-        body_element = driver.find_element(By.TAG_NAME, "body")
-        body_element.send_keys(Keys.END)
-        
-def safe_get_text(element: WebElement, selector: str, default: str = "") -> str:
-    """Busca um elemento filho por seletor CSS e retorna seu texto de forma segura."""
-    try:
-        raw = element.find_element(By.CSS_SELECTOR, selector).get_attribute("textContent") or ""
-        # transforma múltiplos espaços, tabs e quebras de linha em um único espaço
-        cleaned = re.sub(r"\s+", " ", raw).strip()
-        return cleaned.replace(";", ",")
-    except NoSuchElementException:
-        return default
-    except Exception as e:
-        logger.error(f"Erro inesperado ao buscar texto com seletor '{selector}': {e}")
-        return default
-
-def safe_get_attribute(element: WebElement, selector: str, attribute: str, default: str = "") -> str:
-    """Busca um elemento filho por seletor CSS e retorna um atributo de forma segura."""
-    try:
-        return element.find_element(By.CSS_SELECTOR, selector).get_attribute(attribute) or default
-    except NoSuchElementException:
-        return default
-    except Exception as e:
-        logger.error(f"Erro inesperado ao buscar atributo '{attribute}' com seletor '{selector}': {e}")
-        return default
-
-def extract_number(text: str, default: int = 0) -> int:
-    """Extrai o primeiro número inteiro de uma string, removendo não-dígitos."""
-    if not text:
-        return default
-    # Remove R$, pontos de milhar, espaços e pega apenas os dígitos
-    digits = re.sub(r'[^\d]', '', text)
-    return int(digits) if digits else default
-
-def extract_decimal_number(text: str, default: float = 0.0) -> float:
-    """Extrai um número decimal (IPTU/Cond), tratando vírgula como separador decimal."""
-    if not text:
-        return default
-    # Encontra padrões como R$ 1.234,56 ou R$ 570
-    match = re.search(r'R\$\s*([\d\.,]+)', text)
-    if match:
-        num_str = match.group(1).replace('.', '').replace(',', '.') # Transforma para formato float padrão
-        try:
-            return float(num_str)
-        except ValueError:
-            logger.warning(f"Não foi possível converter '{num_str}' para float.")
-            return default
-    return default
-
-def safe_get(driver, url, retries=3):
-    """Tenta carregar página, detecta Cloudflare e faz retry com novo driver."""
-    for attempt in range(retries):
-        driver = start_driver()
-        driver.get(url)
-        #time.sleep(1)
-        if "Checking your browser" not in driver.title:
-            return driver
-        logger.warning("Bloqueado pela Cloudflare, trocando driver/proxy...")
-        driver.quit()
-    raise RuntimeError("Falha ao passar pelo Cloudflare após várias tentativas")
-
-USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 14.4; rv:125.0) Gecko/20100101 Firefox/125.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0",
-    "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/124.0.6367.80 Mobile/15E148 Safari/604.1"
-]
-
-MONTHS_PT = {
-    'janeiro':   1,  'fevereiro': 2, 'março':      3,
-    'abril':     4,  'maio':      5, 'junho':      6,
-    'julho':     7,  'agosto':    8, 'setembro':   9,
-    'outubro':  10,  'novembro': 11, 'dezembro':  12,
+BASE_URL = "https://www.zapimoveis.com.br"
+SEARCH_URLS = {
+    "apartamento": "https://www.zapimoveis.com.br/venda/apartamentos/ce%2Bfortaleza/",
+    "casa": "https://www.zapimoveis.com.br/venda/casas/ce%2Bfortaleza/",
 }
 
-def start_driver() -> uc.Chrome:
-    """Inicializa undetected ChromeDriver com opções stealth."""
-    options = uc.ChromeOptions()
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    driver = uc.Chrome(options=options)
-    driver.set_window_size(1200, 800)
-    driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-      "source": """
-        Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
-        window.chrome = { runtime: {} };
-        Object.defineProperty(navigator, 'plugins', { get: () => [1,2,3,4,5] });
-        Object.defineProperty(navigator, 'languages', { get: () => ['pt-BR','en-US'] });
-      """
-    })
-    return driver
+OUTPUT_COLUMNS = [
+    "listing_id",
+    "titulo",
+    "apartamento_ou_casa",
+    "tipo_imovel",
+    "estado",
+    "cidade",
+    "bairro",
+    "rua",
+    "numero",
+    "endereco",
+    "metragem",
+    "quartos",
+    "banheiros",
+    "suites",
+    "andar",
+    "estacionamentos",
+    "preco_anuncio",
+    "latitude",
+    "longitude",
+    "tem_portaria_24h",
+    "tem_vista_pro_mar",
+    "tem_condominio_fechado",
+    "tem_piscina",
+    "tem_deck",
+    "tem_varanda_gourmet",
+    "tem_varanda",
+    "tem_academia",
+    "tem_salao_festas",
+    "tem_salao_jogos",
+    "tem_quadra_campo",
+    "descricao",
+    "anuncio_criado",
+    "corretora",
+    "nota_media",
+    "url",
+    "imagem_url",
+]
 
-def parse_pt_date_to_iso(pt_date: str) -> str:
-    """
-    Recebe data em português no formato 'D de mês de YYYY'
-    e retorna 'YYYY-MM-DD'. Se o formato não bater, retorna original.
-    """
-    m = re.search(r'(\d{1,2})\s+de\s+([A-Za-zç]+)\s+de\s+(\d{4})', pt_date, re.IGNORECASE)
-    if not m:
-        return pt_date  # fallback
-    day, month_name, year = m.group(1), m.group(2).lower(), m.group(3)
-    month = MONTHS_PT.get(month_name)
-    if not month:
-        return pt_date
-    return f"{int(year):04d}-{month:02d}-{int(day):02d}"
 
-def parse_card_casas(card_element: WebElement) -> Optional[Dict]:
-
+def _ensure_playwright() -> None:
     try:
-        card_data = {}
+        import playwright  # noqa: F401
+    except Exception as exc:  # pragma: no cover
+        raise SystemExit(
+            "Playwright nao esta instalado. Instale com `pip install playwright` "
+            "e depois rode `playwright install chromium`."
+        ) from exc
 
-        # Área (m²)
-        area_text = safe_get_text(card_element, 'li[data-cy="rp-cardProperty-propertyArea-txt"] h3')
-        card_data['area_m2'] = extract_number(area_text)
-        logger.debug(f"  Área Texto Bruto: '{area_text}', Extraído: {card_data['area_m2']}")
 
-        # Quartos
-        quartos_text = safe_get_text(card_element, 'li[data-cy="rp-cardProperty-bedroomQuantity-txt"] h3')
-        card_data['quartos'] = extract_number(quartos_text)
-        logger.debug(f"  Quartos Texto Bruto: '{quartos_text}', Extraído: {card_data['quartos']}")
+def _clean_text(text: str) -> str:
+    text = html.unescape(text or "")
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
 
-        # Banheiros
-        banheiros_text = safe_get_text(card_element, 'li[data-cy="rp-cardProperty-bathroomQuantity-txt"] h3')
-        card_data['banheiros'] = extract_number(banheiros_text)
-        logger.debug(f"  Banheiros Texto Bruto: '{banheiros_text}', Extraído: {card_data['banheiros']}")
 
-        # Vagas
-        vagas_text = safe_get_text(card_element, 'li[data-cy="rp-cardProperty-parkingSpacesQuantity-txt"] h3')
-        card_data['vagas'] = extract_number(vagas_text)
-        logger.debug(f"  Vagas Texto Bruto: '{vagas_text}', Extraído: {card_data['vagas']}")
+def _normalize(text: str) -> str:
+    text = html.unescape(text or "")
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    return text.lower()
 
-        # Valor do Imóvel
-        price_text = safe_get_text(card_element, 'div[data-cy="rp-cardProperty-price-txt"] p.text-2-25')
-        card_data['valor_R$'] = extract_number(price_text) # Renomeei para indicar que é número
-        logger.debug(f"  Valor Texto Bruto: '{price_text}', Extraído: {card_data['valor_R$']}")
-        
-        # Preço por m²
-        card_data["preco_m2"] = card_data["valor_R$"] / card_data["area_m2"] if card_data["area_m2"] > 0 else 0.0
-        logger.debug(f"  Preço por m²: {card_data['preco_m2']}")
 
-        # URL do Anúncio
-        card_data['url'] = safe_get_attribute(card_element, 'a', 'href', 'URL Não Encontrada')
-
-        # Tipo de Destaque
-        card_data['destaque'] = safe_get_text(card_element, 'li[data-cy="rp-cardProperty-tag-txt"]', 'Sem Destaque')
-
-        # Imagem Principal
-        card_data['imagem_url'] = safe_get_attribute(card_element, 'img', 'src', 'Imagem Não Encontrada')
-
-        # Localização: tipo, bairro e cidade separadamente
-        loc_text = safe_get_text(card_element, 'h2[data-cy="rp-cardProperty-location-txt"]')
-        # Exemplo: "Casa em Andaraí, Rio de Janeiro"
-        tipo, _, loc_part = loc_text.partition(' em ')
-        card_data['tipo_imovel_titulo'] = tipo.strip() or None
-        # separar bairro e cidade por vírgula
-        bairro, sep, cidade = loc_part.partition(',')
-        card_data['bairro']       = bairro.strip() if bairro else None
-        card_data['cidade']       = cidade.strip() if sep and cidade else None
-
-        # Rua
-        card_data['rua'] = safe_get_text(card_element, 'p[data-cy="rp-cardProperty-street-txt"]', 'Rua Não Informada')
-
-        # Condomínio e IPTU
-        costs_text = safe_get_text(card_element, 'div[data-cy="rp-cardProperty-price-txt"] p.text-1-75')
-        card_data['condominio_R$'] = 0.0
-        card_data['iptu_R$'] = 0.0
-        if costs_text:
-            cond_match = re.search(r'Cond\.\s*(R\$\s*[\d\.,]+)', costs_text, re.IGNORECASE)
-            if cond_match:
-                card_data['condominio_R$'] = extract_decimal_number(cond_match.group(1))
-            iptu_match = re.search(r'IPTU\s*(R\$\s*[\d\.,]+)', costs_text, re.IGNORECASE)
-            if iptu_match:
-                card_data['iptu_R$'] = extract_decimal_number(iptu_match.group(1))
-        logger.debug(f"  Custos Texto Bruto: '{costs_text}', Cond: {card_data['condominio_R$']}, IPTU: {card_data['iptu_R$']}")
-
-        # Timestamp
-        card_data['timestamp_coleta'] = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S') # Formato mais legível
-
-        logger.debug(f"Card parseado com sucesso: {card_data.get('url', 'URL Desconhecida')}")
-        return card_data
-
-    except Exception as e:
-        logger.exception(f"Erro crítico ao parsear um card. Detalhes: {e}")
-        url_on_error = safe_get_attribute(card_element, 'a', 'href', 'URL não recuperável no erro')
-        logger.error(f"Erro no card com URL (aproximada): {url_on_error}")
+def _to_number(text: str) -> Optional[float]:
+    match = re.search(r"(\d+(?:[.,]\d+)?)", _normalize(text))
+    if not match:
         return None
-    
-def fetch_detail_with_safe_get(card_data):
-    """
-    Usa safe_get para criar um driver que já passou pelo Cloudflare,
-    carrega a página de detalhe, extrai 'descricao' e 'corretora' e encerra o driver.
-    """
-    url = card_data.get('url')
-    if not url or url.startswith('URL Não'):
-        card_data['descricao'] = "Descrição não disponível"
-        card_data['corretora'] = "Corretora não disponível"
-        card_data['anuncio_criado'] = "Data não disponível"
-        card_data['suites'] = "Suites não disponíveis"
-        card_data['andar'] = "Andar não disponível"
-        card_data['endereco'] = "Endereco não disponível"
-        card_data['estado'] = "Estado não disponível"
-        card_data['numero'] = "Número não disponível"
-        card_data['coordenadas'] = "Coordenadas não encontradas"
-        card_data['tem_portaria_24h'] = False
-        card_data['tem_vista_pro_mar'] = False
-        card_data['tem_interfone'] = False
-        card_data['tem_condominio_fechado'] = False
-        card_data['tem_piscina'] = False
-        card_data['tem_churrasqueira'] = False
-        card_data['tem_varanda_gourmet'] = False
-        card_data['tem_varanda'] = False
-        card_data['tem_armario_embutido'] = False
-        card_data['aceita_pet'] = False
-        card_data['tem_academia'] = False
-        card_data['tem_salao_festas'] = False
-        card_data['tem_estacionamento'] = False
-        card_data['nota_media'] = 0.0
-        card_data['total_avaliacoes'] = 0
-        card_data['total_imoveis'] = 0
-        return
-
     try:
-        driver_aba = safe_get(None, url) 
-        time.sleep(2)
-        
-        # Estado
-        endereco_selector = "p[data-testid='address-info-value']"
-        endereco_raw = safe_get_text(driver_aba, endereco_selector)
-        card_data['estado'] = endereco_raw.split(",")[-1].split("-")[-1].strip() if endereco_raw else "Estado não disponível"
-        
-        # Numero
-        numero_selector = "p[data-testid='address-info-value']"
-        numero_raw = safe_get_text(driver_aba, numero_selector)
-        numero = extract_number(numero_raw, "Número não disponível")
-        card_data['numero'] = numero
-        
-        # Suites
-        suite_selector = "li[itemprop='numberOfSuites']"
-        suite_raw = safe_get_text(driver_aba, suite_selector)
-        card_data['suites'] = extract_number(suite_raw) if suite_raw else 0
-        
-        # Andar
-        andar_selector = "li[itemprop='floorLevel']"
-        andar_raw = safe_get_text(driver_aba, andar_selector)
-        card_data['andar'] = extract_number(andar_raw) if andar_raw else 1
-        
-        #permite pets?
-        pet_selector = "li[itemprop='PETS_ALLOWED']"
-        pet_raw = safe_get_text(driver_aba, pet_selector)
-        if pet_raw:
-            card_data['aceita_pet'] = True
-        else:
-            card_data['aceita_pet'] = False   
-        
-        #portaria 24h
-        portaria_selector = "li[itemprop='CONCIERGE_24H']"
-        portaria_raw = safe_get_text(driver_aba, portaria_selector)
-        if portaria_raw:
-            card_data['tem_portaria_24h'] = True
-        else:
-            card_data['tem_portaria_24h'] = False
-          
-        #vista pro mar
-        mar_selector = "li[itemprop='SEA_VIEW']"
-        mar_raw = safe_get_text(driver_aba, mar_selector)
-        if mar_raw:  #Vista para o mar
-            card_data['tem_vista_pro_mar'] = True
-        else:
-            card_data['tem_vista_pro_mar'] = False  
-            
-        #interfone
-        interfone_selector = "li[itemprop='INTERCOM']"
-        interfone_raw = safe_get_text(driver_aba, interfone_selector)
-        if interfone_raw:  #== "Interfone"
-            card_data['tem_interfone'] = True
-        else:
-            card_data['tem_interfone'] = False
-        
-        #condominio fechado
-        condominio_selector = "li[itemprop='GATED_COMMUNITY']"
-        condominio_raw = safe_get_text(driver_aba, condominio_selector)
-        if condominio_raw:
-            card_data['tem_condominio_fechado'] = True
-        else:
-            card_data['tem_condominio_fechado'] = False
-        
-        # piscina
-        piscina_selector = "li[itemprop='POOL']"
-        piscina_raw = safe_get_text(driver_aba, piscina_selector)
-        if piscina_raw:
-            card_data['tem_piscina'] = True
-        else:
-            card_data['tem_piscina'] = False
-            
-        # churrasqueira
-        churrasqueira_selector = "li[itemprop='BARBECUE_GRILL']"
-        churrasqueira_raw = safe_get_text(driver_aba, churrasqueira_selector)
-        if churrasqueira_raw:
-            card_data['tem_churrasqueira'] = True
-        else:
-            card_data['tem_churrasqueira'] = False    
-            
-        # Varanda gourmet
-        varanda_selector = "li[itemprop='GOURMET_BALCONY']"
-        varanda_raw = safe_get_text(driver_aba, varanda_selector)
-        if varanda_raw:
-            card_data['tem_varanda_gourmet'] = True
-        else:
-            card_data['tem_varanda_gourmet'] = False
-            
-        # Varanda
-        varanda_selector = "li[itemprop='BALCONY']"
-        varanda_raw = safe_get_text(driver_aba, varanda_selector)
-        if varanda_raw:
-            card_data['tem_varanda'] = True
-        else:
-            card_data['tem_varanda'] = False
-            
-        # Armario embutido
-        armario_selector = "li[itemprop='BUILTIN_WARDROBE']"
-        armario_raw = safe_get_text(driver_aba, armario_selector)
-        if armario_raw:
-            card_data['tem_armario_embutido'] = True
-        else:
-            card_data['tem_armario_embutido'] = False
-            
-        # Estacionamento
-        estacionamento_selector = "li[itemprop='PARKING']"
-        estacionamento_raw = safe_get_text(driver_aba, estacionamento_selector)
-        if estacionamento_raw:
-            card_data['tem_estacionamento'] = True
-        else:
-            card_data['tem_estacionamento'] = False
-            
-        # Academia
-        academia_selector = "li[itemprop='GYM']"
-        academia_raw = safe_get_text(driver_aba, academia_selector)
-        if academia_raw:
-            card_data['tem_academia'] = True
-        else:
-            card_data['tem_academia'] = False
-            
-        # Salão de festas
-        salao_selector = "li[itemprop='PARTY_HALL']"
-        salao_raw = safe_get_text(driver_aba, salao_selector)
-        if salao_raw:
-            card_data['tem_salao_festas'] = True
-        else:
-            card_data['tem_salao_festas'] = False       
-        
-        # Corretora
-        card_data["corretora"]  = safe_get_text(driver_aba, "a[data-testid='official-store-redirect-link']")
+        return float(match.group(1).replace(".", "").replace(",", "."))
+    except ValueError:
+        return None
 
-        # Avaliações
-        rating_selector = '[data-testid="rating-container"] .rating-container__text'
-        rating_raw = safe_get_text(driver_aba, rating_selector)
-        m = re.search(r"(\d+(?:\.\d+)?)\/\d+\s*\((\d+)", rating_raw)
-        card_data['nota_media'] = float(m.group(1)) if m else 0
-        card_data['total_avaliacoes'] = int(m.group(2)) if m else 0
 
-        # Total imóveis
-        total_selector = "p.properties-container"
-        total_raw = safe_get_text(driver_aba, total_selector)
-        card_data['total_imoveis'] = extract_number(total_raw)
+def _to_int(text: str) -> Optional[int]:
+    value = _to_number(text)
+    if value is None:
+        return None
+    return int(round(value))
 
-        # Anuncio criado
-        date_raw = safe_get_text(driver_aba, '[data-testid="listing-created-date"]')
-        created_part = date_raw.split(",")[0].replace("Anúncio criado em", "").strip()
-        card_data['anuncio_criado'] = parse_pt_date_to_iso(created_part)  
-       
-        # Descrição
-        desc_selector = "p[data-testid='description-content']"
-        desc_raw = safe_get_text(driver_aba, desc_selector)
-        card_data['descricao'] = desc_raw        
-        
-        # Endereco
-        desc_selector = "p[data-testid='location']"
-        desc_raw = safe_get_text(driver_aba, desc_selector)
-        card_data['endereco'] = desc_raw    
+
+def _extract_listing_id(url: str) -> str:
+    match = re.search(r"-id-(\d+)", url)
+    return match.group(1) if match else ""
+
+
+def _extract_type_from_url(url: str) -> str:
+    path = urlparse(url).path.lower()
+    if "/venda/apartamentos/" in path or "venda-apartamento-" in path or "-apartamento-" in path:
+        return "apartamento"
+    if "/venda/casas/" in path or "venda-casa-" in path or "-casa-" in path:
+        return "casa"
+    return ""
+
+
+def _build_search_url(property_type: str, page_number: int) -> str:
+    base = SEARCH_URLS[property_type]
+    if page_number <= 1:
+        return base
+    return f"{base}?pagina={page_number}"
+
+
+def _extract_bairro_from_url(url: str) -> str:
+    path = urlparse(url).path.lower()
+    slug = path.rsplit("/", 1)[-1]
+    slug = re.sub(r"-id-\d+.*$", "", slug)
+    if "-fortaleza-ce-" not in slug:
+        return ""
+    prefix = slug.split("-fortaleza-ce-", 1)[0]
+    tokens = [t for t in prefix.split("-") if t]
+    if len(tokens) < 2:
+        return ""
+
+    generic = {
+        "venda",
+        "aluguel",
+        "apartamento",
+        "apartamentos",
+        "casa",
+        "casas",
+        "com",
+        "de",
+        "do",
+        "da",
+        "das",
+        "dos",
+        "e",
+        "na",
+        "no",
+        "nos",
+        "nas",
+        "quartos",
+        "quarto",
+        "banheiros",
+        "banheiro",
+        "vagas",
+        "vaga",
+        "suite",
+        "suites",
+        "piscina",
+        "varanda",
+        "gourmet",
+        "m2",
+        "m",
+    }
+
+    while tokens and tokens[-1] in generic:
+        tokens.pop()
+    while tokens and tokens[-1].isdigit():
+        tokens.pop()
+    if not tokens:
+        return ""
+
+    tail = tokens[-4:]
+    while tail and tail[0] in generic:
+        tail = tail[1:]
+    while tail and tail[-1] in generic:
+        tail = tail[:-1]
+    return " ".join(tail).strip(" -")
+
+
+def _first_json_ld_dict(page) -> dict:
+    try:
+        raw_scripts = page.locator('script[type="application/ld+json"]').all_text_contents()
+    except Exception:
+        raw_scripts = []
+
+    best_item = {}
+    for raw in raw_scripts:
+        raw = raw.strip()
+        if not raw:
+            continue
+        try:
+            parsed = json.loads(raw)
+        except Exception:
+            continue
+        if isinstance(parsed, dict):
+            score = 0
+            if parsed.get("offers"):
+                score += 2
+            if parsed.get("image"):
+                score += 2
+            if parsed.get("sku"):
+                score += 1
+            if parsed.get("name") and "zap imoveis" not in str(parsed.get("name", "")).lower():
+                score += 2
+            if parsed.get("description"):
+                score += 1
+            if score > 0 and score >= best_item.get("_score", 0):
+                best_item = dict(parsed)
+                best_item["_score"] = score
+        if isinstance(parsed, list):
+            for item in parsed:
+                if isinstance(item, dict):
+                    score = 0
+                    if item.get("offers"):
+                        score += 2
+                    if item.get("image"):
+                        score += 2
+                    if item.get("sku"):
+                        score += 1
+                    if item.get("name") and "zap imoveis" not in str(item.get("name", "")).lower():
+                        score += 2
+                    if item.get("description"):
+                        score += 1
+                    if score > 0 and score >= best_item.get("_score", 0):
+                        best_item = dict(item)
+                        best_item["_score"] = score
+    if "_score" in best_item:
+        best_item.pop("_score", None)
+    return best_item
+
+
+def _json_ld_value(item: dict, key: str) -> str:
+    value = item.get(key, "")
+    if isinstance(value, dict):
+        return str(value.get("value", ""))
+    if isinstance(value, list):
+        for entry in value:
+            if isinstance(entry, str):
+                return entry
+    return str(value) if value is not None else ""
+
+
+def _json_ld_address(item: dict) -> dict:
+    address = item.get("address")
+    return address if isinstance(address, dict) else {}
+
+
+def _json_ld_geo(item: dict) -> dict:
+    geo = item.get("geo")
+    return geo if isinstance(geo, dict) else {}
+
+
+def _json_ld_offers(item: dict) -> dict:
+    offers = item.get("offers")
+    if isinstance(offers, dict):
+        return offers
+    if isinstance(offers, list) and offers and isinstance(offers[0], dict):
+        return offers[0]
+    return {}
+
+
+def _extract_meta(page, selector: str) -> str:
+    try:
+        value = page.locator(selector).first.get_attribute("content") or ""
+        return _clean_text(value)
+    except Exception:
+        return ""
+
+
+def _extract_title(page, fallback: str) -> str:
+    try:
+        h1 = page.locator("h1").first.inner_text(timeout=5000)
+        if h1:
+            return _clean_text(h1)
+    except Exception:
+        pass
+    title = page.title()
+    if title:
+        return _clean_text(title)
+    title = _extract_meta(page, 'meta[property="og:title"]')
+    if title and title.lower() != "zap imoveis":
+        return title
+    return fallback
+
+
+def _extract_bairro_from_page(page) -> str:
+    page_title = ""
+    try:
+        page_title = page.title()
+    except Exception:
+        page_title = ""
+
+    patterns = [
+        r"\bem\s+(.+?)\s*-\s*Fortaleza\b",
+        r"\bde\s+(.+?)\s*-\s*Fortaleza\b",
+    ]
+    for source in [page_title, _extract_meta(page, 'meta[name="description"]')]:
+        for pattern in patterns:
+            match = re.search(pattern, source, flags=re.I)
+            if match:
+                return _clean_text(match.group(1))
+    return ""
+
+
+def _extract_image(page) -> str:
+    image = _extract_meta(page, 'meta[property="og:image"]')
+    if image:
+        if image.startswith("//"):
+            return f"https:{image}"
+        if image.startswith("/"):
+            return urljoin(BASE_URL, image)
+        return image
+    try:
+        src = page.locator("img").first.get_attribute("src") or ""
+        if src.startswith("//"):
+            return f"https:{src}"
+        if src.startswith("/"):
+            return urljoin(BASE_URL, src)
+        return src
+    except Exception:
+        return ""
+
+
+def _is_blocked_content(text: str) -> bool:
+    normalized = _normalize(text)
+    return any(
+        phrase in normalized
+        for phrase in [
+            "sorry, you have been blocked",
+            "access denied",
+            "unusual traffic",
+            "blocked",
+        ]
+    )
+
+
+def _page_looks_blocked(page) -> bool:
+    try:
+        title = page.title()
+    except Exception:
+        title = ""
+    try:
+        body = page.locator("body").inner_text(timeout=3000)
+    except Exception:
+        body = ""
+    try:
+        html_text = page.content()
+    except Exception:
+        html_text = ""
+    return _is_blocked_content(f"{title}\n{body}\n{html_text}")
+
+
+def _goto_with_block_retries(page, url: str, *, attempts: int = 3, timeout_ms: int = 20000) -> bool:
+    for attempt in range(1, attempts + 1):
+        try:
+            page.goto(url, wait_until="commit", timeout=timeout_ms)
+            page.wait_for_timeout(700)
+        except Exception as exc:
+            print(f"[zap] falha ao abrir {url} tentativa {attempt}/{attempts}: {exc}", file=sys.stderr)
+            if attempt < attempts:
+                page.wait_for_timeout(1500 * attempt)
+            continue
+
+        if _page_looks_blocked(page):
+            print(f"[zap] pagina bloqueada em {url} tentativa {attempt}/{attempts}; recarregando.", file=sys.stderr)
+            try:
+                page.reload(wait_until="domcontentloaded", timeout=timeout_ms)
+            except Exception:
+                pass
+            page.wait_for_timeout(1500 * attempt)
+            if _page_looks_blocked(page):
+                if attempt < attempts:
+                    continue
+                return False
+        return True
+    return False
+
+
+def _extract_price(text: str) -> str:
+    match = re.search(r"R\$\s*[\d\.\,]+", text)
+    return match.group(0).replace("R$ ", "R$").strip() if match else ""
+
+
+def _extract_area(text: str) -> Optional[float]:
+    patterns = [
+        r"(\d+(?:[.,]\d+)?)\s*m²",
+        r"(\d+(?:[.,]\d+)?)\s*m2",
+        r"(\d+(?:[.,]\d+)?)\s+metros?\s+quadrados?",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, _normalize(text), flags=re.I | re.S)
+        if match:
+            return _to_number(match.group(1))
+    return None
+
+
+def _extract_rooms(text: str) -> Optional[int]:
+    patterns = [r"(\d+)\s+quartos?", r"(\d+)\s+dormitorios?", r"(\d+)\s+dormit[óo]rios?"]
+    for pattern in patterns:
+        match = re.search(pattern, _normalize(text), flags=re.I)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def _extract_bathrooms(text: str) -> Optional[int]:
+    match = re.search(r"(\d+)\s+banheiros?", _normalize(text), flags=re.I)
+    return int(match.group(1)) if match else None
+
+
+def _extract_parking(text: str) -> Optional[int]:
+    patterns = [r"(\d+)\s+vagas?\s+de\s+garagem", r"(\d+)\s+vagas?"]
+    for pattern in patterns:
+        match = re.search(pattern, _normalize(text), flags=re.I)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def _extract_suite_count(text: str) -> Optional[int]:
+    match = re.search(r"(\d+)\s+su[ii]tes?", _normalize(text), flags=re.I)
+    return int(match.group(1)) if match else None
+
+
+def _extract_floor(text: str) -> str:
+    match = re.search(r"(\d+)\s*(?:º|o)?\s*andar", _normalize(text), flags=re.I)
+    if match:
+        return match.group(1)
+    match = re.search(r"andar\s*(\d+)", _normalize(text), flags=re.I)
+    return match.group(1) if match else ""
+
+
+def _extract_feature_flags(text: str) -> dict[str, str]:
+    normalized = _normalize(text)
+    return {
+        "tem_portaria_24h": str(int(any(term in normalized for term in ["portaria 24", "portaria eletronica", "portaria"]))),
+        "tem_vista_pro_mar": str(int(any(term in normalized for term in ["vista para o mar", "vista mar", "frente mar", "beira mar"]))),
+        "tem_condominio_fechado": str(int("condominio fechado" in normalized)),
+        "tem_piscina": str(int("piscina" in normalized)),
+        "tem_deck": str(int("deck" in normalized)),
+        "tem_varanda_gourmet": str(int("varanda gourmet" in normalized)),
+        "tem_varanda": str(int("varanda" in normalized)),
+        "tem_academia": str(int(any(term in normalized for term in ["academia", "fitness"]))),
+        "tem_salao_festas": str(int(any(term in normalized for term in ["salao de festa", "salao de festas"]))),
+        "tem_salao_jogos": str(int("salao de jogos" in normalized)),
+        "tem_quadra_campo": str(int(any(term in normalized for term in ["quadra", "campo de futebol", "campo society", "quadra poliesportiva"]))),
+    }
+
+
+def _extract_text_field(page, fallback: str = "") -> str:
+    value = _extract_meta(page, 'meta[name="description"]')
+    return value or fallback
+
+
+def _extract_structured_data(page) -> dict:
+    item = _first_json_ld_dict(page)
+    address = _json_ld_address(item)
+    geo = _json_ld_geo(item)
+    offers = _json_ld_offers(item)
+
+    price = ""
+    raw_price = offers.get("price") or offers.get("lowPrice") or ""
+    if raw_price:
+        price = f"R$ {raw_price}" if not str(raw_price).startswith("R$") else str(raw_price)
+
+    return {
+        "titulo": _extract_title(page, str(item.get("name", ""))),
+        "descricao": _extract_meta(page, 'meta[name="description"]') or str(item.get("description", "")),
+        "image": (
+            (item.get("image")[0] if isinstance(item.get("image"), list) and item.get("image") else "")
+            or (str(item.get("image", "")) if isinstance(item.get("image"), str) else "")
+            or _extract_image(page)
+        ),
+        "street": str(address.get("streetAddress", "")),
+        "neighborhood": str(address.get("addressLocality", "")),
+        "region": str(address.get("addressRegion", "")),
+        "latitude": str(geo.get("latitude", "")),
+        "longitude": str(geo.get("longitude", "")),
+        "price": price,
+        "floor_size": _json_ld_value(item, "floorSize"),
+        "rooms": _json_ld_value(item, "numberOfRooms"),
+        "bathrooms": _json_ld_value(item, "numberOfBathroomsTotal"),
+        "suites": _json_ld_value(item, "numberOfSuites"),
+        "floor": _json_ld_value(item, "floorLevel"),
+        "parking": _json_ld_value(item, "numberOfParkingSpaces"),
+        "date_posted": str(item.get("datePosted", "")),
+        "seller": str(item.get("publisher", {}).get("name", "")) if isinstance(item.get("publisher"), dict) else "",
+    }
+
+
+@dataclass
+class ListingRecord:
+    listing_id: str = ""
+    titulo: str = ""
+    apartamento_ou_casa: str = ""
+    tipo_imovel: str = ""
+    estado: str = "CE"
+    cidade: str = "Fortaleza"
+    bairro: str = ""
+    rua: str = ""
+    numero: str = ""
+    endereco: str = ""
+    metragem: Optional[float] = None
+    quartos: Optional[int] = None
+    banheiros: Optional[int] = None
+    suites: Optional[int] = None
+    andar: str = ""
+    estacionamentos: Optional[int] = None
+    preco_anuncio: str = ""
+    latitude: str = ""
+    longitude: str = ""
+    tem_portaria_24h: str = "0"
+    tem_vista_pro_mar: str = "0"
+    tem_condominio_fechado: str = "0"
+    tem_piscina: str = "0"
+    tem_deck: str = "0"
+    tem_varanda_gourmet: str = "0"
+    tem_varanda: str = "0"
+    tem_academia: str = "0"
+    tem_salao_festas: str = "0"
+    tem_salao_jogos: str = "0"
+    tem_quadra_campo: str = "0"
+    descricao: str = ""
+    anuncio_criado: str = ""
+    corretora: str = ""
+    nota_media: str = ""
+    url: str = ""
+    imagem_url: str = ""
+
+    def as_dict(self) -> dict[str, str]:
+        def fmt(value):
+            if value is None:
+                return ""
+            if isinstance(value, float) and value.is_integer():
+                return str(int(value))
+            return str(value)
+
+        return {
+            "listing_id": self.listing_id,
+            "titulo": self.titulo,
+            "apartamento_ou_casa": self.apartamento_ou_casa,
+            "tipo_imovel": self.tipo_imovel,
+            "estado": self.estado,
+            "cidade": self.cidade,
+            "bairro": self.bairro,
+            "rua": self.rua,
+            "numero": self.numero,
+            "endereco": self.endereco,
+            "metragem": fmt(self.metragem),
+            "quartos": fmt(self.quartos),
+            "banheiros": fmt(self.banheiros),
+            "suites": fmt(self.suites),
+            "andar": self.andar,
+            "estacionamentos": fmt(self.estacionamentos),
+            "preco_anuncio": self.preco_anuncio,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "tem_portaria_24h": self.tem_portaria_24h,
+            "tem_vista_pro_mar": self.tem_vista_pro_mar,
+            "tem_condominio_fechado": self.tem_condominio_fechado,
+            "tem_piscina": self.tem_piscina,
+            "tem_deck": self.tem_deck,
+            "tem_varanda_gourmet": self.tem_varanda_gourmet,
+            "tem_varanda": self.tem_varanda,
+            "tem_academia": self.tem_academia,
+            "tem_salao_festas": self.tem_salao_festas,
+            "tem_salao_jogos": self.tem_salao_jogos,
+            "tem_quadra_campo": self.tem_quadra_campo,
+            "descricao": self.descricao,
+            "anuncio_criado": self.anuncio_criado,
+            "corretora": self.corretora,
+            "nota_media": self.nota_media,
+            "url": self.url,
+            "imagem_url": self.imagem_url,
+        }
+
+
+def _collect_listing_urls(page, property_type: str, page_number: int) -> list[str]:
+    if not _goto_with_block_retries(page, _build_search_url(property_type, page_number), attempts=3, timeout_ms=30000):
+        print(f"[zap] busca bloqueada ou inacessivel para {property_type} pagina {page_number}", file=sys.stderr)
+        return []
+
+    page.wait_for_timeout(500)
+    try:
+        hrefs = page.locator('a[href*="/imovel/"]').evaluate_all("els => els.map(el => el.href).filter(Boolean)")
+    except Exception:
+        hrefs = []
+
+    urls: list[str] = []
+    for href in hrefs:
+        if "/imovel/" not in href:
+            continue
+        if _extract_type_from_url(href) != property_type:
+            continue
+        if href not in urls:
+            urls.append(href)
+
+    return urls
+
+
+def _scrape_detail(page, url: str) -> ListingRecord:
+    if not _goto_with_block_retries(page, url, attempts=4, timeout_ms=20000):
+        raise RuntimeError(f"pagina bloqueada apos retries: {url}")
+
+    page.wait_for_timeout(500)
+    try:
+        body_text = _clean_text(page.locator("body").inner_text(timeout=7000))
+    except Exception:
+        body_text = ""
+    try:
+        html_text = page.content()
+    except Exception:
+        html_text = ""
+    combined_text = f"{body_text}\n{html_text}"
+    structured = _extract_structured_data(page)
+
+    record = ListingRecord()
+    record.listing_id = _extract_listing_id(url)
+    record.titulo = structured.get("titulo", "") or _extract_title(page, body_text)
+    record.url = url
+    record.apartamento_ou_casa = _extract_type_from_url(url)
+    record.tipo_imovel = record.apartamento_ou_casa
+    record.bairro = _extract_bairro_from_page(page) or structured.get("neighborhood", "") or _extract_bairro_from_url(url)
+    record.rua = structured.get("street", "")
+    record.numero = re.search(r"\b(\d{1,6})\b", record.rua).group(1) if re.search(r"\b(\d{1,6})\b", record.rua) else ""
+    if not record.rua:
+        match = re.search(r"(rua|avenida|av\.|travessa|alameda|rodovia|estrada)\s+[^,\n]+", body_text, flags=re.I)
+        if match:
+            record.rua = _clean_text(match.group(0))
+            record.numero = re.search(r"\b(\d{1,6})\b", record.rua).group(1) if re.search(r"\b(\d{1,6})\b", record.rua) else ""
+
+    record.endereco = ", ".join([part for part in [record.rua, record.bairro, "Fortaleza - CE"] if part])
+    record.metragem = _to_number(structured.get("floor_size", "")) or _extract_area(combined_text)
+    record.quartos = _to_int(structured.get("rooms", "")) or _extract_rooms(combined_text)
+    record.banheiros = _to_int(structured.get("bathrooms", "")) or _extract_bathrooms(combined_text)
+    record.suites = _to_int(structured.get("suites", "")) or _extract_suite_count(combined_text)
+    record.andar = structured.get("floor", "") or _extract_floor(combined_text)
+    record.estacionamentos = _to_int(structured.get("parking", "")) or _extract_parking(combined_text)
+    record.preco_anuncio = structured.get("price", "") or _extract_price(combined_text)
+    record.latitude = structured.get("latitude", "")
+    record.longitude = structured.get("longitude", "")
+    if not record.latitude or not record.longitude:
+        lat = re.search(r'"latitude"\s*:\s*(-?\d+(?:\.\d+)?)', html_text, flags=re.I | re.S)
+        lon = re.search(r'"longitude"\s*:\s*(-?\d+(?:\.\d+)?)', html_text, flags=re.I | re.S)
+        if lat and lon:
+            record.latitude, record.longitude = lat.group(1), lon.group(1)
+
+    record.descricao = structured.get("descricao", "") or _extract_meta(page, 'meta[name="description"]')
+    record.anuncio_criado = structured.get("date_posted", "")
+    record.corretora = structured.get("seller", "")
+    record.nota_media = ""
+    record.imagem_url = structured.get("image", "")
+    if not record.imagem_url:
+        record.imagem_url = _extract_image(page)
+
+    record.__dict__.update(_extract_feature_flags(combined_text))
+    return record
+
+
+def _append_row(output_path: Path, row: dict[str, str]) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    file_exists = output_path.exists() and output_path.stat().st_size > 0
+    with output_path.open("a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=OUTPUT_COLUMNS)
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow(row)
+
+
+def _load_seen_urls(output_path: Path) -> set[str]:
+    seen_urls: set[str] = set()
+    if not output_path.exists() or output_path.stat().st_size == 0:
+        return seen_urls
+    try:
+        with output_path.open("r", newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                url = (row or {}).get("url", "").strip()
+                if url:
+                    seen_urls.add(url)
+    except Exception as exc:
+        print(f"[zap] nao foi possivel ler o CSV existente para retomar: {exc}", file=sys.stderr)
+    return seen_urls
+
+
+def scrape_zap(output_path: Path, max_listings_per_type: int = 5000, headless: bool = True) -> list[dict[str, str]]:
+    _ensure_playwright()
+    from playwright.sync_api import sync_playwright
+
+    rows: list[dict[str, str]] = []
+    seen_urls: set[str] = _load_seen_urls(output_path)
+    if seen_urls:
+        print(f"[zap] retomando com {len(seen_urls)} URLs ja salvas em {output_path}")
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=headless)
+        page = browser.new_page(
+            viewport={"width": 1440, "height": 2200},
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/124.0.0.0 Safari/537.36"
+            ),
+        )
+        detail_page = browser.new_page(
+            viewport={"width": 1440, "height": 2200},
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/124.0.0.0 Safari/537.36"
+            ),
+        )
 
         try:
-            botao_localizacao = WebDriverWait(driver_aba, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='address-info-button']"))
-            )
+            for property_type in ("apartamento", "casa"):
+                print(f"[zap] coletando URLs de {property_type}s...")
+                page_number = 1
+                empty_pages = 0
+                collected_this_type = 0
 
-            # Scroll para o botão ser visível e clicável
-            driver_aba.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", botao_localizacao)
-            time.sleep(0.5) # Pequena pausa após scroll
-            driver_aba.execute_script("arguments[0].click();", botao_localizacao)
-            time.sleep(1) # Pausa para dar tempo do iframe iniciar o carregamento
+                while True:
+                    if max_listings_per_type and collected_this_type >= max_listings_per_type:
+                        break
 
-            # 2. Espera o IFRAME do mapa aparecer
-            WebDriverWait(driver_aba, 15).until(
-                EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, "iframe[data-testid='map-iframe']"))
-            )
-        
-            place_name_el = WebDriverWait(driver_aba, 10).until(
-                EC.visibility_of_element_located((By.CSS_SELECTOR, "div.place-name"))
-            )
-            coordenadas_texto = place_name_el.get_attribute("textContent").strip()
-            card_data['coordenadas'] = coordenadas_texto
-            
-        except Exception as e_inner:
-                card_data['coordenadas'] = "Coordenadas não encontradas"
-                 
-    except Exception as e:
-        logger.error(f"Erro ao buscar detalhe {url}: {e}")
-    finally:
-        driver_aba.quit()  # garante encerramento do driver de detalhe
-    
+                    urls = _collect_listing_urls(page, property_type=property_type, page_number=page_number)
+                    new_urls = [url for url in urls if url not in seen_urls]
+                    if not urls or not new_urls:
+                        empty_pages += 1
+                    else:
+                        empty_pages = 0
 
-def scrape_pages(pages: int) -> pd.DataFrame:
-    #driver = start_driver()
-    cards: List[Dict] = []
-    base_url = "https://www.zapimoveis.com.br/venda/imoveis/ce+fortaleza/" 
-    try:
-        for i in range(1, pages + 1):
-            url = f"{base_url}?pagina={i}"
-            logger.info(f"Abrindo página {i}: {url}")
-            try:
-                #driver.get(url)
-                driver = safe_get(None, url)
-                # espera até container de cards aparecer
-                carregar_cards_zap_imoveis(driver)
-                
-                elems = driver.find_elements(By.CSS_SELECTOR, 'li[data-cy="rp-property-cd"]')
-                logger.info(f"Encontrados {len(elems)} anúncios na página {i}")
-                for e in elems:
-                    card = parse_card_casas(e)
-                    if card:
-                        # extrai detalhes na página do anúncio
-                        fetch_detail_with_safe_get(card)
-                        cards.append(card)
-                        time.sleep(2)
-                    
-                driver.quit()
-            except TimeoutException:
-                logger.error(f"Timeout ao carregar página {i}")
-    except WebDriverException as e:
-        logger.exception("Erro no WebDriver:")
-    finally:
-        driver.quit()
-    df = pd.DataFrame(cards)
-    return df
+                    if empty_pages >= 3:
+                        print(f"[zap] sem novas URLs em {property_type} na pagina {page_number}, encerrando tipo.")
+                        break
+
+                    if not new_urls:
+                        print(f"[zap] pagina {page_number} sem URLs novas para {property_type}")
+                        page_number += 1
+                        continue
+
+                    print(f"[zap] pagina {page_number}: {len(new_urls)} novas URLs de {property_type}")
+                    for index, url in enumerate(new_urls, start=1):
+                        if url in seen_urls:
+                            continue
+                        seen_urls.add(url)
+                        try:
+                            record = _scrape_detail(detail_page, url)
+                            row = record.as_dict()
+                            rows.append(row)
+                            _append_row(output_path, row)
+                            collected_this_type += 1
+                            print(f"[zap] {property_type} p{page_number} {index}/{len(new_urls)} OK: {record.bairro or record.rua or url}")
+                            if max_listings_per_type and collected_this_type >= max_listings_per_type:
+                                break
+                        except Exception as exc:
+                            print(f"[zap] erro ao ler {url}: {exc}", file=sys.stderr)
+
+                    page_number += 1
+        finally:
+            detail_page.close()
+            page.close()
+            browser.close()
+
+    return rows
+
+
+def build_arg_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Scraper do ZAP Imoveis para venda de apartamentos e casas em Fortaleza.")
+    parser.add_argument(
+        "--output",
+        default=str(Path(__file__).resolve().parent / "outputs" / "zap_venda_fortaleza.csv"),
+        help="Caminho do CSV de saida.",
+    )
+    parser.add_argument(
+        "--max-listings-per-type",
+        type=int,
+        default=5000,
+        help="Limite maximo por tipo de imovel.",
+    )
+    parser.add_argument(
+        "--headless",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Executa o navegador em modo headless.",
+    )
+    return parser
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    parser = build_arg_parser()
+    args = parser.parse_args(argv)
+    output_path = Path(args.output)
+    rows = scrape_zap(output_path=output_path, max_listings_per_type=args.max_listings_per_type, headless=args.headless)
+    print(f"[zap] finalizado com {len(rows)} registros em {output_path}")
+    return 0
+
 
 if __name__ == "__main__":
-    NUM_PAGES = 1
-    df = scrape_pages(NUM_PAGES)
-    logger.info(f"Total de anúncios coletados: {len(df)}")
-    df.to_csv("scraping/outputs/Fortaleza-CE-2026-dataset-imoveis-geral.csv", sep=";", index=False, encoding="utf-8-sig")
-    logger.info("Dados salvos em 'scraping/outputs/Fortaleza-CE-2026-dataset-imoveis-geral.csv'")
+    raise SystemExit(main())

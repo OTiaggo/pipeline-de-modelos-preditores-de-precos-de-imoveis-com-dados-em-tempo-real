@@ -4,3 +4,4 @@ pandas
 setuptools
 beautifulsoup4
 requests
+playwright>=1.44.0
