@@ -1548,7 +1548,7 @@ def geocode_items(items, user_agent="imov-scraper-only", delay=1.1):
 # ORQUESTRADOR
 # ══════════════════════════════════════════════════════════════════════════════
 
-async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx", "zap", "vivareal", "imovelweb"), detalhar=False, max_detalhes=30, include_lancamentos=False, include_sem_url=False, geocode=False, max_pages=5, sweep_bairros=False, olx_start_page=1):
+async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx", "zap", "vivareal", "imovelweb"), detalhar=False, max_detalhes=30, include_lancamentos=False, include_sem_url=False, geocode=False, max_pages=5, sweep_bairros=False, olx_start_page=1, skip_quality_filter=False):
     """Coleta imóveis usando Playwright e retorna lista de Imovel.
 
     detalhar=True abre páginas individuais para tentar extrair descrição, endereço, condomínio e IPTU.
@@ -1611,7 +1611,7 @@ async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx",
         finally:
             await browser.close()
 
-    unique = _filter_quality(all_res, include_lancamentos=include_lancamentos, include_sem_url=include_sem_url)
+    unique = all_res if skip_quality_filter else _filter_quality(all_res, include_lancamentos=include_lancamentos, include_sem_url=include_sem_url)
 
     if detalhar:
         # Reabre um browser/contexto só para detalhes, evitando misturar páginas abertas da listagem.
@@ -1622,7 +1622,7 @@ async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx",
             finally:
                 await browser2.close()
         # Sanitiza novamente após preencher descrição/endereço/IPTU/condomínio.
-        unique = _filter_quality(unique, include_lancamentos=include_lancamentos, include_sem_url=include_sem_url)
+        unique = all_res if skip_quality_filter else _filter_quality(unique, include_lancamentos=include_lancamentos, include_sem_url=include_sem_url)
 
     if geocode:
         geocode_items(unique)

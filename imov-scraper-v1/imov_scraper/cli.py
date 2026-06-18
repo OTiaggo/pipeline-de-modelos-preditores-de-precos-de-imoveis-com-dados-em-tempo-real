@@ -32,24 +32,14 @@ def save_csv(items, path: Path):
         writer.writerows(rows)
 
 
-def load_existing_csv(path: Path):
-    if not path.exists():
-        return []
-    with path.open("r", newline="", encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        return list(reader)
-
-
-def merge_rows(existing, new_rows):
-    merged = {}
-    def key(row):
-        return (str(row.get("external_id") or "").strip(), str(row.get("url") or "").strip())
-    for row in existing + new_rows:
-        k = key(row)
-        if k == ("", ""):
-            continue
-        merged[k] = row
-    return list(merged.values())
+def append_csv(items, path: Path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    file_exists = path.exists()
+    with path.open("a", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
+        if not file_exists:
+            writer.writeheader()
+        writer.writerows([asdict(x) for x in items])
 
 
 async def main():
@@ -68,6 +58,7 @@ async def main():
     p.add_argument("--sweep-bairros", action="store_true", help="Em Fortaleza/CE, varre bairros da cidade via OLX para aumentar volume")
     p.add_argument("--include-lancamentos", action="store_true", help="Mantém páginas de lançamentos/construtoras")
     p.add_argument("--include-sem-url", action="store_true", help="Mantém registros sem URL")
+    p.add_argument("--skip-quality-filter", action="store_true", help="Mantém a coleta bruta sem deduplicar/filtrar registros")
     p.add_argument("--geocode", action="store_true", help="Busca latitude/longitude por bairro via Nominatim/OpenStreetMap")
     args = p.parse_args()
 
@@ -107,28 +98,14 @@ async def main():
             max_pages=args.max_pages,
             sweep_bairros=args.sweep_bairros,
             olx_start_page=args.olx_start_page,
+            skip_quality_filter=args.skip_quality_filter,
         )
         items.extend(chunk)
 
     if args.format in {"json", "both"}:
-        json_path = base.with_suffix(".json")
-        existing_json = []
-        if json_path.exists():
-            try:
-                existing_json = json.loads(json_path.read_text(encoding="utf-8"))
-            except Exception:
-                existing_json = []
-        payload = merge_rows(existing_json, [asdict(x) for x in items])
-        json_path.parent.mkdir(parents=True, exist_ok=True)
-        json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        save_json(items, base.with_suffix(".json"))
     if args.format in {"csv", "both"}:
-        csv_path = base.with_suffix(".csv")
-        existing_csv = load_existing_csv(csv_path)
-        merged = merge_rows(existing_csv, [asdict(x) for x in items])
-        with csv_path.open("w", newline="", encoding="utf-8-sig") as f:
-            writer = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
-            writer.writeheader()
-            writer.writerows(merged)
+        append_csv(items, base.with_suffix(".csv"))
 
     print(f"OK: {len(items)} imóveis novos coletados em {base.parent.resolve()}")
 
