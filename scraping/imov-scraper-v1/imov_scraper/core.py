@@ -1,11 +1,13 @@
 import asyncio
 import hashlib
+import itertools
 import json
 import logging
 import random
 import re
 import sys
 import time
+import unicodedata
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from typing import Optional
@@ -59,6 +61,8 @@ class Imovel:
 
 def _slug(s):
     s = (s or "").strip().lower()
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
     for a, b in [("ã","a"),("â","a"),("á","a"),("à","a"),("é","e"),("ê","e"),
                  ("í","i"),("ó","o"),("ô","o"),("õ","o"),("ú","u"),("ü","u"),
                  ("ç","c"),(" ","-")]:
@@ -493,14 +497,20 @@ def _make_id(prefix: str, link: str) -> str:
     return f"{prefix}_{int(hashlib.md5((link or prefix).encode()).hexdigest()[:12], 16)}"
 
 
-async def _zap(ctx, cidade, estado, finalidade, max_pages=5):
+def _page_range(start=1, max_pages=5):
+    if max_pages is None or int(max_pages) <= 0:
+        return itertools.count(start)
+    return range(start, start + int(max_pages))
+
+
+async def _zap(ctx, cidade, estado, finalidade, max_pages=5, on_items=None):
     page = await ctx.new_page()
     res  = []
     es   = estado.lower()
     cs   = _slug(cidade)
     tu   = "venda" if finalidade == "venda" else "aluguel"
 
-    for pag in range(1, max_pages + 1):
+    for pag in _page_range(1, max_pages):
         url = (f"https://www.zapimoveis.com.br/{tu}/imoveis/{es}+{cs}/"
                + (f"?pagina={pag}" if pag > 1 else ""))
         logger.info(f"[ZAP] p{pag}: {url}")
@@ -626,6 +636,8 @@ async def _zap(ctx, cidade, estado, finalidade, max_pages=5):
             novos += 1
 
         logger.info(f"[ZAP] p{pag}: {novos}")
+        if on_items and novos:
+            on_items(res[-novos:])
         if novos == 0: break
         await asyncio.sleep(random.uniform(2.5, 4))
 
@@ -638,14 +650,14 @@ async def _zap(ctx, cidade, estado, finalidade, max_pages=5):
 # VivaReal — data-cy="rp-property-cd" → texts dentro do container flex
 # ══════════════════════════════════════════════════════════════════════════════
 
-async def _vivareal(ctx, cidade, estado, finalidade, max_pages=5):
+async def _vivareal(ctx, cidade, estado, finalidade, max_pages=5, on_items=None):
     page = await ctx.new_page()
     res  = []
     en   = ESTADO_NOME.get(estado.upper(), estado.lower())
     cs   = _slug(cidade)
     tu   = "venda" if finalidade == "venda" else "aluguel"
 
-    for pag in range(1, max_pages + 1):
+    for pag in _page_range(1, max_pages):
         url = (f"https://www.vivareal.com.br/{tu}/{en}/{cs}/"
                + (f"?pagina={pag}" if pag > 1 else ""))
         logger.info(f"[VivaReal] p{pag}: {url}")
@@ -679,10 +691,15 @@ async def _vivareal(ctx, cidade, estado, finalidade, max_pages=5):
                 const seen = new Set();
                 const unique = texts.filter(t => { if(seen.has(t)) return false; seen.add(t); return true; });
 
+                const wrapper = card.closest('li, article, section') || card.parentElement;
+                const link = card.querySelector('a')?.href
+                          || wrapper?.querySelector('a')?.href
+                          || card.closest('a')?.href || '';
+
                 return {
                     texts: unique,
                     title: card.getAttribute('title') || '',
-                    link:  card.querySelector('a')?.href || '',
+                    link,
                     id:    card.getAttribute('data-id') || card.id || '',
                 };
             }).filter(c => c.texts.length > 0);
@@ -779,6 +796,8 @@ async def _vivareal(ctx, cidade, estado, finalidade, max_pages=5):
             novos += 1
 
         logger.info(f"[VivaReal] p{pag}: {novos}")
+        if on_items and novos:
+            on_items(res[-novos:])
         if novos == 0: break
         await asyncio.sleep(random.uniform(2.5, 4))
 
@@ -791,9 +810,10 @@ async def _vivareal(ctx, cidade, estado, finalidade, max_pages=5):
 # OLX — class="olx-adcard__content" → textos dos filhos
 # ══════════════════════════════════════════════════════════════════════════════
 
-async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, output_cidade=None, start_page=1):
+async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, output_cidade=None, start_page=1, on_items=None):
     page = await ctx.new_page()
     res  = []
+    seen_links = set()
     es   = estado.lower()
     cs   = _slug(search_slug or cidade)
     cidade_out = output_cidade or cidade
@@ -801,26 +821,31 @@ async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, o
     base_urls = []
     if cidade_out.strip().lower() == "fortaleza" and estado.upper() == "CE" and finalidade == "venda":
         base_urls = [
-            "https://www.olx.com.br/imoveis/venda/apartamentos/estado-ce/fortaleza-e-regiao",
-            "https://www.olx.com.br/imoveis/venda/casas/estado-ce/fortaleza-e-regiao",
+            ("apartamentos", "https://www.olx.com.br/imoveis/venda/apartamentos/estado-ce/fortaleza-e-regiao"),
+            ("casas", "https://www.olx.com.br/imoveis/venda/casas/estado-ce/fortaleza-e-regiao"),
         ]
     else:
-        base_urls = [f"https://{es}.olx.com.br/{cs}-e-regiao/imoveis"]
+        base_urls = [("imoveis", f"https://{es}.olx.com.br/{cs}-e-regiao/imoveis")]
 
-    for base_url in base_urls:
-        for pag in range(start_page, start_page + max_pages):
+    for categoria, base_url in base_urls:
+        if max_pages is None or int(max_pages) <= 0:
+            paginas_msg = f"{start_page}-ate esgotar"
+        else:
+            paginas_msg = f"{start_page}-{start_page + int(max_pages) - 1}"
+        logger.info(f"[OLX] categoria={categoria} | paginas={paginas_msg}")
+        for pag in _page_range(start_page, max_pages):
             url = base_url + (f"?o={pag}" if pag > 1 else "")
-            logger.info(f"[OLX] p{pag}: {url}")
+            logger.info(f"[OLX/{categoria}] p{pag}: {url}")
 
             try:
                 await page.goto(url, wait_until="domcontentloaded", timeout=30000)
             except Exception as e:
-                logger.warning(f"[OLX] goto erro: {e}"); break
+                logger.warning(f"[OLX/{categoria}] goto erro: {e}"); break
 
             try:
                 await page.wait_for_selector('.olx-adcard__content', timeout=15000)
             except:
-                logger.warning(f"[OLX] sem cards p{pag}")
+                logger.warning(f"[OLX/{categoria}] sem cards p{pag}")
 
             await asyncio.sleep(1.5)
 
@@ -935,6 +960,10 @@ async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, o
                 finalidade_final = "aluguel" if re.search(r"\balug", titulo_final, re.I) else finalidade
                 bairro = _clean_bairro(bairro)
                 link = c.get("link","")
+                if link and link in seen_links:
+                    continue
+                if link:
+                    seen_links.add(link)
                 ei   = c.get("id") or f"olx_dom_{int(hashlib.md5(link.encode()).hexdigest()[:12], 16)}"
                 res.append(Imovel(
                     external_id=f"olx_{ei}", url=link, site="OLX",
@@ -947,7 +976,9 @@ async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, o
                 ))
                 novos += 1
 
-            logger.info(f"[OLX] p{pag}: {novos}")
+            logger.info(f"[OLX/{categoria}] p{pag}: {novos}")
+            if on_items and novos:
+                on_items(res[-novos:])
             if novos == 0: break
             await asyncio.sleep(random.uniform(2, 3.5))
 
@@ -961,14 +992,14 @@ async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, o
 #             → textos dentro de class="postingCard-module__posting-top"
 # ══════════════════════════════════════════════════════════════════════════════
 
-async def _imovelweb(ctx, cidade, estado, finalidade, max_pages=5):
+async def _imovelweb(ctx, cidade, estado, finalidade, max_pages=5, on_items=None):
     page = await ctx.new_page()
     res  = []
     es   = estado.lower()
     cs   = _slug(cidade)
     op   = "imoveis-venda" if finalidade == "venda" else "imoveis-aluguel"
 
-    for pag in range(1, max_pages + 1):
+    for pag in _page_range(1, max_pages):
         url = (f"https://www.imovelweb.com.br/{op}-{cs}-{es}.html"
                + (f"?pag={pag}" if pag > 1 else ""))
         logger.info(f"[ImovelWeb] p{pag}: {url}")
@@ -1112,6 +1143,8 @@ async def _imovelweb(ctx, cidade, estado, finalidade, max_pages=5):
             novos += 1
 
         logger.info(f"[ImovelWeb] p{pag}: {novos}")
+        if on_items and novos:
+            on_items(res[-novos:])
         if novos == 0: break
         await asyncio.sleep(random.uniform(2, 3.5))
 
@@ -1242,12 +1275,54 @@ def _extract_features(text: str) -> dict:
 
     return out
 
+def _first_int(text: str, patterns) -> Optional[int]:
+    for pat in patterns:
+        m = re.search(pat, text or "", re.I)
+        if not m:
+            continue
+        try:
+            return int(m.group(1))
+        except Exception:
+            continue
+    return None
+
+def _first_float(text: str, patterns) -> Optional[float]:
+    for pat in patterns:
+        m = re.search(pat, text or "", re.I)
+        if not m:
+            continue
+        try:
+            value = m.group(1).replace(".", "").replace(",", ".")
+            return float(value)
+        except Exception:
+            continue
+    return None
+
 def _parse_detail_text(text: str) -> dict:
     """Extrai descrição, condomínio, IPTU e endereço a partir do texto da página."""
     text = re.sub(r"\s+", " ", text or " ").strip()
     out = {}
     if not text:
         return out
+
+    area = _first_float(text, [
+        r"([\d\.]+(?:,\d+)?)\s*m(?:\u00b2|2)\b",
+        r"(?:area|\u00e1rea)(?:\s+(?:util|\u00fatil|privativa|total))?\s*([\d\.]+(?:,\d+)?)",
+        r"([\d\.]+(?:,\d+)?)\s*m(?:²|Â²|2)\b",
+        r"[ÁAÃ]rea(?:\s+útil|\s+privativa|\s+total)?\s*([\d\.]+(?:,\d+)?)",
+    ])
+    if area and area > 5:
+        out["area_m2"] = area
+
+    quartos = _first_int(text, [r"(\d+)\s*(?:quartos?|dormit[oóÃ³]rios?|dorms?)\b"])
+    if quartos is not None:
+        out["quartos"] = quartos
+    banheiros = _first_int(text, [r"(\d+)\s*banheiros?\b"])
+    if banheiros is not None:
+        out["banheiros"] = banheiros
+    vagas = _first_int(text, [r"(\d+)\s*(?:vagas?|garagens?)\b"])
+    if vagas is not None:
+        out["vagas"] = vagas
 
     # Condomínio e IPTU. Mantém conservador para evitar confundir preço do imóvel.
     m = re.search(r"Condom[ií]nio\s*(?:R\$)?\s*([\d\.]+)(?:,\d{1,2})?", text, re.I)
@@ -1282,6 +1357,39 @@ def _parse_detail_text(text: str) -> dict:
     return out
 
 
+def _apply_detail_fields(item: Imovel, parsed: dict) -> Imovel:
+    scalar_fields = [
+        "area_m2", "quartos", "banheiros", "vagas", "suites", "andar",
+        "condominio", "iptu",
+    ]
+    for field in scalar_fields:
+        if parsed.get(field) is not None:
+            setattr(item, field, parsed[field])
+
+    bool_fields = [
+        "portaria", "vista_mar", "condominio_fechado", "piscina", "deck",
+        "varanda_gourmet", "varanda", "academia", "salao_festa",
+        "salao_jogos", "quadra_campo",
+    ]
+    for field in bool_fields:
+        if parsed.get(field) is not None:
+            setattr(item, field, parsed[field])
+
+    if parsed.get("descricao") and not item.descricao:
+        item.descricao = parsed["descricao"]
+    if parsed.get("endereco") and not item.endereco:
+        item.endereco = _clean_address(parsed["endereco"])
+    if item.endereco and not item.numero_endereco:
+        item.numero_endereco = _extract_address_number(item.endereco)
+    if item.endereco:
+        known_b = _extract_known_bairro(item.endereco)
+        if known_b:
+            item.bairro = known_b
+
+    item.preco_m2 = _calc_preco_m2(item.preco, item.area_m2)
+    return _sanitize_item(item)
+
+
 async def _detail_one(ctx, item: Imovel, sem: asyncio.Semaphore) -> Imovel:
     if not item.url:
         return item
@@ -1294,10 +1402,15 @@ async def _detail_one(ctx, item: Imovel, sem: asyncio.Semaphore) -> Imovel:
                 const meta = document.querySelector('meta[name="description"], meta[property="og:description"]')?.content || '';
                 const title = document.querySelector('meta[property="og:title"]')?.content || document.title || '';
                 const bodyText = document.body ? document.body.innerText : '';
-                const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]')).map(s => s.textContent || '');
+                const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"], script[type="application/json"], script#__NEXT_DATA__'))
+                    .map(s => s.textContent || '')
+                    .filter(t => t && t.length < 250000);
                 return {meta, title, bodyText, scripts};
             }""")
             parsed = _parse_detail_text(data.get("bodyText", ""))
+            if data.get("title"):
+                title_parsed = _parse_detail_text(data.get("title", ""))
+                parsed.update({k: v for k, v in title_parsed.items() if parsed.get(k) in (None, "")})
             meta_desc = _clean_description(data.get("meta", ""))
 
             # JSON-LD costuma ter description/address em alguns sites.
@@ -1316,6 +1429,11 @@ async def _detail_one(ctx, item: Imovel, sem: asyncio.Semaphore) -> Imovel:
                     if not parsed.get("descricao") and isinstance(cur.get("description"), str) and len(cur["description"]) > 30:
                         jd = _clean_description(cur["description"])
                         if jd: parsed["descricao"] = jd
+                    for key in ["description", "name", "title"]:
+                        val = cur.get(key)
+                        if isinstance(val, str):
+                            val_parsed = _parse_detail_text(val)
+                            parsed.update({k: v for k, v in val_parsed.items() if parsed.get(k) in (None, "")})
                     addr = cur.get("address")
                     if not parsed.get("endereco"):
                         if isinstance(addr, str) and len(addr) > 8:
@@ -1323,14 +1441,26 @@ async def _detail_one(ctx, item: Imovel, sem: asyncio.Semaphore) -> Imovel:
                         elif isinstance(addr, dict):
                             vals = [addr.get(k) for k in ["streetAddress", "addressLocality", "addressRegion"] if addr.get(k)]
                             if vals: parsed["endereco"] = ", ".join(vals)[:180]
+                    for src, dest in [
+                        ("floorSize", "area_m2"),
+                        ("numberOfRooms", "quartos"),
+                        ("numberOfBedrooms", "quartos"),
+                        ("numberOfBathroomsTotal", "banheiros"),
+                    ]:
+                        val = cur.get(src)
+                        if isinstance(val, dict):
+                            val = val.get("value")
+                        if val is not None and parsed.get(dest) is None:
+                            try:
+                                parsed[dest] = float(val) if dest == "area_m2" else int(val)
+                            except Exception:
+                                pass
                     for v in cur.values():
                         if isinstance(v, (dict, list)):
                             stack.append(v)
 
-            if meta_desc and not item.descricao:
-                item.descricao = meta_desc
-            elif parsed.get("descricao") and not item.descricao:
-                item.descricao = parsed["descricao"]
+            if meta_desc and not parsed.get("descricao"):
+                parsed["descricao"] = meta_desc
             if parsed.get("endereco") and not item.endereco:
                 item.endereco = _clean_address(parsed["endereco"])
             if item.endereco:
@@ -1342,6 +1472,7 @@ async def _detail_one(ctx, item: Imovel, sem: asyncio.Semaphore) -> Imovel:
                 item.condominio = parsed["condominio"]
             if parsed.get("iptu") is not None:
                 item.iptu = parsed["iptu"]
+            _apply_detail_fields(item, parsed)
         except Exception as e:
             logger.debug(f"[detalhe] falhou {item.url}: {e}")
         finally:
@@ -1350,13 +1481,19 @@ async def _detail_one(ctx, item: Imovel, sem: asyncio.Semaphore) -> Imovel:
         return item
 
 
-async def enrich_details(ctx, items, max_items=30, concurrency=2):
-    alvo = [iv for iv in items if iv.url][:max_items]
+async def enrich_details(ctx, items, max_items=30, concurrency=2, on_items=None):
+    alvo = [iv for iv in items if iv.url]
+    if max_items is not None and int(max_items) > 0:
+        alvo = alvo[:int(max_items)]
     if not alvo:
         return items
     logger.info(f"[detalhe] abrindo até {len(alvo)} anúncios individuais...")
     sem = asyncio.Semaphore(max(1, int(concurrency)))
-    await asyncio.gather(*[_detail_one(ctx, iv, sem) for iv in alvo])
+    tasks = [asyncio.create_task(_detail_one(ctx, iv, sem)) for iv in alvo]
+    for task in asyncio.as_completed(tasks):
+        enriched = await task
+        if on_items:
+            on_items([enriched])
     return items
 
 
@@ -1548,7 +1685,7 @@ def geocode_items(items, user_agent="imov-scraper-only", delay=1.1):
 # ORQUESTRADOR
 # ══════════════════════════════════════════════════════════════════════════════
 
-async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx", "zap", "vivareal", "imovelweb"), detalhar=False, max_detalhes=30, include_lancamentos=False, include_sem_url=False, geocode=False, max_pages=5, sweep_bairros=False, olx_start_page=1, skip_quality_filter=False):
+async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx", "zap", "vivareal", "imovelweb"), detalhar=False, max_detalhes=30, include_lancamentos=False, include_sem_url=False, geocode=False, max_pages=5, sweep_bairros=False, olx_start_page=1, skip_quality_filter=False, on_items=None, detail_concurrency=2):
     """Coleta imóveis usando Playwright e retorna lista de Imovel.
 
     detalhar=True abre páginas individuais para tentar extrair descrição, endereço, condomínio e IPTU.
@@ -1561,6 +1698,7 @@ async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx",
     sites = [s.lower() for s in sites]
     logger.info(f"=== Scraping: {cidade}/{estado} | sites={sites} | finalidades={finalidades} ===")
     all_res = []
+    listing_on_items = None if detalhar else on_items
 
     async with async_playwright() as pw:
         browser, ctx = await _browser(pw)
@@ -1578,7 +1716,7 @@ async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx",
                     continue
                 logger.info(f"\n--- {fin.upper()} ---")
                 results = await asyncio.gather(
-                    *[fn(ctx, cidade, estado, fin, max_pages=max_pages, start_page=olx_start_page) if name == "OLX" else fn(ctx, cidade, estado, fin, max_pages=max_pages) for name, fn in selected],
+                    *[fn(ctx, cidade, estado, fin, max_pages=max_pages, start_page=olx_start_page, on_items=listing_on_items) if name == "OLX" else fn(ctx, cidade, estado, fin, max_pages=max_pages, on_items=listing_on_items) for name, fn in selected],
                     return_exceptions=True,
                 )
                 for (site_name, _), r in zip(selected, results):
@@ -1603,6 +1741,7 @@ async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx",
                                 search_slug=bairro,
                                 output_cidade=cidade,
                                 start_page=olx_start_page,
+                                on_items=listing_on_items,
                             )
                             all_res.extend(bairros_res)
                             logger.info(f"[OLX/{fin}] bairro={bairro} {len(bairros_res)} coletados")
@@ -1614,15 +1753,18 @@ async def scrape(cidade, estado, finalidades=("venda", "aluguel"), sites=("olx",
     unique = all_res if skip_quality_filter else _filter_quality(all_res, include_lancamentos=include_lancamentos, include_sem_url=include_sem_url)
 
     if detalhar:
+        sem_url = len([iv for iv in unique if not iv.url])
+        if sem_url:
+            logger.info(f"[detalhe] ignorando {sem_url} registros sem URL; nao e possivel abrir pagina individual")
         # Reabre um browser/contexto só para detalhes, evitando misturar páginas abertas da listagem.
         async with async_playwright() as pw2:
             browser2, ctx2 = await _browser(pw2)
             try:
-                await enrich_details(ctx2, unique, max_items=max_detalhes)
+                await enrich_details(ctx2, unique, max_items=max_detalhes, concurrency=detail_concurrency, on_items=on_items)
             finally:
                 await browser2.close()
         # Sanitiza novamente após preencher descrição/endereço/IPTU/condomínio.
-        unique = all_res if skip_quality_filter else _filter_quality(unique, include_lancamentos=include_lancamentos, include_sem_url=include_sem_url)
+        unique = unique if skip_quality_filter else _filter_quality(unique, include_lancamentos=include_lancamentos, include_sem_url=include_sem_url)
 
     if geocode:
         geocode_items(unique)
