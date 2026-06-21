@@ -40,6 +40,8 @@ class Imovel:
     iptu: Optional[float] = None
     descricao: Optional[str] = None
     endereco: Optional[str] = None
+    rua: Optional[str] = None
+    numero: Optional[str] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     is_lancamento: bool = False
@@ -54,6 +56,10 @@ class Imovel:
     salao_festa: Optional[bool] = None
     salao_jogos: Optional[bool] = None
     quadra_campo: Optional[bool] = None
+    anuncio_criado: Optional[str] = None
+    corretora: Optional[str] = None
+    nota_media: Optional[float] = None
+    imagem_url: Optional[str] = None
     data_coleta: Optional[str] = None
 
 
@@ -313,10 +319,11 @@ def _merge_items(preferred, other):
     if not preferred: return other
     if not other: return preferred
     for f in [
-        "descricao", "endereco", "numero_endereco", "condominio", "iptu", "area_m2",
+        "descricao", "endereco", "rua", "numero", "numero_endereco", "condominio", "iptu", "area_m2",
         "quartos", "banheiros", "vagas", "suites", "andar", "portaria", "vista_mar",
         "condominio_fechado", "piscina", "deck", "varanda_gourmet", "varanda",
-        "academia", "salao_festa", "salao_jogos", "quadra_campo",
+        "academia", "salao_festa", "salao_jogos", "quadra_campo", "anuncio_criado",
+        "corretora", "nota_media", "imagem_url",
     ]:
         if getattr(preferred, f, None) in (None, "") and getattr(other, f, None) not in (None, ""):
             setattr(preferred, f, getattr(other, f))
@@ -863,16 +870,24 @@ async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, o
                            || card.querySelector('[class*="location"]');
                 const locText = locEl ? locEl.textContent?.trim() : '';
 
-                // Área: procura em .olx-adcard__detail com aria-label terminando em "metros quadrados"
-                // Ex: aria-label="66 metros quadrados"
+                // Area/quartos/banheiros/vagas: a OLX costuma expor esses atributos no aria-label.
                 let areaM2 = null;
+                let quartos = null;
+                let banheiros = null;
+                let vagas = null;
                 const details = Array.from(card.querySelectorAll('.olx-adcard__detail, [class*="adcard__detail"]'));
                 for (const d of details) {
                     const label = (d.getAttribute('aria-label') || '').toLowerCase();
                     if (label.endsWith('metros quadrados')) {
                         const num = parseFloat(label.replace('metros quadrados', '').trim().replace(',', '.'));
-                        if (!isNaN(num) && num > 5) { areaM2 = num; break; }
+                        if (!isNaN(num) && num > 5) areaM2 = num;
                     }
+                    let m = label.match(/(\\d+)\\s+quarto/);
+                    if (m) quartos = parseInt(m[1], 10);
+                    m = label.match(/(\\d+)\\s+banheiro/);
+                    if (m) banheiros = parseInt(m[1], 10);
+                    m = label.match(/(\\d+)\\s+(vaga|garagem|estacionamento)/);
+                    if (m) vagas = parseInt(m[1], 10);
                 }
 
                 const wrapper = card.closest('li') || card.parentElement;
@@ -880,8 +895,10 @@ async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, o
                           || wrapper?.querySelector('a')?.href || '';
                 const id   = wrapper?.getAttribute('data-lurker-id')
                           || wrapper?.getAttribute('data-eid') || '';
+                const img = card.querySelector('img') || wrapper?.querySelector('img');
+                const imagemUrl = img?.currentSrc || img?.src || img?.getAttribute('data-src') || img?.getAttribute('data-original') || '';
 
-                return { texts: unique, locText, areaM2, link, id };
+                return { texts: unique, locText, areaM2, quartos, banheiros, vagas, link, id, imagemUrl };
             });
         }""")
 
@@ -949,9 +966,15 @@ async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, o
                         try: area = float(m.group(1).replace(",","."))
                         except: pass
 
-                quartos  = None
+                quartos  = c.get("quartos")
                 m = re.search(r"(\d+)\s*quarto", full, re.I)
-                if m: quartos = int(m.group(1))
+                if not quartos and m: quartos = int(m.group(1))
+                banheiros = c.get("banheiros")
+                m = re.search(r"(\d+)\s*banheiro", full, re.I)
+                if not banheiros and m: banheiros = int(m.group(1))
+                vagas = c.get("vagas")
+                m = re.search(r"(\d+)\s*(?:vaga|garagem|estacionamento)", full, re.I)
+                if not vagas and m: vagas = int(m.group(1))
 
                 titulo_final = next((t for t in texts if len(t) > 10), "")[:120]
                 if not _looks_like_olx_imovel(titulo_final, full, tipo, area, quartos):
@@ -971,7 +994,8 @@ async def _olx(ctx, cidade, estado, finalidade, max_pages=5, search_slug=None, o
                     finalidade=finalidade_final, tipo=tipo, preco=preco,
                     bairro=bairro, cidade=cidade_out, estado=estado,
                     area_m2=area, preco_m2=_calc_preco_m2(preco, area),
-                    quartos=quartos,
+                    quartos=quartos, banheiros=banheiros, vagas=vagas,
+                    imagem_url=c.get("imagemUrl") or None,
                     data_coleta=_now_iso(),
                 ))
                 novos += 1
@@ -1221,6 +1245,22 @@ def _extract_address_number(addr: str) -> Optional[str]:
         return m.group(1)
     return None
 
+def _extract_street(addr: str) -> Optional[str]:
+    addr = re.sub(r"\s+", " ", addr or "").strip()
+    if not addr:
+        return None
+    first = addr.split(",", 1)[0].strip()
+    return first[:120] if RUA_RE.match(first) else None
+
+def _parse_rating(text: str) -> Optional[float]:
+    if text in (None, ""):
+        return None
+    try:
+        v = float(str(text).replace(",", "."))
+        return v if 0 <= v <= 5 else None
+    except Exception:
+        return None
+
 def _extract_features(text: str) -> dict:
     """Extrai atributos estruturados a partir de texto livre do anúncio."""
     raw = re.sub(r"\s+", " ", text or "").strip()
@@ -1345,6 +1385,8 @@ def _parse_detail_text(text: str) -> dict:
             cand = _clean_address(m.group(1))
             if cand:
                 out["endereco"] = cand
+                out["rua"] = _extract_street(cand)
+                out["numero"] = _extract_address_number(cand)
                 break
 
     # Descrição: pega uma janela depois de "Descrição"; fallback para meta description fica no JS.
@@ -1401,6 +1443,10 @@ async def _detail_one(ctx, item: Imovel, sem: asyncio.Semaphore) -> Imovel:
             data = await page.evaluate("""() => {
                 const meta = document.querySelector('meta[name="description"], meta[property="og:description"]')?.content || '';
                 const title = document.querySelector('meta[property="og:title"]')?.content || document.title || '';
+                const image = document.querySelector('meta[property="og:image"], meta[name="twitter:image"]')?.content
+                    || document.querySelector('img')?.currentSrc
+                    || document.querySelector('img')?.src
+                    || '';
                 const bodyText = document.body ? document.body.innerText : '';
                 const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"], script[type="application/json"], script#__NEXT_DATA__'))
                     .map(s => s.textContent || '')
@@ -1464,10 +1510,27 @@ async def _detail_one(ctx, item: Imovel, sem: asyncio.Semaphore) -> Imovel:
             if parsed.get("endereco") and not item.endereco:
                 item.endereco = _clean_address(parsed["endereco"])
             if item.endereco:
+                item.rua = item.rua or _extract_street(item.endereco)
+                item.numero = item.numero or item.numero_endereco or _extract_address_number(item.endereco)
+                item.numero_endereco = item.numero_endereco or item.numero
+            if item.endereco:
                 # Se o endereço detalhado contém um bairro conhecido, usa-o para corrigir bairro quebrado
                 known_b = _extract_known_bairro(item.endereco)
                 if known_b:
                     item.bairro = known_b
+            if parsed.get("rua") and not item.rua:
+                item.rua = parsed["rua"]
+            if parsed.get("numero") and not item.numero:
+                item.numero = parsed["numero"]
+                item.numero_endereco = item.numero_endereco or item.numero
+            if parsed.get("anuncio_criado") and not item.anuncio_criado:
+                item.anuncio_criado = parsed["anuncio_criado"]
+            if parsed.get("corretora") and not item.corretora:
+                item.corretora = parsed["corretora"]
+            if parsed.get("nota_media") is not None and item.nota_media is None:
+                item.nota_media = parsed["nota_media"]
+            if data.get("image") and not item.imagem_url:
+                item.imagem_url = data["image"]
             if parsed.get("condominio") is not None:
                 item.condominio = parsed["condominio"]
             if parsed.get("iptu") is not None:
@@ -1547,6 +1610,16 @@ def _sanitize_item(iv: Imovel) -> Imovel:
         iv.endereco = _clean_address(iv.endereco)
         if not iv.numero_endereco:
             iv.numero_endereco = _extract_address_number(iv.endereco)
+        if not iv.numero:
+            iv.numero = iv.numero_endereco or _extract_address_number(iv.endereco)
+        if not iv.rua:
+            iv.rua = _extract_street(iv.endereco)
+    elif iv.rua:
+        iv.rua = re.sub(r"\s+", " ", iv.rua).strip()[:120]
+    if not iv.numero_endereco and iv.numero:
+        iv.numero_endereco = iv.numero
+    if not iv.numero and iv.numero_endereco:
+        iv.numero = iv.numero_endereco
     if iv.descricao:
         iv.descricao = _clean_description(iv.descricao)
 

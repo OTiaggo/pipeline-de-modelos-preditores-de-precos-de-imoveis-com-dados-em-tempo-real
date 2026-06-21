@@ -17,6 +17,98 @@ FIELDS = [
     "quadra_campo", "latitude", "longitude", "is_lancamento", "data_coleta", "url",
 ]
 
+OLX_LIVE_FIELDS = [
+    "listing_id", "titulo", "apartamento_ou_casa", "tipo_imovel", "estado",
+    "cidade", "bairro", "rua", "numero", "endereco", "metragem", "quartos",
+    "banheiros", "suites", "andar", "estacionamentos", "preco_anuncio",
+    "latitude", "longitude", "tem_portaria_24h", "tem_vista_pro_mar",
+    "tem_condominio_fechado", "tem_piscina", "tem_deck",
+    "tem_varanda_gourmet", "tem_varanda", "tem_academia",
+    "tem_salao_festas", "tem_salao_jogos", "tem_quadra_campo", "descricao",
+    "anuncio_criado", "corretora", "nota_media", "url", "imagem_url",
+]
+
+
+def _listing_id_from_url(url: str) -> str:
+    import hashlib
+    import re
+
+    url = url or ""
+    m = re.search(r"(?:id-|/)(\d{8,13})(?:[/?#.-]|$)", url)
+    if m:
+        return m.group(1)
+    return str(int(hashlib.md5(url.encode()).hexdigest()[:12], 16)) if url else ""
+
+
+def _bool_cell(value):
+    if value is None:
+        return ""
+    return int(bool(value))
+
+
+def _olx_live_row(item):
+    r = asdict(item)
+    tipo = (r.get("tipo") or "").strip().lower()
+    return {
+        "listing_id": _listing_id_from_url(r.get("url")) or str(r.get("external_id") or "").replace("olx_", ""),
+        "titulo": r.get("titulo") or "",
+        "apartamento_ou_casa": tipo if tipo in {"apartamento", "casa"} else "",
+        "tipo_imovel": tipo,
+        "estado": r.get("estado") or "",
+        "cidade": r.get("cidade") or "",
+        "bairro": r.get("bairro") or "",
+        "rua": r.get("rua") or "",
+        "numero": r.get("numero") or r.get("numero_endereco") or "",
+        "endereco": r.get("endereco") or "",
+        "metragem": r.get("area_m2") or "",
+        "quartos": r.get("quartos") or "",
+        "banheiros": r.get("banheiros") or "",
+        "suites": r.get("suites") or "",
+        "andar": r.get("andar") if r.get("andar") is not None else "",
+        "estacionamentos": r.get("vagas") or "",
+        "preco_anuncio": r.get("preco") or "",
+        "latitude": r.get("latitude") or "",
+        "longitude": r.get("longitude") or "",
+        "tem_portaria_24h": _bool_cell(r.get("portaria")),
+        "tem_vista_pro_mar": _bool_cell(r.get("vista_mar")),
+        "tem_condominio_fechado": _bool_cell(r.get("condominio_fechado")),
+        "tem_piscina": _bool_cell(r.get("piscina")),
+        "tem_deck": _bool_cell(r.get("deck")),
+        "tem_varanda_gourmet": _bool_cell(r.get("varanda_gourmet")),
+        "tem_varanda": _bool_cell(r.get("varanda")),
+        "tem_academia": _bool_cell(r.get("academia")),
+        "tem_salao_festas": _bool_cell(r.get("salao_festa")),
+        "tem_salao_jogos": _bool_cell(r.get("salao_jogos")),
+        "tem_quadra_campo": _bool_cell(r.get("quadra_campo")),
+        "descricao": r.get("descricao") or "",
+        "anuncio_criado": r.get("anuncio_criado") or "",
+        "corretora": r.get("corretora") or "",
+        "nota_media": r.get("nota_media") if r.get("nota_media") is not None else "",
+        "url": r.get("url") or "",
+        "imagem_url": r.get("imagem_url") or "",
+    }
+
+
+def save_olx_live_csv(items, path: Path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    rows = []
+    for item in items:
+        r = asdict(item)
+        if (r.get("site") or "").upper() != "OLX":
+            continue
+        if (r.get("finalidade") or "").lower() != "venda":
+            continue
+        if (r.get("cidade") or "").strip().lower() != "fortaleza":
+            continue
+        if (r.get("tipo") or "").strip().lower() not in {"apartamento", "casa"}:
+            continue
+        rows.append(_olx_live_row(item))
+    with path.open("w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=OLX_LIVE_FIELDS, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+    return len(rows)
+
 
 def save_json(items, path: Path):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -81,6 +173,7 @@ async def main():
     p.add_argument("--sites", default="zap,vivareal,imovelweb", help="olx,zap,vivareal,imovelweb")
     p.add_argument("--out", default="saida/imoveis", help="Caminho base sem extensão")
     p.add_argument("--format", default="both", choices=["json", "csv", "both"], help="Formato de saída")
+    p.add_argument("--schema", default="default", choices=["default", "olx_live"], help="Schema de exportacao CSV")
     p.add_argument("--detalhar", action="store_true", help="Abre cada anúncio individual para buscar descrição, endereço, IPTU e condomínio")
     p.add_argument("--max-detalhes", type=int, default=30, help="Máximo de anúncios a detalhar; use 0 para detalhar todos")
     p.add_argument("--detail-concurrency", type=int, default=2, help="Quantidade de páginas de detalhe abertas em paralelo")
@@ -142,6 +235,11 @@ async def main():
     finally:
         if autosave:
             autosave.flush()
+
+    if args.schema == "olx_live":
+        total = save_olx_live_csv(items, base.with_suffix(".csv"))
+        print(f"OK: {total} imoveis OLX salvos em {base.with_suffix('.csv').resolve()}")
+        return
 
     if args.format in {"json", "both"}:
         save_json(items, base.with_suffix(".json"))
