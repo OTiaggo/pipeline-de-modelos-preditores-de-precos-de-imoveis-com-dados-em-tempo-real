@@ -1,0 +1,2 @@
+model_key,modelo,rmse,mae,r2,best_params
+xgboost,XGBoost,458521.71959509567,255767.14309424078,0.6482002094558893,"{'n_estimators': 703, 'learning_rate': 0.012796110877805382, 'max_depth': 5, 'min_child_weight': 1.7199936655011971, 'subsample': 0.7060629586302634, 'colsample_bytree': 0.953870160095726, 'reg_alpha': 0.017657261122730354, 'reg_lambda': 0.014179011047653015}"

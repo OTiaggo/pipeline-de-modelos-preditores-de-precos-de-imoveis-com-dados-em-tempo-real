@@ -1,0 +1,2 @@
+model_key,modelo,rmse,mae,r2,best_params
+mlp,MLPRegressor,525172.4997816683,325874.99855498417,0.5361781162318533,"{'width': 128, 'depth': 3, 'activation': 'relu', 'alpha': 9.387035562870913e-05, 'learning_rate_init': 0.001637768588208409, 'batch_size': 32}"
