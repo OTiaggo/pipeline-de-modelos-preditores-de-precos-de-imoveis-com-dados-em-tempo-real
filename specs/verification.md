@@ -21,11 +21,11 @@
 | [CAP-PREDICT-001](capabilities/price-prediction.md#cap-predict-001) | [sistema/tests/test_app.py](../sistema/tests/test_app.py) verifies `/predict` returns an estimate with a loaded model | Automated test | Partial |
 | [CAP-PREDICT-002](capabilities/price-prediction.md#cap-predict-002) | [sistema/tests/test_app.py](../sistema/tests/test_app.py) verifies the Portuguese prediction payload maps to `MODEL_FEATURES` | Automated test and inspection | Active |
 | [CAP-RETRAIN-001](capabilities/retraining-signal.md#cap-retrain-001) | Significant price-change signal and no-signal tests | Automated test and analysis | Gap |
-| [CAP-UI-001](capabilities/user-interface.md#cap-ui-001) | Attribute entry and prediction result demo | Demonstration and automated UI test | Gap |
+| [CAP-UI-001](capabilities/user-interface.md#cap-ui-001) | `front_end` React app now implements prediction input, CSV upload, training trigger, clear success/error states, and requires manual browser validation plus future automated UI coverage | Demonstration and automated UI test | Partial |
 | [QUAL-MODEL-001](quality.md#qual-model-001) | Candidate metric capture inspection | Inspection | Partial |
 | [QUAL-RELIABILITY-001](quality.md#qual-reliability-001) | Model-unavailable `/predict` test | Automated test | Gap |
 | [QUAL-OBSERVABILITY-001](quality.md#qual-observability-001) | Retraining signal visibility test | Automated test | Gap |
-| [QUAL-USABILITY-001](quality.md#qual-usability-001) | Prediction UI flow demo | Demonstration | Gap |
+| [QUAL-USABILITY-001](quality.md#qual-usability-001) | Prediction UI flow demo completed in the browser; automated UI coverage still pending | Demonstration | Partial |
 
 ## Manual Verification and Demo Paths
 
@@ -41,7 +41,7 @@ Current implementation covers notebook-derived data treatment in [../sistema/src
 ## Known Gaps
 
 - PostgreSQL container, table bootstrap, and application write/query code are configured, but live database integration tests are still needed.
-- The interface is specified but not present in inspected source.
+- The interface is now implemented in `front_end`, but automated UI coverage is still needed.
 - Significant price-change detection is specified but not implemented in inspected source.
 - Full Optuna integration coverage across all heavy model families is still needed; focused tests use Ridge/Lasso for runtime speed.
 - Model-unavailable and prediction-error branches still need automated API tests.

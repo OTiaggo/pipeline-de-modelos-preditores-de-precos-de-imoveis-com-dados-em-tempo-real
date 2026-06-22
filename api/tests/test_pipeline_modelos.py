@@ -1,0 +1,58 @@
+import importlib.util
+import sys
+from pathlib import Path
+
+import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+
+MODULE_PATH = Path(__file__).resolve().parents[1] / "src" / "pipeline_modelos.py"
+spec = importlib.util.spec_from_file_location("pipeline_modelos", MODULE_PATH)
+pipeline_modelos = importlib.util.module_from_spec(spec)
+sys.modules["pipeline_modelos"] = pipeline_modelos
+spec.loader.exec_module(pipeline_modelos)
+
+
+def test_model_registry_concentra_modelos_suportados():
+    registry = pipeline_modelos.MODEL_REGISTRY
+
+    assert {"xgboost", "lightgbm", "catboost", "random_forest", "ridge", "lasso", "svr", "mlp"}.issubset(registry)
+    assert registry["catboost"].use_native_categoricals is True
+    assert registry["ridge"].search_strategy == "grid"
+    assert registry["xgboost"].search_strategy == "optuna"
+
+
+def test_treinar_modelos_salva_campeao_com_registro_reduzido(tmp_path):
+    X = pd.DataFrame(
+        {
+            "bairro": ["Aldeota", "Meireles", "Centro", "Aldeota", "Centro", "Meireles"],
+            "tipo_imovel_padronizado": ["apartamento_padrao", "casa_padrao"] * 3,
+            "area_m2": [60, 90, 45, 80, 55, 100],
+            "quartos": [2, 3, 1, 3, 2, 4],
+        }
+    )
+    y = pd.Series([420000, 650000, 250000, 590000, 310000, 760000])
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ("categorical", OneHotEncoder(handle_unknown="ignore"), ["bairro", "tipo_imovel_padronizado"]),
+            ("numeric", "passthrough", ["area_m2", "quartos"]),
+        ]
+    )
+    model_registry = {
+        "ridge": pipeline_modelos.MODEL_REGISTRY["ridge"],
+        "lasso": pipeline_modelos.MODEL_REGISTRY["lasso"],
+    }
+
+    champion, ranking = pipeline_modelos.treinar_modelos(
+        X,
+        y,
+        preprocessor,
+        caminho_modelo=tmp_path / "campeao.pkl",
+        model_registry=model_registry,
+        n_splits=3,
+        n_trials=1,
+    )
+
+    assert champion.model_key in model_registry
+    assert list(ranking["rmse"]) == sorted(ranking["rmse"])
+    assert (tmp_path / "campeao.pkl").exists()
