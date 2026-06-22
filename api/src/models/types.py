@@ -9,8 +9,8 @@ from sklearn.base import BaseEstimator
 SearchStrategy = Literal["optuna", "grid"]
 
 DEFAULT_RANDOM_STATE = 42
-DEFAULT_N_SPLITS = 5
-DEFAULT_N_TRIALS = 30
+DEFAULT_N_SPLITS = 3
+DEFAULT_N_TRIALS = 10
 EARLY_STOPPING_ROUNDS = 50
 CATEGORICAL_COLUMNS = ["bairro", "tipo_imovel_padronizado"]
 

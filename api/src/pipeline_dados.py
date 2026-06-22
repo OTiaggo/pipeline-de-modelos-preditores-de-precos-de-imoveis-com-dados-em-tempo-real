@@ -302,8 +302,9 @@ def _normalizar_schema_entrada(df: pd.DataFrame) -> pd.DataFrame:
         _coalesce_column(dados, target, column_aliases)
 
     if "apartamento_ou_casa" not in dados.columns:
+        tipo_imovel_base = dados["tipo_imovel"] if "tipo_imovel" in dados.columns else pd.Series(index=dados.index, dtype="object")
         dados["apartamento_ou_casa"] = np.where(
-            dados.get("tipo_imovel", "").astype(str).str.contains("casa|home", case=False, na=False),
+            tipo_imovel_base.astype(str).str.contains("casa|home", case=False, na=False),
             "casa",
             "apartamento",
         )

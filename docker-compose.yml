@@ -29,6 +29,7 @@ services:
       CAMINHO_MODELO: /app/api/artifacts/modelo_campeao.pkl
     volumes:
       - api_artifacts:/app/api/artifacts
+      - ./api:/app/api
     ports:
       - "8000:8000"
     depends_on:
