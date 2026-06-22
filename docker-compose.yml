@@ -28,7 +28,7 @@ services:
       DATABASE_URL: postgresql://admin:admin@db:5432/dados_imobiliarios_fortaleza
       CAMINHO_MODELO: /app/api/artifacts/modelo_campeao.pkl
     volumes:
-      - api_artifacts:/app/api/artifacts
+      - ./api/artifacts:/app/api/artifacts
       - ./api:/app/api
     ports:
       - "8000:8000"
@@ -49,4 +49,3 @@ services:
 
 volumes:
   postgres_data:
-  api_artifacts:
