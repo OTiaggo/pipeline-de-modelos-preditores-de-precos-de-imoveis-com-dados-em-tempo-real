@@ -18,5 +18,34 @@ services:
       timeout: 5s
       retries: 5
 
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: imoveis_api
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://admin:admin@db:5432/dados_imobiliarios_fortaleza
+      CAMINHO_MODELO: /app/api/artifacts/modelo_campeao.pkl
+    volumes:
+      - api_artifacts:/app/api/artifacts
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./front_end
+      dockerfile: Dockerfile
+    container_name: imoveis_frontend
+    restart: always
+    ports:
+      - "4173:80"
+    depends_on:
+      - api
+
 volumes:
   postgres_data:
+  api_artifacts:
