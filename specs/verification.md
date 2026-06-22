@@ -12,14 +12,14 @@
 
 | Requirement ID | Test or Check | Verification Method | Status |
 | --- | --- | --- | --- |
-| [CAP-DATA-001](capabilities/data-ingestion.md#cap-data-001) | API upload test for `/insertData` CSV parsing and parse failure | Automated test | Gap |
-| [CAP-DATA-002](capabilities/data-ingestion.md#cap-data-002) | Data treatment fixture test for approved features and `preco` target | Automated test | Gap |
-| [CAP-DATA-003](capabilities/data-ingestion.md#cap-data-003) | PostgreSQL persistence test with saved date | Automated integration test | Gap |
-| [CAP-MODEL-001](capabilities/model-training.md#cap-model-001) | Training query excludes records older than one year | Automated integration test | Gap |
-| [CAP-MODEL-002](capabilities/model-training.md#cap-model-002) | Candidate model search covers approved configured models and search modes | Automated test and inspection | Gap |
-| [CAP-MODEL-003](capabilities/model-training.md#cap-model-003) | Best-model selection and artifact availability test | Automated test | Partial |
-| [CAP-PREDICT-001](capabilities/price-prediction.md#cap-predict-001) | `/predict` returns estimate, model-unavailable error, and prediction error | Automated test | Gap |
-| [CAP-PREDICT-002](capabilities/price-prediction.md#cap-predict-002) | Prediction schema matches approved feature contract | Automated test and inspection | Gap |
+| [CAP-DATA-001](capabilities/data-ingestion.md#cap-data-001) | [sistema/tests/test_app.py](../sistema/tests/test_app.py) verifies `/insertData` CSV upload contract with mocked persistence | Automated test | Active |
+| [CAP-DATA-002](capabilities/data-ingestion.md#cap-data-002) | [sistema/tests/test_pipeline_dados.py](../sistema/tests/test_pipeline_dados.py) validates notebook-derived treatment, approved features, and `preco` target | Automated test | Active |
+| [CAP-DATA-003](capabilities/data-ingestion.md#cap-data-003) | PostgreSQL container, table bootstrap, and application insert code exist; live database integration test is still needed | Automated integration test | Partial |
+| [CAP-MODEL-001](capabilities/model-training.md#cap-model-001) | `/trainModels` queries `data_salvamento >= NOW() - INTERVAL '1 year'`; live database integration test is still needed | Automated integration test | Partial |
+| [CAP-MODEL-002](capabilities/model-training.md#cap-model-002) | [sistema/tests/test_pipeline_modelos.py](../sistema/tests/test_pipeline_modelos.py) verifies the model registry and grid-search path; full Optuna execution remains integration coverage | Automated test and inspection | Partial |
+| [CAP-MODEL-003](capabilities/model-training.md#cap-model-003) | [sistema/tests/test_pipeline_modelos.py](../sistema/tests/test_pipeline_modelos.py) verifies ranking, champion selection, and artifact saving with a reduced registry | Automated test | Active |
+| [CAP-PREDICT-001](capabilities/price-prediction.md#cap-predict-001) | [sistema/tests/test_app.py](../sistema/tests/test_app.py) verifies `/predict` returns an estimate with a loaded model | Automated test | Partial |
+| [CAP-PREDICT-002](capabilities/price-prediction.md#cap-predict-002) | [sistema/tests/test_app.py](../sistema/tests/test_app.py) verifies the Portuguese prediction payload maps to `MODEL_FEATURES` | Automated test and inspection | Active |
 | [CAP-RETRAIN-001](capabilities/retraining-signal.md#cap-retrain-001) | Significant price-change signal and no-signal tests | Automated test and analysis | Gap |
 | [CAP-UI-001](capabilities/user-interface.md#cap-ui-001) | Attribute entry and prediction result demo | Demonstration and automated UI test | Gap |
 | [QUAL-MODEL-001](quality.md#qual-model-001) | Candidate metric capture inspection | Inspection | Partial |
@@ -36,16 +36,15 @@
 
 ## Coverage Notes
 
-Current implementation partially covers model benchmarking and model artifact saving in [../sistema/src/pipeline_modelos.py](../sistema/src/pipeline_modelos.py), and prediction request handling in [../sistema/app.py](../sistema/app.py). The API path names currently differ from the target `AGENTS.md` contract: checked-in code exposes `/train`, while the target spec requires `/insertData` and `/trainModels`.
+Current implementation covers notebook-derived data treatment in [../sistema/src/pipeline_dados.py](../sistema/src/pipeline_dados.py), modular model search and champion artifact saving in [../sistema/src/pipeline_modelos.py](../sistema/src/pipeline_modelos.py), and the target API endpoints `/insertData`, `/trainModels`, and `/predict` in [../sistema/app.py](../sistema/app.py).
 
 ## Known Gaps
 
-- `sistema/src/pipeline_dados.py` is empty in the checked-in source inspected during canonization, while `sistema/app.py` imports data-preparation functions from it.
-- PostgreSQL persistence is specified but not implemented in the inspected source.
+- PostgreSQL container, table bootstrap, and application write/query code are configured, but live database integration tests are still needed.
 - The interface is specified but not present in inspected source.
 - Significant price-change detection is specified but not implemented in inspected source.
-- The full candidate model list and Bayesian search are specified but not implemented in inspected source.
-- The full `AGENTS.md` feature contract is not matched by the current API prediction payload.
+- Full Optuna integration coverage across all heavy model families is still needed; focused tests use Ridge/Lasso for runtime speed.
+- Model-unavailable and prediction-error branches still need automated API tests.
 
 ## Accepted Unverified Assumptions
 
