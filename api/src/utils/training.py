@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, clone
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import GridSearchCV, KFold, train_test_split
+from sklearn.model_selection import GridSearchCV, KFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer
 
@@ -241,26 +241,20 @@ def _fit_final_estimator(
     config: ModelConfig,
     params: dict[str, Any],
 ) -> BaseEstimator:
+    """Fit the production artifact with all available training rows.
+
+    Cross-validation and optional early stopping are used during model
+    selection. After the champion hyperparameters are known, the artifact saved
+    for the API is refit on the full dataset so no recent production data is
+    left out of the deployed model.
+    """
+
     estimator = config.build_estimator(params)
 
     if config.use_native_categoricals:
         X_cat = _prepare_catboost_features(X)
         cat_features = [c for c in CATEGORICAL_COLUMNS if c in X_cat.columns]
-        X_train, X_valid, y_train, y_valid = train_test_split(
-            X_cat,
-            y,
-            test_size=0.15,
-            random_state=DEFAULT_RANDOM_STATE,
-        )
-        _fit_with_optional_early_stopping(
-            estimator,
-            X_train,
-            y_train,
-            X_valid,
-            y_valid,
-            config=config,
-            cat_features=cat_features,
-        )
+        estimator.fit(X_cat, y, cat_features=cat_features)
         return Pipeline(
             steps=[
                 ("prepare_catboost_categories", FunctionTransformer(_prepare_catboost_features, validate=False)),
@@ -269,26 +263,6 @@ def _fit_final_estimator(
         )
 
     pipeline = _make_pipeline(preprocessor, estimator)
-    if config.supports_early_stopping:
-        X_train, X_valid, y_train, y_valid = train_test_split(
-            X,
-            y,
-            test_size=0.15,
-            random_state=DEFAULT_RANDOM_STATE,
-        )
-        fitted_preprocessor = clone(preprocessor)
-        X_train_ready = fitted_preprocessor.fit_transform(X_train)
-        X_valid_ready = fitted_preprocessor.transform(X_valid)
-        _fit_with_optional_early_stopping(
-            estimator,
-            X_train_ready,
-            y_train,
-            X_valid_ready,
-            y_valid,
-            config=config,
-        )
-        return Pipeline(steps=[("preprocessor", fitted_preprocessor), ("regressor", estimator)])
-
     pipeline.fit(X, y)
     return pipeline
 
