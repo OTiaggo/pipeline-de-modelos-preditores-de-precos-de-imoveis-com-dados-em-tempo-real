@@ -7,3 +7,10 @@ requests
 playwright>=1.44.0
 playwright>=1.44.0
 requests>=2.31.0
+scikit-learn
+xgboost
+lightgbm
+catboost
+optuna
+joblib
+psycopg2-binary

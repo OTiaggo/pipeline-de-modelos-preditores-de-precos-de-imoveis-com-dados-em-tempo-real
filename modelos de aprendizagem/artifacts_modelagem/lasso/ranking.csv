@@ -1,0 +1,2 @@
+model_key,modelo,rmse,mae,r2,best_params
+lasso,Lasso,544567.8874418009,348540.64773222496,0.5036536631141207,{'alpha': 10.0}

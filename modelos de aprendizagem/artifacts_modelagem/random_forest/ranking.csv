@@ -1,0 +1,2 @@
+model_key,modelo,rmse,mae,r2,best_params
+random_forest,Random Forest,469710.85327384155,280957.25231689564,0.6270161820624381,"{'n_estimators': 300, 'max_depth': 16, 'min_samples_split': 15, 'min_samples_leaf': 3, 'max_features': 1.0}"

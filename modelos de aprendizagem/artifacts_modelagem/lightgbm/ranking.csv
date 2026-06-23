@@ -1,0 +1,2 @@
+model_key,modelo,rmse,mae,r2,best_params
+lightgbm,LightGBM,471870.1285074973,287913.5222154614,0.6264130105336151,"{'n_estimators': 1444, 'learning_rate': 0.013421606103053558, 'num_leaves': 161, 'max_depth': 13, 'min_child_samples': 54, 'subsample': 0.7792553706017563, 'colsample_bytree': 0.7849955337779447, 'reg_alpha': 0.001641106561253949, 'reg_lambda': 0.05722393988773344}"

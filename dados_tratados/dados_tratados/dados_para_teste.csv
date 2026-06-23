@@ -1,0 +1,825 @@
+tipo,cidade,bairro,area_m2,quartos,banheiros,suites,andar,vagas,preco,preco_m2,portaria,vista_mar,condominio_fechado,piscina,deck,varanda_gourmet,varanda,academia,salao_festa,salao_jogos,quadra_campo,estado,tipo_imovel_padronizado,tem_geolocalizacao,tem_endereco_estruturado,andar_informado
+apartamento,Fortaleza,Cambeba,54.0,2.0,2.0,1.0,1.0,1.0,310000.0,5740.740740740741,True,False,True,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Mondubim,100.0,3.0,3.0,2.0,0.0,2.0,469000.0,4690.0,False,False,False,False,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aracapé,51.0,2.0,2.0,1.0,1.0,1.0,235000.0,4607.843137254902,True,False,True,True,False,True,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,135.0,3.0,4.0,3.0,0.0,3.0,1700000.0,12592.592592592593,False,False,False,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,63.0,3.0,2.0,1.0,2.0,2.0,250000.0,3968.253968253968,False,False,False,True,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jardim Cearense,54.0,2.0,2.0,1.0,7.0,2.0,340000.0,6296.2962962962965,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Siqueira,44.0,2.0,1.0,1.0,1.0,1.0,43000.0,977.2727272727273,False,False,False,True,True,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,116.0,3.0,4.0,3.0,0.0,2.0,1160000.0,10000.0,True,False,False,True,False,True,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,179.0,4.0,5.0,3.0,0.0,6.0,475000.0,2653.631284916201,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Parque Dois Irmãos,45.0,2.0,2.0,1.0,2.0,1.0,287000.0,6377.777777777777,False,False,False,True,True,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,65.0,2.0,2.0,1.0,13.0,1.0,1299000.0,19984.615384615383,False,True,False,True,False,True,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jangurussu,100.0,3.0,3.0,3.0,0.0,3.0,455000.0,4550.0,False,False,False,True,False,True,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cambeba,65.0,3.0,2.0,1.0,0.0,2.0,370000.0,5692.307692307692,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parangaba,62.0,2.0,1.0,1.0,13.0,2.0,420000.0,6774.193548387097,False,False,False,True,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Siqueira,44.0,2.0,1.0,1.0,1.0,1.0,70000.0,1590.909090909091,True,False,False,True,True,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Prefeito José Walter,44.0,2.0,2.0,1.0,0.0,1.0,260000.0,5909.090909090909,False,False,False,True,True,True,True,False,True,True,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Manoel Sátiro,103.0,3.0,3.0,1.0,0.0,1.0,350000.0,3398.0582524271845,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,21.0,1.0,1.0,1.0,0.0,1.0,556131.0,26482.428571428572,False,True,False,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,70.0,3.0,2.0,1.0,0.0,1.0,465000.0,6642.857142857143,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Damas,70.0,3.0,2.0,1.0,0.0,1.0,440000.0,6285.714285714285,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Padre Andrade,77.0,2.0,2.0,1.0,0.0,1.0,250000.0,3246.753246753247,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Ancuri,54.0,2.0,2.0,2.0,0.0,1.0,195000.0,3611.1111111111113,False,False,True,False,False,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,145.0,3.0,4.0,3.0,0.0,3.0,1499000.0,10337.931034482759,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,160.0,3.0,4.0,3.0,9.0,2.0,710000.0,4437.5,False,False,False,False,False,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,105.0,3.0,3.0,3.0,12.0,2.0,920000.0,8761.904761904761,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Vicente Pinzon,51.0,2.0,2.0,1.0,10.0,1.0,385000.0,7549.019607843137,True,True,True,True,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Ancuri,55.0,2.0,2.0,1.0,0.0,1.0,185000.0,3363.6363636363635,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Ancuri,55.0,2.0,2.0,1.0,0.0,1.0,185000.0,3363.6363636363635,False,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Vicente Pinzon,140.0,3.0,3.0,2.0,0.0,2.0,350000.0,2500.0,True,True,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,72.0,2.0,2.0,1.0,9.0,1.0,644000.0,8944.444444444445,True,False,True,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,112.0,3.0,4.0,3.0,0.0,2.0,895000.0,7991.071428571428,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parangaba,44.0,2.0,1.0,1.0,4.0,1.0,55000.0,1250.0,True,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,60.0,2.0,2.0,1.0,0.0,2.0,530000.0,8833.333333333334,False,False,True,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,120.0,3.0,4.0,3.0,0.0,2.0,650000.0,5416.666666666667,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,37.0,1.0,2.0,1.0,0.0,1.0,549000.0,14837.837837837838,True,False,False,False,False,True,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Centro,61.0,3.0,2.0,1.0,0.0,1.0,575000.0,9426.22950819672,False,True,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jangurussu,50.0,2.0,2.0,2.0,1.0,1.0,79000.0,1580.0,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,360.0,4.0,5.0,4.0,0.0,2.0,750000.0,2083.3333333333335,False,False,False,False,False,False,False,False,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Centro,84.0,3.0,3.0,3.0,0.0,2.0,699000.0,8321.42857142857,True,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Parque Manibura,207.0,4.0,3.0,1.0,0.0,3.0,630000.0,3043.478260869565,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,54.0,2.0,2.0,1.0,0.0,1.0,907119.0,16798.5,False,False,False,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,71.0,3.0,2.0,2.0,0.0,2.0,690000.0,9718.30985915493,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,116.0,3.0,3.0,3.0,0.0,2.0,1179000.0,10163.793103448275,True,False,True,True,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,152.0,3.0,3.0,3.0,6.0,2.0,1100000.0,7236.8421052631575,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,73.0,3.0,2.0,2.0,0.0,2.0,640000.0,8767.123287671233,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,38.0,1.0,1.0,1.0,0.0,1.0,653858.0,17206.78947368421,False,True,False,True,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Messejana,65.0,3.0,2.0,1.0,18.0,2.0,479000.0,7369.2307692307695,True,False,True,True,True,True,True,True,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,64.0,3.0,2.0,1.0,0.0,1.0,450000.0,7031.25,True,False,True,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,76.0,3.0,3.0,2.0,0.0,2.0,740000.0,9736.842105263158,False,False,True,True,False,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Itaperi,126.0,3.0,2.0,2.0,0.0,2.0,640000.0,5079.3650793650795,False,False,False,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,51.0,2.0,1.0,1.0,0.0,1.0,346458.0,6793.294117647059,False,False,False,False,False,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cambeba,162.0,4.0,3.0,2.0,0.0,4.0,690000.0,4259.259259259259,False,False,False,False,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,142.0,3.0,4.0,3.0,0.0,3.0,1650000.0,11619.718309859154,False,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,148.0,3.0,2.0,1.0,3.0,2.0,308000.0,2081.0810810810813,True,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,139.0,3.0,3.0,3.0,0.0,2.0,1999000.0,14381.294964028777,False,False,False,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,101.0,3.0,3.0,3.0,0.0,2.0,1769463.0,17519.435643564357,False,False,False,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro I,50.0,2.0,2.0,2.0,16.0,1.0,368000.0,7360.0,True,True,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Joaquim Távora,350.0,5.0,4.0,2.0,0.0,4.0,1300000.0,3714.285714285714,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Jardim das Oliveiras,152.0,4.0,4.0,4.0,0.0,1.0,649000.0,4269.736842105263,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,60.0,2.0,1.0,1.0,3.0,1.0,375000.0,6250.0,False,False,False,True,False,True,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,48.0,2.0,2.0,1.0,0.0,1.0,380900.0,7935.416666666667,False,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,71.0,3.0,2.0,2.0,22.0,2.0,698250.0,9834.507042253521,True,True,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,48.0,2.0,2.0,1.0,0.0,1.0,410000.0,8541.666666666666,False,False,False,True,False,False,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,75.0,3.0,2.0,1.0,0.0,2.0,700000.0,9333.333333333334,False,False,False,True,True,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,50.0,2.0,2.0,1.0,0.0,1.0,330000.0,6600.0,True,False,True,True,True,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,158.0,3.0,3.0,2.0,0.0,2.0,1220000.0,7721.518987341772,False,False,True,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,330.0,4.0,4.0,4.0,0.0,3.0,2995000.0,9075.757575757576,False,True,False,True,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Messejana,49.0,2.0,2.0,1.0,0.0,2.0,471109.0,9614.469387755102,False,False,False,True,True,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,73.0,2.0,2.0,1.0,0.0,2.0,710000.0,9726.027397260274,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jacarecanga,65.0,3.0,2.0,1.0,10.0,2.0,420000.0,6461.538461538462,False,True,True,True,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,143.0,3.0,4.0,3.0,0.0,3.0,1370000.0,9580.41958041958,False,False,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,78.0,3.0,3.0,2.0,0.0,2.0,839712.0,10765.538461538461,False,False,False,True,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,112.0,3.0,3.0,2.0,9.0,2.0,440000.0,3928.5714285714284,True,False,False,True,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,40.0,1.0,1.0,1.0,0.0,1.0,541609.0,13540.225,False,False,False,True,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cambeba,51.0,2.0,1.0,1.0,1.0,1.0,333721.0,6543.549019607844,False,False,False,True,False,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,140.0,3.0,4.0,3.0,4.0,2.0,1200000.0,8571.42857142857,False,False,False,True,True,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jardim Cearense,131.0,4.0,4.0,3.0,1.0,2.0,850000.0,6488.5496183206105,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,93.0,3.0,4.0,3.0,0.0,2.0,924656.0,9942.537634408602,False,False,False,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,75.0,3.0,3.0,1.0,1.0,2.0,755000.0,10066.666666666666,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,121.0,3.0,4.0,3.0,0.0,2.0,1339000.0,11066.11570247934,False,False,False,True,True,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,56.0,2.0,2.0,1.0,0.0,1.0,455000.0,8125.0,False,False,False,True,False,True,True,False,False,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,70.0,2.0,2.0,1.0,3.0,1.0,724139.0,10344.842857142858,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,132.0,3.0,3.0,1.0,0.0,1.0,420000.0,3181.818181818182,False,False,True,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,117.0,3.0,3.0,2.0,6.0,1.0,590000.0,5042.735042735043,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,314.0,5.0,4.0,4.0,0.0,4.0,2650000.0,8439.490445859872,True,False,False,True,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,95.0,3.0,2.0,1.0,0.0,2.0,900000.0,9473.684210526315,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,86.0,2.0,3.0,2.0,0.0,2.0,750000.0,8720.93023255814,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,73.0,2.0,2.0,1.0,0.0,2.0,650000.0,8904.109589041096,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,104.0,3.0,4.0,3.0,0.0,2.0,920000.0,8846.153846153846,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Serrinha,54.0,2.0,1.0,1.0,5.0,1.0,365000.0,6759.259259259259,True,False,False,True,True,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,235.0,4.0,4.0,4.0,0.0,4.0,2881221.0,12260.51489361702,False,False,False,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sabiaguaba,186.0,3.0,4.0,3.0,0.0,3.0,1150000.0,6182.795698924731,False,False,False,True,False,True,True,True,False,True,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Fátima,95.0,3.0,3.0,1.0,0.0,2.0,450000.0,4736.8421052631575,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cambeba,173.0,4.0,3.0,2.0,0.0,4.0,690000.0,3988.4393063583816,False,False,False,False,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,75.0,2.0,7.0,2.0,0.0,2.0,840000.0,11200.0,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,66.0,3.0,2.0,2.0,3.0,2.0,650000.0,9848.484848484848,False,False,True,True,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,115.0,3.0,4.0,3.0,0.0,2.0,1650000.0,14347.826086956522,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,77.0,3.0,2.0,1.0,1.0,2.0,772000.0,10025.974025974027,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,57.0,2.0,2.0,1.0,0.0,1.0,532097.0,9335.035087719298,True,False,False,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,78.0,3.0,3.0,3.0,2.0,2.0,970000.0,12435.897435897436,True,True,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,116.0,3.0,4.0,3.0,0.0,2.0,1030000.0,8879.310344827587,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,José Bonifácio,90.0,3.0,3.0,1.0,0.0,2.0,890000.0,9888.888888888889,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,73.0,2.0,3.0,2.0,0.0,0.0,996000.0,13643.835616438357,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,138.0,3.0,5.0,3.0,0.0,3.0,1199000.0,8688.40579710145,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Maraponga,263.0,4.0,5.0,3.0,0.0,2.0,620000.0,2357.4144486692016,False,False,False,False,False,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,45.0,1.0,1.0,1.0,11.0,1.0,520000.0,11555.555555555555,False,False,False,False,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Itaperi,125.0,3.0,3.0,2.0,0.0,2.0,650000.0,5200.0,False,False,False,True,False,False,True,True,False,False,False,CE,cobertura,True,True,True
+apartamento,Fortaleza,Aldeota,127.0,3.0,4.0,3.0,0.0,2.0,790000.0,6220.472440944882,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,123.0,3.0,4.0,3.0,0.0,2.0,1200000.0,9756.09756097561,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,133.0,3.0,4.0,3.0,2.0,3.0,1560757.0,11735.015037593985,True,False,False,True,True,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,103.0,3.0,3.0,3.0,0.0,2.0,1090000.0,10582.52427184466,False,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,141.0,3.0,3.0,3.0,0.0,3.0,2188768.0,15523.17730496454,False,False,False,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,187.0,3.0,3.0,3.0,0.0,2.0,950000.0,5080.213903743315,False,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Centro,115.0,3.0,3.0,1.0,0.0,1.0,369000.0,3208.695652173913,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,181.0,4.0,4.0,4.0,0.0,2.0,1190000.0,6574.585635359116,False,False,False,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,São Gerardo,65.0,3.0,2.0,1.0,2.0,2.0,580000.0,8923.076923076924,False,False,True,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,145.0,3.0,4.0,3.0,0.0,3.0,1650000.0,11379.310344827587,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Damas,74.0,3.0,2.0,1.0,0.0,1.0,220000.0,2972.972972972973,False,False,True,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,75.0,2.0,2.0,2.0,0.0,2.0,820000.0,10933.333333333334,True,False,True,True,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Barroso,46.0,2.0,2.0,1.0,1.0,1.0,260000.0,5652.173913043478,True,False,False,True,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,126.0,3.0,4.0,3.0,1.0,0.0,672000.0,5333.333333333333,False,False,False,False,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,78.0,3.0,2.0,2.0,15.0,2.0,999689.0,12816.52564102564,True,False,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,87.0,3.0,3.0,2.0,0.0,1.0,370000.0,4252.873563218391,False,False,True,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,146.0,3.0,4.0,3.0,0.0,3.0,990000.0,6780.821917808219,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Benfica,67.0,3.0,2.0,2.0,9.0,2.0,670000.0,10000.0,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,228.0,4.0,5.0,4.0,0.0,4.0,4000000.0,17543.859649122805,False,False,False,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,76.0,2.0,3.0,2.0,0.0,2.0,790000.0,10394.736842105263,False,False,True,True,False,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,115.0,3.0,4.0,3.0,0.0,3.0,1150000.0,10000.0,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,112.0,3.0,3.0,1.0,0.0,2.0,1080000.0,9642.857142857143,False,False,False,True,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,61.0,2.0,2.0,1.0,0.0,2.0,560000.0,9180.327868852459,True,False,False,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,93.0,3.0,3.0,2.0,0.0,2.0,920000.0,9892.47311827957,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,71.0,2.0,2.0,2.0,4.0,1.0,700000.0,9859.154929577464,False,False,False,True,False,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cajazeiras,61.0,3.0,2.0,1.0,0.0,1.0,230000.0,3770.4918032786886,False,False,False,True,True,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,134.0,4.0,4.0,4.0,0.0,3.0,1469900.0,10969.402985074626,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,112.0,3.0,4.0,3.0,0.0,3.0,720000.0,6428.571428571428,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,78.0,3.0,4.0,2.0,0.0,2.0,890000.0,11410.25641025641,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,53.0,2.0,2.0,1.0,1.0,1.0,419000.0,7905.66037735849,True,True,False,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,43.0,2.0,1.0,1.0,0.0,1.0,315000.0,7325.581395348837,False,False,False,True,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,78.0,3.0,2.0,2.0,0.0,2.0,865617.0,11097.653846153846,True,False,True,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,234.0,4.0,4.0,4.0,0.0,4.0,4098389.0,17514.482905982906,False,False,False,True,False,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Barroso,44.0,2.0,2.0,1.0,3.0,1.0,77000.0,1750.0,True,False,True,False,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,150.0,4.0,4.0,3.0,4.0,2.0,650000.0,4333.333333333333,True,False,False,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Messejana,65.0,3.0,2.0,1.0,2.0,2.0,380000.0,5846.153846153846,True,False,True,True,False,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,69.0,2.0,2.0,2.0,0.0,1.0,947225.0,13727.898550724638,False,True,False,True,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,71.0,3.0,3.0,2.0,5.0,1.0,389000.0,5478.87323943662,True,False,True,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,112.0,3.0,4.0,3.0,24.0,3.0,1288000.0,11500.0,False,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,146.0,3.0,4.0,3.0,0.0,3.0,1750000.0,11986.301369863013,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,104.0,3.0,4.0,3.0,13.0,2.0,1100000.0,10576.923076923076,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,139.0,3.0,4.0,3.0,0.0,2.0,760000.0,5467.625899280575,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,110.0,3.0,4.0,3.0,6.0,2.0,1150000.0,10454.545454545454,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Vicente Pinzon,100.0,3.0,3.0,1.0,0.0,1.0,410000.0,4100.0,True,False,False,False,False,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,100.0,4.0,4.0,4.0,0.0,2.0,890000.0,8900.0,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,122.0,3.0,3.0,1.0,0.0,2.0,620000.0,5081.9672131147545,True,False,False,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,67.0,3.0,3.0,1.0,1.0,2.0,480000.0,7164.179104477612,True,False,False,False,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Paupina,60.0,3.0,1.0,1.0,0.0,1.0,280000.0,4666.666666666667,True,False,True,True,True,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cidade dos Funcionários,193.0,4.0,5.0,4.0,0.0,2.0,800000.0,4145.077720207254,False,False,False,False,False,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,115.0,3.0,4.0,3.0,0.0,2.0,1350000.0,11739.130434782608,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,220.0,3.0,3.0,3.0,0.0,0.0,1300000.0,5909.090909090909,False,False,False,True,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,70.0,2.0,1.0,1.0,0.0,2.0,750000.0,10714.285714285714,True,False,False,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Monte Castelo,50.0,2.0,2.0,1.0,0.0,1.0,382191.0,7643.82,False,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,95.0,3.0,3.0,3.0,0.0,3.0,399990.0,4210.421052631579,False,False,False,False,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,62.0,3.0,2.0,1.0,0.0,2.0,530000.0,8548.387096774193,True,False,False,False,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,105.0,3.0,4.0,3.0,0.0,3.0,1350000.0,12857.142857142857,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,70.0,2.0,2.0,1.0,0.0,2.0,769000.0,10985.714285714286,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,86.0,3.0,2.0,1.0,0.0,2.0,650000.0,7558.139534883721,False,False,False,False,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,83.0,3.0,2.0,1.0,1.0,2.0,890000.0,10722.89156626506,True,False,False,True,True,True,True,True,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jóquei Clube,48.0,2.0,2.0,1.0,0.0,1.0,436325.0,9090.104166666666,True,False,False,True,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,50.0,2.0,2.0,1.0,6.0,1.0,369000.0,7380.0,True,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Praia do Futuro I,341.0,4.0,2.0,1.0,0.0,3.0,990000.0,2903.2258064516127,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Cajazeiras,298.0,4.0,5.0,4.0,0.0,3.0,1199000.0,4023.489932885906,True,False,False,True,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,70.0,2.0,2.0,1.0,20.0,1.0,1350000.0,19285.714285714286,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Praia do Futuro II,470.0,5.0,10.0,5.0,0.0,6.0,1490000.0,3170.2127659574467,False,False,False,True,True,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,213.0,3.0,2.0,2.0,0.0,2.0,899990.0,4225.305164319248,True,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Eusébio,Coaçu,154.0,4.0,4.0,3.0,0.0,3.0,880000.0,5714.285714285715,False,False,False,True,True,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,188.0,3.0,5.0,3.0,6.0,2.0,990000.0,5265.95744680851,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,142.0,3.0,4.0,3.0,0.0,3.0,1599000.0,11260.56338028169,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,95.0,3.0,2.0,2.0,0.0,2.0,1330290.0,14003.052631578947,False,False,False,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,74.0,3.0,3.0,2.0,0.0,2.0,750000.0,10135.135135135135,False,False,False,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,95.0,3.0,2.0,1.0,0.0,2.0,1150000.0,12105.263157894737,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Presidente Kennedy,64.0,3.0,2.0,2.0,0.0,2.0,699000.0,10921.875,True,True,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,149.0,3.0,4.0,3.0,21.0,3.0,1950000.0,13087.24832214765,True,False,True,True,True,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,450.0,10.0,8.0,5.0,0.0,2.0,425000.0,944.4444444444445,False,False,False,False,False,False,False,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,301.0,4.0,5.0,4.0,0.0,5.0,4483678.0,14895.940199335548,False,False,False,True,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,130.0,3.0,4.0,3.0,2.0,2.0,1290000.0,9923.076923076924,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,94.0,3.0,3.0,2.0,0.0,2.0,900000.0,9574.468085106382,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Paupina,48.0,2.0,2.0,1.0,1.0,1.0,225000.0,4687.5,False,False,False,True,False,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Paupina,53.0,2.0,2.0,1.0,1.0,0.0,215000.0,4056.603773584906,True,False,True,True,True,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jangurussu,137.0,3.0,3.0,3.0,0.0,2.0,350000.0,2554.7445255474454,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,81.0,3.0,4.0,3.0,2.0,2.0,695000.0,8580.246913580248,False,False,True,True,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,São Bento,161.0,4.0,4.0,4.0,0.0,3.0,875000.0,5434.782608695652,False,False,True,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Centro,81.0,3.0,3.0,1.0,0.0,2.0,900000.0,11111.111111111111,True,True,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Bom Jardim,44.0,2.0,1.0,1.0,4.0,1.0,45000.0,1022.7272727272727,False,False,False,False,True,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,72.0,2.0,2.0,1.0,0.0,1.0,590000.0,8194.444444444445,True,False,False,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,José Bonifácio,105.0,3.0,2.0,2.0,0.0,2.0,1317053.0,12543.361904761905,False,False,False,True,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,204.0,3.0,4.0,3.0,7.0,3.0,1100000.0,5392.156862745098,True,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jardim das Oliveiras,152.0,4.0,4.0,4.0,0.0,2.0,740000.0,4868.421052631579,False,False,False,True,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,175.0,3.0,4.0,3.0,0.0,3.0,1100000.0,6285.714285714285,True,False,False,False,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,70.0,3.0,2.0,2.0,0.0,2.0,660000.0,9428.57142857143,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,38.0,1.0,1.0,1.0,4.0,1.0,450000.0,11842.105263157895,False,True,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,75.0,3.0,2.0,1.0,2.0,1.0,499000.0,6653.333333333333,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Vicente Pinzon,94.0,3.0,3.0,2.0,2.0,1.0,510000.0,5425.531914893617,True,False,True,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,71.0,3.0,1.0,1.0,4.0,1.0,643000.0,9056.338028169013,False,False,True,False,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,100.0,3.0,4.0,3.0,0.0,2.0,990000.0,9900.0,True,False,False,True,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jangurussu,480.0,12.0,13.0,7.0,0.0,10.0,650000.0,1354.1666666666667,False,False,False,True,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,85.0,3.0,4.0,3.0,0.0,2.0,730000.0,8588.235294117647,False,False,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,70.0,2.0,2.0,1.0,8.0,2.0,635000.0,9071.42857142857,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,126.0,3.0,3.0,3.0,0.0,2.0,930000.0,7380.952380952381,False,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,62.0,2.0,2.0,1.0,0.0,2.0,530000.0,8548.387096774193,True,False,False,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,112.0,3.0,4.0,3.0,0.0,2.0,879000.0,7848.214285714285,True,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,115.0,3.0,3.0,3.0,0.0,2.0,1150000.0,10000.0,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Benfica,48.0,2.0,2.0,1.0,0.0,1.0,580000.0,12083.333333333334,False,False,True,True,True,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cidade dos Funcionários,145.0,4.0,4.0,3.0,0.0,5.0,700000.0,4827.586206896552,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,270.0,4.0,6.0,4.0,0.0,3.0,950000.0,3518.5185185185187,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,82.0,3.0,3.0,1.0,0.0,1.0,1530000.0,18658.536585365855,True,False,True,True,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,120.0,3.0,3.0,3.0,0.0,2.0,550000.0,4583.333333333333,False,False,False,False,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,62.0,2.0,2.0,1.0,0.0,1.0,535000.0,8629.032258064517,True,True,True,True,True,False,True,True,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,91.0,3.0,3.0,3.0,0.0,2.0,895000.0,9835.164835164835,True,False,False,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,242.0,4.0,4.0,4.0,0.0,4.0,3939574.0,16279.231404958678,False,False,False,True,True,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,230.0,4.0,4.0,4.0,0.0,3.0,2000000.0,8695.652173913044,True,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Messejana,132.0,5.0,4.0,3.0,0.0,2.0,890000.0,6742.424242424242,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,54.0,2.0,2.0,2.0,0.0,1.0,650000.0,12037.037037037036,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,125.0,2.0,3.0,1.0,0.0,2.0,680000.0,5440.0,True,False,False,False,True,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,112.0,3.0,4.0,3.0,0.0,3.0,1480000.0,13214.285714285714,False,False,True,True,False,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Itaperi,150.0,4.0,4.0,4.0,0.0,2.0,590000.0,3933.3333333333335,False,False,False,False,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Conjunto Ceará II,190.0,6.0,3.0,2.0,0.0,4.0,619000.0,3257.8947368421054,False,False,False,False,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,218.0,4.0,5.0,4.0,0.0,4.0,3400000.0,15596.330275229358,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,55.0,2.0,2.0,1.0,0.0,1.0,900000.0,16363.636363636364,True,False,False,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,122.0,2.0,4.0,2.0,22.0,3.0,1329000.0,10893.442622950819,True,False,False,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro I,60.0,3.0,2.0,2.0,0.0,1.0,489916.0,8165.266666666666,True,False,False,True,False,False,True,False,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Panamericano,57.0,2.0,2.0,1.0,0.0,1.0,210000.0,3684.2105263157896,True,False,False,False,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,73.0,2.0,2.0,1.0,0.0,2.0,700000.0,9589.04109589041,False,False,False,True,False,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,48.0,2.0,2.0,1.0,5.0,1.0,405000.0,8437.5,True,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,119.0,3.0,4.0,3.0,0.0,3.0,1390000.0,11680.672268907563,True,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jangurussu,400.0,13.0,12.0,1.0,0.0,1.0,430000.0,1075.0,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,112.0,3.0,4.0,3.0,0.0,2.0,840000.0,7500.0,False,False,False,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,93.0,3.0,4.0,2.0,0.0,2.0,1100000.0,11827.956989247312,True,False,False,True,False,False,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Paupina,40.0,2.0,2.0,1.0,0.0,1.0,230000.0,5750.0,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,178.0,4.0,4.0,4.0,0.0,2.0,799000.0,4488.76404494382,False,False,False,False,False,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,167.0,4.0,4.0,4.0,0.0,3.0,1850000.0,11077.844311377246,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Varjota,86.0,3.0,3.0,3.0,3.0,2.0,1241000.0,14430.232558139534,False,False,True,False,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,111.0,3.0,3.0,3.0,0.0,2.0,1270000.0,11441.441441441442,False,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jardim das Oliveiras,160.0,3.0,5.0,2.0,0.0,2.0,680000.0,4250.0,False,False,False,False,True,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,123.0,3.0,4.0,3.0,0.0,3.0,1350000.0,10975.609756097561,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,65.0,3.0,2.0,1.0,0.0,1.0,646000.0,9938.461538461539,True,True,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Maraponga,250.0,4.0,6.0,4.0,0.0,2.0,1950000.0,7800.0,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,114.0,3.0,2.0,1.0,0.0,1.0,440000.0,3859.6491228070176,True,True,False,False,True,False,False,False,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,127.0,3.0,3.0,3.0,9.0,3.0,2350000.0,18503.937007874014,True,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,92.0,3.0,3.0,2.0,3.0,2.0,820000.0,8913.04347826087,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Parque Iracema,307.0,5.0,6.0,4.0,2.0,5.0,1150000.0,3745.928338762215,False,False,False,False,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,117.0,3.0,4.0,2.0,0.0,2.0,1150000.0,9829.059829059828,False,False,False,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,De Lourdes,465.0,3.0,6.0,3.0,2.0,3.0,1100000.0,2365.5913978494623,False,True,False,True,False,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,94.0,3.0,3.0,2.0,0.0,2.0,850000.0,9042.553191489362,True,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jardim América,400.0,9.0,7.0,4.0,0.0,2.0,490000.0,1225.0,False,False,False,False,False,False,False,False,False,False,True,CE,casa_padrao,True,True,True
+casa,Fortaleza,Parque Santa Maria,70.0,2.0,2.0,1.0,0.0,1.0,90000.0,1285.7142857142858,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,260.0,6.0,5.0,5.0,0.0,5.0,720000.0,2769.230769230769,False,False,False,False,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,96.0,3.0,4.0,3.0,0.0,2.0,830000.0,8645.833333333334,True,False,True,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,130.0,3.0,4.0,3.0,0.0,2.0,1290000.0,9923.076923076924,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,55.0,2.0,2.0,2.0,0.0,1.0,683816.0,12433.018181818183,False,False,False,False,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,30.0,1.0,1.0,1.0,2.0,1.0,404723.0,13490.766666666666,True,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,116.0,3.0,4.0,3.0,0.0,2.0,1360000.0,11724.137931034482,False,False,True,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Mondubim,274.0,4.0,4.0,4.0,0.0,3.0,550000.0,2007.2992700729926,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,52.0,2.0,2.0,1.0,2.0,1.0,290000.0,5576.923076923077,True,False,True,True,True,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,72.0,3.0,2.0,2.0,0.0,2.0,680000.0,9444.444444444445,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Ancuri,55.0,2.0,2.0,1.0,0.0,1.0,185000.0,3363.6363636363635,False,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,64.0,3.0,2.0,1.0,0.0,1.0,340000.0,5312.5,True,False,False,False,False,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,98.0,3.0,3.0,2.0,0.0,2.0,1049000.0,10704.081632653062,False,False,True,False,False,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,71.0,3.0,2.0,1.0,0.0,0.0,645000.0,9084.507042253521,False,False,False,True,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,75.0,3.0,2.0,1.0,0.0,2.0,1205000.0,16066.666666666666,True,True,True,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,100.0,3.0,3.0,2.0,1.0,2.0,1320000.0,13200.0,False,False,False,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,39.0,1.0,2.0,1.0,2.0,1.0,885000.0,22692.30769230769,True,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Tauape,159.0,3.0,4.0,3.0,10.0,3.0,1900000.0,11949.685534591195,False,False,True,True,True,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,140.0,3.0,3.0,3.0,0.0,3.0,850000.0,6071.428571428572,True,False,False,False,False,True,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,124.0,3.0,4.0,3.0,0.0,2.0,950000.0,7661.290322580645,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Prefeito José Walter,43.0,2.0,2.0,2.0,0.0,1.0,335000.0,7790.697674418605,True,False,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,90.0,3.0,3.0,2.0,14.0,2.0,1199000.0,13322.222222222223,False,False,False,True,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,69.0,2.0,1.0,1.0,0.0,2.0,1066000.0,15449.27536231884,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Centro,85.0,3.0,3.0,2.0,0.0,2.0,850000.0,10000.0,False,True,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,De Lourdes,390.0,4.0,5.0,4.0,0.0,9.0,2300000.0,5897.4358974358975,False,False,False,True,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,119.0,3.0,4.0,3.0,9.0,3.0,1700000.0,14285.714285714286,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Messejana,40.0,3.0,2.0,1.0,0.0,1.0,219000.0,5475.0,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,105.0,2.0,3.0,2.0,0.0,2.0,1490000.0,14190.47619047619,True,False,False,True,True,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,150.0,4.0,5.0,4.0,0.0,3.0,730000.0,4866.666666666667,False,False,False,True,True,False,False,False,True,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,82.0,3.0,3.0,3.0,0.0,2.0,850000.0,10365.853658536585,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,90.0,3.0,3.0,2.0,0.0,2.0,850000.0,9444.444444444445,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,73.0,3.0,2.0,1.0,18.0,2.0,749000.0,10260.27397260274,False,False,False,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,64.0,3.0,2.0,1.0,0.0,1.0,430000.0,6718.75,True,False,True,True,False,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,111.0,3.0,3.0,3.0,0.0,2.0,1420000.0,12792.792792792792,False,True,True,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,123.0,3.0,3.0,3.0,0.0,2.0,998000.0,8113.821138211382,False,False,False,False,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Siqueira,810.0,4.0,3.0,2.0,0.0,12.0,700000.0,864.1975308641976,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Parangaba,250.0,4.0,2.0,2.0,0.0,3.0,695000.0,2780.0,False,False,False,False,True,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,50.0,1.0,2.0,1.0,0.0,1.0,442557.0,8851.14,True,False,False,True,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,141.0,3.0,4.0,3.0,0.0,3.0,1500000.0,10638.297872340425,False,True,False,True,True,True,True,False,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jacarecanga,80.0,3.0,2.0,1.0,0.0,2.0,429000.0,5362.5,False,False,True,True,True,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,89.0,3.0,2.0,2.0,0.0,2.0,983000.0,11044.943820224718,False,False,True,True,False,True,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Centro,95.0,3.0,2.0,1.0,11.0,2.0,990000.0,10421.052631578947,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Engenheiro Luciano Cavalcante,285.0,3.0,6.0,3.0,0.0,4.0,980000.0,3438.59649122807,False,False,False,False,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,112.0,3.0,4.0,3.0,0.0,2.0,780000.0,6964.285714285715,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,60.0,3.0,2.0,1.0,0.0,1.0,486900.0,8115.0,True,True,True,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,96.0,3.0,3.0,1.0,6.0,2.0,1200000.0,12500.0,False,True,False,True,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,De Lourdes,508.0,11.0,12.0,11.0,2.0,4.0,1690000.0,3326.771653543307,False,False,False,True,True,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aracapé,44.0,2.0,1.0,1.0,1.0,1.0,39999.0,909.0681818181819,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,54.0,2.0,2.0,2.0,15.0,1.0,590000.0,10925.925925925925,False,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,71.0,3.0,2.0,2.0,5.0,2.0,841335.0,11849.788732394367,True,False,False,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,José Bonifácio,90.0,3.0,4.0,1.0,22.0,2.0,893000.0,9922.222222222223,False,False,False,True,True,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sabiaguaba,229.0,3.0,4.0,3.0,0.0,3.0,1380000.0,6026.200873362445,False,False,False,True,False,True,True,True,False,True,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,José de Alencar,50.0,2.0,1.0,1.0,1.0,1.0,395000.0,7900.0,True,False,True,True,True,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,48.0,2.0,2.0,2.0,0.0,1.0,545000.0,11354.166666666666,True,True,True,True,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,100.0,3.0,3.0,1.0,1.0,1.0,299000.0,2990.0,True,False,True,False,False,False,False,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,74.0,3.0,3.0,2.0,0.0,2.0,650000.0,8783.783783783783,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,78.0,2.0,2.0,1.0,0.0,1.0,490000.0,6282.051282051282,False,False,False,True,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jardim das Oliveiras,100.0,3.0,2.0,2.0,0.0,2.0,440000.0,4400.0,False,False,False,False,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Cidade dos Funcionários,160.0,4.0,4.0,4.0,0.0,4.0,615000.0,3843.75,False,False,True,True,True,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,242.0,4.0,5.0,3.0,1.0,5.0,1350000.0,5578.512396694215,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,65.0,2.0,2.0,1.0,5.0,2.0,1390203.0,21387.73846153846,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Presidente Kennedy,54.0,2.0,2.0,1.0,0.0,0.0,570000.0,10555.555555555555,False,False,True,True,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Guajeru,168.0,3.0,3.0,2.0,0.0,3.0,950000.0,5654.761904761905,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,73.0,3.0,2.0,2.0,9.0,2.0,691000.0,9465.753424657534,True,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,69.0,3.0,2.0,1.0,0.0,1.0,510000.0,7391.304347826087,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Varjota,154.0,3.0,4.0,3.0,0.0,3.0,2300000.0,14935.064935064935,False,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,José Bonifácio,55.0,2.0,2.0,1.0,2.0,1.0,499000.0,9072.727272727272,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,78.0,3.0,2.0,2.0,3.0,2.0,887000.0,11371.794871794871,False,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,198.0,3.0,4.0,3.0,8.0,4.0,600000.0,3030.3030303030305,False,False,True,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,61.0,3.0,3.0,2.0,0.0,2.0,650000.0,10655.737704918032,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,111.0,3.0,4.0,3.0,4.0,3.0,1420604.0,12798.234234234234,False,True,True,True,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,87.0,3.0,3.0,2.0,3.0,0.0,1280950.0,14723.563218390804,False,False,False,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Siqueira,39.0,2.0,1.0,1.0,1.0,1.0,45000.0,1153.8461538461538,False,False,False,False,True,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,135.0,3.0,2.0,1.0,0.0,1.0,520000.0,3851.8518518518517,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Curió,135.0,3.0,4.0,3.0,0.0,2.0,750000.0,5555.555555555556,True,False,True,True,True,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,118.0,3.0,3.0,3.0,0.0,2.0,1190000.0,10084.745762711864,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,105.0,3.0,4.0,3.0,17.0,2.0,1250000.0,11904.761904761905,False,False,True,False,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,260.0,3.0,4.0,3.0,0.0,3.0,1250000.0,4807.692307692308,False,False,False,True,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Ancuri,54.0,2.0,2.0,2.0,0.0,1.0,185000.0,3425.925925925926,False,False,False,False,False,False,False,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,185.0,3.0,5.0,3.0,0.0,3.0,799000.0,4318.918918918919,True,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,85.0,3.0,3.0,2.0,0.0,0.0,275000.0,3235.294117647059,False,False,True,True,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,77.0,3.0,2.0,2.0,5.0,2.0,842000.0,10935.064935064935,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,65.0,2.0,2.0,1.0,0.0,2.0,550000.0,8461.538461538461,False,False,False,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,65.0,2.0,2.0,1.0,0.0,1.0,1110000.0,17076.923076923078,False,True,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,78.0,3.0,3.0,2.0,2.0,2.0,871071.0,11167.576923076924,False,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,242.0,4.0,4.0,4.0,0.0,4.0,4050326.0,16736.88429752066,False,False,False,True,False,True,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,200.0,4.0,4.0,4.0,0.0,6.0,795000.0,3975.0,False,False,False,True,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,José de Alencar,260.0,4.0,5.0,4.0,0.0,3.0,900000.0,3461.5384615384614,True,False,True,True,True,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,109.0,3.0,3.0,3.0,0.0,10.0,1290000.0,11834.862385321101,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cambeba,58.0,2.0,2.0,1.0,2.0,1.0,430000.0,7413.793103448276,True,False,True,True,False,False,False,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,59.0,3.0,1.0,1.0,8.0,1.0,380000.0,6440.677966101695,True,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,186.0,3.0,4.0,3.0,0.0,2.0,898000.0,4827.956989247312,True,False,True,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,54.0,2.0,2.0,2.0,3.0,1.0,680620.0,12604.074074074075,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,117.0,3.0,4.0,3.0,0.0,2.0,1280000.0,10940.17094017094,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,74.0,3.0,2.0,2.0,0.0,2.0,800000.0,10810.81081081081,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Centro,180.0,4.0,2.0,1.0,0.0,2.0,750000.0,4166.666666666667,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Siqueira,44.0,2.0,1.0,1.0,1.0,1.0,75000.0,1704.5454545454545,False,False,False,True,True,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,176.0,4.0,5.0,4.0,0.0,3.0,1990000.0,11306.818181818182,False,False,False,True,False,False,False,True,False,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cidade 2000,55.0,2.0,2.0,1.0,0.0,1.0,494400.0,8989.09090909091,False,False,False,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,54.0,2.0,2.0,2.0,0.0,2.0,620000.0,11481.481481481482,False,False,False,True,True,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cambeba,132.0,3.0,4.0,3.0,0.0,3.0,1125000.0,8522.727272727272,False,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Ancuri,81.0,2.0,2.0,2.0,0.0,1.0,225000.0,2777.777777777778,False,False,False,False,False,False,False,True,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Pedras,65.0,2.0,2.0,1.0,0.0,1.0,193000.0,2969.230769230769,False,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Presidente Kennedy,170.0,3.0,4.0,3.0,0.0,2.0,1099000.0,6464.705882352941,False,False,False,True,False,False,True,False,False,False,False,CE,cobertura,True,True,True
+casa,Fortaleza,Parque Santa Rosa,560.0,4.0,5.0,4.0,0.0,1.0,1350000.0,2410.714285714286,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Fátima,70.0,3.0,2.0,1.0,0.0,2.0,750000.0,10714.285714285714,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,240.0,4.0,5.0,4.0,11.0,4.0,1999000.0,8329.166666666666,False,True,False,False,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Sapiranga-Coité,64.0,3.0,2.0,1.0,0.0,2.0,420000.0,6562.5,True,False,False,False,True,True,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Varjota,106.0,3.0,4.0,2.0,0.0,2.0,820000.0,7735.8490566037735,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Tauape,135.0,3.0,4.0,3.0,3.0,3.0,1640000.0,12148.148148148148,False,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,146.0,3.0,4.0,3.0,0.0,4.0,1895000.0,12979.452054794521,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,José de Alencar,95.0,3.0,3.0,3.0,0.0,2.0,899000.0,9463.157894736842,True,False,False,True,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,180.0,3.0,4.0,3.0,0.0,2.0,599000.0,3327.777777777778,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,97.0,3.0,3.0,2.0,0.0,2.0,1050000.0,10824.742268041236,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,65.0,3.0,2.0,1.0,0.0,2.0,749000.0,11523.076923076924,True,False,True,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,76.0,2.0,2.0,1.0,0.0,2.0,990000.0,13026.315789473685,True,False,False,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cambeba,150.0,3.0,4.0,3.0,0.0,4.0,699000.0,4660.0,False,False,True,True,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,112.0,3.0,4.0,3.0,0.0,2.0,1080000.0,9642.857142857143,True,False,False,True,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,65.0,2.0,2.0,2.0,14.0,1.0,1595000.0,24538.46153846154,True,True,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,213.0,3.0,4.0,3.0,0.0,3.0,2800000.0,13145.539906103286,True,True,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Aerolândia,374.0,3.0,4.0,3.0,0.0,6.0,849990.0,2272.700534759358,False,False,False,False,False,False,False,False,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Prefeito José Walter,50.0,2.0,2.0,2.0,4.0,1.0,350000.0,7000.0,False,False,True,True,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sabiaguaba,193.0,3.0,3.0,3.0,0.0,3.0,1150000.0,5958.5492227979275,False,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,186.0,3.0,3.0,3.0,0.0,2.0,1050000.0,5645.1612903225805,False,False,False,False,True,False,False,True,True,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,108.0,3.0,3.0,3.0,0.0,2.0,1100000.0,10185.185185185184,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cambeba,130.0,3.0,3.0,1.0,6.0,2.0,890000.0,6846.153846153846,True,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Sapiranga-Coité,101.0,3.0,4.0,3.0,2.0,2.0,850000.0,8415.841584158416,True,False,False,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cais do Porto,48.0,2.0,1.0,1.0,0.0,1.0,355000.0,7395.833333333333,False,False,True,True,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,110.0,3.0,4.0,3.0,0.0,2.0,1400000.0,12727.272727272728,True,False,False,True,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,44.0,2.0,2.0,2.0,4.0,2.0,350000.0,7954.545454545455,True,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,125.0,3.0,4.0,3.0,0.0,3.0,1300000.0,10400.0,True,False,True,False,True,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Messejana,134.0,3.0,2.0,1.0,0.0,2.0,340000.0,2537.313432835821,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,45.0,1.0,1.0,1.0,3.0,1.0,754953.0,16776.733333333334,False,False,False,False,False,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,130.0,3.0,4.0,3.0,0.0,2.0,1600000.0,12307.692307692309,False,False,False,True,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,55.0,2.0,2.0,2.0,0.0,1.0,570000.0,10363.636363636364,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Engenheiro Luciano Cavalcante,226.0,5.0,6.0,4.0,0.0,2.0,700000.0,3097.3451327433627,False,False,False,False,False,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,133.0,3.0,4.0,3.0,0.0,3.0,1390000.0,10451.127819548872,True,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,59.0,2.0,2.0,1.0,5.0,0.0,884000.0,14983.050847457627,False,True,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,45.0,1.0,1.0,1.0,0.0,1.0,560492.0,12455.377777777778,False,False,False,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,40.0,1.0,1.0,1.0,15.0,1.0,520000.0,13000.0,False,False,False,False,False,False,False,False,False,False,False,CE,kitchenette_studio,True,True,True
+casa,Fortaleza,Sabiaguaba,186.0,3.0,3.0,3.0,0.0,2.0,1150000.0,6182.795698924731,True,False,True,True,False,True,True,True,False,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,124.0,3.0,4.0,3.0,0.0,3.0,1180000.0,9516.129032258064,True,False,False,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Varjota,86.0,3.0,3.0,3.0,12.0,2.0,899000.0,10453.488372093023,True,True,False,True,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,49.0,2.0,2.0,2.0,0.0,1.0,330000.0,6734.693877551021,False,False,True,True,False,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,75.0,3.0,2.0,1.0,2.0,2.0,560172.0,7468.96,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,127.0,3.0,4.0,3.0,0.0,3.0,2150000.0,16929.133858267716,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,230.0,3.0,5.0,3.0,0.0,4.0,2940000.0,12782.608695652174,True,False,True,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,92.0,3.0,3.0,2.0,0.0,2.0,939000.0,10206.521739130434,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,87.0,3.0,2.0,1.0,0.0,2.0,1250000.0,14367.816091954022,False,False,False,True,True,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Pedras,55.0,2.0,2.0,1.0,0.0,1.0,186000.0,3381.818181818182,False,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,60.0,2.0,2.0,1.0,11.0,2.0,630000.0,10500.0,True,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Presidente Kennedy,53.0,2.0,2.0,1.0,0.0,1.0,523000.0,9867.924528301886,False,False,False,True,True,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,97.0,3.0,3.0,3.0,0.0,2.0,959000.0,9886.59793814433,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Centro,61.0,3.0,2.0,1.0,0.0,2.0,567000.0,9295.081967213115,False,False,False,True,False,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,189.0,4.0,6.0,4.0,0.0,4.0,2542000.0,13449.73544973545,True,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jardim Cearense,64.0,3.0,2.0,1.0,0.0,2.0,559999.0,8749.984375,True,False,False,True,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,98.0,4.0,3.0,3.0,3.0,2.0,819990.0,8367.244897959185,True,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,175.0,3.0,5.0,3.0,11.0,2.0,970000.0,5542.857142857143,True,False,True,False,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,241.0,5.0,4.0,3.0,0.0,5.0,995000.0,4128.630705394191,False,False,True,True,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,94.0,3.0,3.0,2.0,0.0,2.0,640000.0,6808.510638297872,False,True,True,False,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Dois Irmãos,60.0,3.0,2.0,1.0,8.0,2.0,349000.0,5816.666666666667,False,False,False,True,True,False,False,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,45.0,1.0,1.0,1.0,10.0,2.0,700648.0,15569.955555555556,True,True,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Prefeito José Walter,50.0,2.0,2.0,1.0,4.0,1.0,240000.0,4800.0,False,False,False,True,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,148.0,3.0,3.0,3.0,0.0,2.0,3600000.0,24324.324324324323,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,100.0,3.0,3.0,2.0,6.0,2.0,1350000.0,13500.0,False,True,False,True,False,True,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,De Lourdes,720.0,3.0,5.0,3.0,0.0,4.0,2100000.0,2916.6666666666665,False,False,False,True,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,182.0,3.0,4.0,3.0,0.0,3.0,1980000.0,10879.12087912088,True,True,True,False,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,São Gerardo,231.0,4.0,5.0,3.0,0.0,3.0,600000.0,2597.4025974025976,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,136.0,3.0,4.0,3.0,0.0,3.0,1788000.0,13147.058823529413,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,55.0,2.0,2.0,2.0,0.0,2.0,340000.0,6181.818181818182,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,122.0,3.0,4.0,2.0,0.0,2.0,650000.0,5327.868852459016,False,False,True,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,379.0,3.0,5.0,3.0,0.0,4.0,2850000.0,7519.788918205805,False,False,True,True,False,False,True,True,True,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,56.0,2.0,2.0,1.0,12.0,1.0,800000.0,14285.714285714286,True,True,False,True,False,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,105.0,3.0,2.0,2.0,10.0,2.0,1199000.0,11419.047619047618,False,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,60.0,2.0,2.0,1.0,0.0,1.0,684000.0,11400.0,False,False,False,True,False,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cajazeiras,80.0,2.0,2.0,1.0,3.0,1.0,120000.0,1500.0,False,False,True,False,False,False,False,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,São Gerardo,91.0,3.0,2.0,1.0,19.0,2.0,830000.0,9120.87912087912,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,120.0,2.0,3.0,2.0,0.0,3.0,1290000.0,10750.0,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,195.0,4.0,4.0,4.0,0.0,3.0,760000.0,3897.4358974358975,True,False,True,False,True,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,325.0,4.0,6.0,4.0,4.0,3.0,1400000.0,4307.692307692308,False,False,True,True,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,120.0,2.0,3.0,2.0,0.0,3.0,1290000.0,10750.0,False,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,96.0,3.0,2.0,1.0,0.0,2.0,990000.0,10312.5,True,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Barroso,41.0,1.0,1.0,1.0,0.0,1.0,270000.0,6585.365853658536,False,False,True,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cidade dos Funcionários,260.0,5.0,4.0,4.0,0.0,0.0,990000.0,3807.6923076923076,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Jóquei Clube,68.0,3.0,2.0,1.0,10.0,2.0,620000.0,9117.64705882353,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,70.0,3.0,2.0,2.0,0.0,2.0,645000.0,9214.285714285714,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,113.0,4.0,3.0,3.0,2.0,2.0,285000.0,2522.1238938053098,False,False,True,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Engenheiro Luciano Cavalcante,140.0,3.0,4.0,3.0,0.0,2.0,800000.0,5714.285714285715,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cidade 2000,167.0,4.0,5.0,4.0,0.0,3.0,1850000.0,11077.844311377246,False,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Benfica,127.0,3.0,3.0,2.0,23.0,3.0,1973000.0,15535.433070866142,True,False,False,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,70.0,3.0,2.0,1.0,12.0,2.0,692513.0,9893.042857142857,False,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Sapiranga-Coité,60.0,3.0,2.0,1.0,0.0,1.0,502346.0,8372.433333333332,False,False,True,True,False,True,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,80.0,3.0,3.0,2.0,0.0,2.0,1350000.0,16875.0,True,False,True,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,57.0,2.0,2.0,1.0,8.0,1.0,649000.0,11385.964912280702,True,False,True,True,True,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cidade 2000,102.0,3.0,3.0,3.0,0.0,2.0,860000.0,8431.372549019608,True,False,True,True,True,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,60.0,2.0,2.0,1.0,14.0,2.0,630000.0,10500.0,False,True,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,92.0,3.0,3.0,2.0,0.0,3.0,1350000.0,14673.91304347826,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,120.0,2.0,3.0,2.0,0.0,3.0,1290000.0,10750.0,False,False,False,True,False,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,155.0,4.0,4.0,4.0,0.0,0.0,700000.0,4516.129032258064,True,False,False,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,95.0,3.0,3.0,2.0,0.0,2.0,850000.0,8947.368421052632,True,True,True,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,57.0,2.0,2.0,1.0,7.0,0.0,580000.0,10175.438596491229,True,False,False,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,127.0,3.0,5.0,3.0,0.0,3.0,2300000.0,18110.23622047244,False,False,True,True,False,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,98.0,3.0,1.0,1.0,10.0,2.0,500000.0,5102.040816326531,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,115.0,3.0,3.0,3.0,4.0,2.0,1090000.0,9478.260869565218,False,False,False,True,True,True,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,60.0,3.0,2.0,1.0,2.0,1.0,249000.0,4150.0,False,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,164.0,2.0,5.0,2.0,18.0,4.0,2250000.0,13719.512195121952,True,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,124.0,3.0,4.0,3.0,0.0,2.0,1390000.0,11209.677419354839,False,False,False,True,True,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,163.0,4.0,5.0,4.0,0.0,3.0,2590000.0,15889.57055214724,False,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,157.0,3.0,4.0,2.0,8.0,3.0,1100000.0,7006.369426751592,True,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,55.0,2.0,2.0,1.0,9.0,1.0,550000.0,10000.0,False,True,True,True,False,True,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,113.0,4.0,4.0,3.0,0.0,2.0,1100000.0,9734.513274336283,True,True,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,52.0,2.0,2.0,1.0,5.0,1.0,270000.0,5192.307692307692,True,False,False,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,88.0,3.0,2.0,1.0,0.0,2.0,1200000.0,13636.363636363636,True,False,False,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,90.0,3.0,2.0,1.0,0.0,2.0,600000.0,6666.666666666667,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,92.0,3.0,3.0,3.0,16.0,2.0,949000.0,10315.217391304348,True,True,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,170.0,3.0,5.0,3.0,15.0,3.0,999000.0,5876.470588235294,False,False,False,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Varjota,48.0,2.0,2.0,2.0,0.0,1.0,630000.0,13125.0,False,True,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cambeba,250.0,3.0,5.0,3.0,0.0,6.0,1300000.0,5200.0,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Praia de Iracema,145.0,2.0,3.0,2.0,0.0,1.0,580000.0,4000.0,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,José de Alencar,145.0,3.0,5.0,3.0,0.0,2.0,575000.0,3965.5172413793102,True,False,True,True,True,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,82.0,3.0,2.0,1.0,0.0,2.0,780000.0,9512.19512195122,True,False,True,False,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Itaperi,58.0,3.0,2.0,1.0,0.0,1.0,159000.0,2741.3793103448274,False,False,True,True,True,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,São Gerardo,104.0,3.0,2.0,1.0,0.0,2.0,440000.0,4230.7692307692305,False,False,False,True,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,140.0,3.0,5.0,3.0,0.0,3.0,1700000.0,12142.857142857143,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,30.0,1.0,1.0,1.0,3.0,1.0,424959.0,14165.3,False,False,False,True,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,254.0,4.0,5.0,4.0,0.0,5.0,4300000.0,16929.133858267716,True,True,True,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,70.0,3.0,2.0,1.0,0.0,2.0,650000.0,9285.714285714286,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,152.0,3.0,4.0,3.0,0.0,3.0,2290000.0,15065.78947368421,False,False,False,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,129.0,3.0,4.0,3.0,40.0,2.0,2590000.0,20077.51937984496,False,False,True,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,150.0,3.0,5.0,3.0,0.0,4.0,1800000.0,12000.0,True,False,False,True,True,False,False,True,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,118.0,3.0,4.0,3.0,8.0,2.0,690000.0,5847.457627118644,False,False,False,False,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,116.0,3.0,4.0,3.0,12.0,2.0,1499000.0,12922.413793103447,True,True,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jardim Cearense,73.0,3.0,2.0,1.0,11.0,2.0,850000.0,11643.835616438357,False,False,False,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,125.0,3.0,3.0,2.0,15.0,2.0,950000.0,7600.0,False,False,False,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Tauape,232.0,3.0,5.0,3.0,10.0,0.0,2900000.0,12500.0,True,False,False,True,True,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cidade dos Funcionários,500.0,5.0,5.0,3.0,0.0,2.0,750000.0,1500.0,False,False,False,True,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,92.0,3.0,3.0,1.0,6.0,2.0,1200000.0,13043.478260869566,False,True,False,True,True,True,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,54.0,2.0,2.0,2.0,3.0,1.0,617342.0,11432.25925925926,False,False,False,True,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,74.0,3.0,3.0,2.0,0.0,2.0,670000.0,9054.054054054053,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,311.0,4.0,9.0,4.0,0.0,5.0,5345000.0,17186.495176848875,False,False,True,False,False,True,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,49.0,2.0,2.0,1.0,0.0,1.0,370000.0,7551.0204081632655,True,False,True,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,254.0,4.0,5.0,4.0,0.0,4.0,3500000.0,13779.527559055117,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,176.0,4.0,4.0,4.0,0.0,4.0,430000.0,2443.181818181818,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,117.0,3.0,4.0,2.0,0.0,2.0,750000.0,6410.25641025641,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,257.0,4.0,5.0,4.0,10.0,4.0,2700000.0,10505.836575875486,True,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,75.0,3.0,2.0,2.0,17.0,2.0,780000.0,10400.0,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,81.0,1.0,2.0,1.0,0.0,1.0,1366600.0,16871.604938271605,False,False,False,True,False,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,60.0,2.0,2.0,1.0,11.0,2.0,630000.0,10500.0,False,False,False,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,170.0,3.0,3.0,2.0,6.0,1.0,710000.0,4176.470588235294,False,False,False,True,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,300.0,4.0,5.0,4.0,2.0,3.0,1650000.0,5500.0,True,False,False,False,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,74.0,2.0,2.0,1.0,7.0,1.0,400000.0,5405.405405405405,False,False,False,False,False,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,195.0,4.0,5.0,3.0,0.0,2.0,1000000.0,5128.205128205128,True,False,True,False,False,True,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,231.0,3.0,4.0,3.0,0.0,2.0,990000.0,4285.714285714285,True,False,False,True,True,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,105.0,3.0,4.0,3.0,0.0,2.0,740000.0,7047.619047619048,False,False,True,True,True,True,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,117.0,3.0,3.0,3.0,0.0,2.0,1279900.0,10939.31623931624,True,False,False,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Aquiraz,Dionísio Torres,165.0,3.0,4.0,3.0,0.0,2.0,670000.0,4060.6060606060605,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Varjota,47.0,2.0,2.0,2.0,9.0,1.0,620000.0,13191.489361702128,True,True,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,77.0,3.0,2.0,2.0,16.0,2.0,936120.0,12157.402597402597,False,True,False,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jangurussu,116.0,3.0,4.0,3.0,0.0,2.0,445000.0,3836.206896551724,False,False,False,True,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,94.0,3.0,3.0,2.0,21.0,2.0,990000.0,10531.91489361702,False,False,False,True,False,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,78.0,3.0,3.0,3.0,0.0,2.0,1046455.0,13416.089743589744,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,182.0,3.0,3.0,3.0,0.0,2.0,890000.0,4890.10989010989,True,False,False,True,True,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,67.0,3.0,2.0,1.0,0.0,2.0,520000.0,7761.194029850746,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,271.0,4.0,5.0,4.0,2.0,5.0,3680000.0,13579.335793357934,False,False,False,True,False,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,86.0,3.0,3.0,3.0,0.0,2.0,1472000.0,17116.279069767443,False,False,False,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,110.0,3.0,3.0,3.0,0.0,3.0,1100000.0,10000.0,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cambeba,350.0,8.0,7.0,6.0,0.0,5.0,2700000.0,7714.285714285715,False,False,False,True,True,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,50.0,2.0,2.0,1.0,6.0,1.0,655000.0,13100.0,False,False,False,True,True,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Dois Irmãos,60.0,3.0,2.0,1.0,5.0,1.0,340000.0,5666.666666666667,False,False,True,True,True,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,80.0,3.0,2.0,2.0,0.0,2.0,750000.0,9375.0,False,False,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,59.0,3.0,2.0,1.0,10.0,1.0,595000.0,10084.745762711864,False,False,True,False,False,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Aquiraz,José de Alencar,350.0,4.0,4.0,4.0,0.0,3.0,3500000.0,10000.0,False,False,True,True,False,True,True,True,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,83.0,3.0,3.0,2.0,0.0,1.0,815000.0,9819.277108433735,True,True,False,False,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Aquiraz,Guararapes,142.0,3.0,4.0,3.0,0.0,3.0,2100000.0,14788.732394366198,False,False,True,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,110.0,4.0,2.0,1.0,0.0,1.0,337000.0,3063.6363636363635,False,False,True,False,False,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,133.0,3.0,5.0,3.0,0.0,2.0,1200000.0,9022.556390977443,True,False,False,False,False,False,False,False,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,105.0,2.0,3.0,2.0,0.0,2.0,1490000.0,14190.47619047619,False,False,False,False,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,137.0,3.0,4.0,3.0,7.0,3.0,1795000.0,13102.189781021898,False,False,False,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,45.0,2.0,1.0,1.0,1.0,1.0,220000.0,4888.888888888889,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Ancuri,87.0,3.0,2.0,2.0,0.0,1.0,250000.0,2873.5632183908046,False,False,False,False,False,False,False,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,90.0,3.0,2.0,1.0,12.0,2.0,1000000.0,11111.111111111111,True,False,True,True,False,False,False,True,False,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,91.0,2.0,2.0,1.0,16.0,2.0,949000.0,10428.57142857143,False,False,False,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,47.0,2.0,2.0,1.0,13.0,1.0,350000.0,7446.808510638298,False,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,116.0,3.0,4.0,3.0,0.0,2.0,1359999.0,11724.129310344828,True,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,150.0,3.0,4.0,3.0,0.0,2.0,969000.0,6460.0,False,True,False,False,False,False,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,105.0,3.0,4.0,3.0,1.0,2.0,750000.0,7142.857142857143,True,False,True,True,True,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,José Bonifácio,123.0,3.0,4.0,3.0,0.0,2.0,450000.0,3658.5365853658536,False,False,False,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,72.0,3.0,3.0,2.0,0.0,1.0,610000.0,8472.222222222223,False,False,True,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Presidente Kennedy,98.0,3.0,2.0,1.0,1.0,1.0,320000.0,3265.3061224489797,True,False,False,False,False,False,False,False,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cambeba,275.0,5.0,5.0,5.0,0.0,4.0,1300000.0,4727.272727272727,False,False,True,True,True,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Damas,67.0,3.0,2.0,1.0,0.0,2.0,415000.0,6194.0298507462685,True,False,True,True,True,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Varjota,106.0,3.0,4.0,2.0,0.0,2.0,800000.0,7547.169811320755,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Itaperi,63.0,3.0,2.0,1.0,2.0,1.0,235000.0,3730.15873015873,False,False,True,True,False,False,False,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,38.0,1.0,1.0,1.0,0.0,1.0,460000.0,12105.263157894737,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,55.0,2.0,2.0,1.0,1.0,1.0,700000.0,12727.272727272728,False,False,True,False,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,270.0,3.0,5.0,3.0,0.0,3.0,1500000.0,5555.555555555556,False,False,True,False,True,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,119.0,3.0,4.0,3.0,0.0,2.0,998575.0,8391.38655462185,False,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,74.0,2.0,2.0,2.0,0.0,1.0,750000.0,10135.135135135135,True,False,True,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,90.0,3.0,2.0,1.0,8.0,2.0,790000.0,8777.777777777777,False,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,120.0,3.0,4.0,3.0,1.0,3.0,1300000.0,10833.333333333334,False,False,False,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,148.0,3.0,3.0,3.0,5.0,2.0,495000.0,3344.5945945945946,True,False,True,False,False,True,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,136.0,3.0,5.0,3.0,0.0,3.0,1450000.0,10661.764705882353,False,False,False,True,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Engenheiro Luciano Cavalcante,477.0,7.0,15.0,6.0,0.0,12.0,3000000.0,6289.308176100629,False,False,False,False,False,False,True,False,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,230.0,3.0,5.0,3.0,0.0,4.0,2890000.0,12565.217391304348,True,False,False,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Parque Manibura,281.0,5.0,4.0,2.0,0.0,5.0,890000.0,3167.259786476868,True,False,False,True,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,59.0,2.0,2.0,1.0,5.0,1.0,540000.0,9152.542372881357,False,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,74.0,3.0,2.0,2.0,0.0,2.0,715000.0,9662.162162162162,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cajazeiras,30.0,1.0,1.0,1.0,3.0,1.0,33000.0,1100.0,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,250.0,4.0,4.0,4.0,0.0,4.0,3600000.0,14400.0,True,True,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,80.0,2.0,3.0,2.0,0.0,2.0,749000.0,9362.5,True,False,True,True,False,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Sapiranga-Coité,330.0,5.0,5.0,4.0,0.0,4.0,800000.0,2424.242424242424,False,False,False,True,True,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,82.0,3.0,2.0,2.0,0.0,2.0,590000.0,7195.121951219512,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,112.0,3.0,5.0,3.0,0.0,0.0,650000.0,5803.571428571428,False,False,False,True,True,False,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Passaré,44.0,2.0,2.0,1.0,4.0,1.0,314700.0,7152.272727272727,True,False,False,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Barroso,45.0,2.0,2.0,1.0,2.0,0.0,287000.0,6377.777777777777,True,False,True,True,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,66.0,3.0,2.0,1.0,0.0,1.0,676000.0,10242.424242424242,False,False,False,True,False,False,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cambeba,275.0,4.0,4.0,4.0,0.0,4.0,1500000.0,5454.545454545455,True,False,True,True,False,False,False,True,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Rachel de Queiroz,125.0,3.0,3.0,2.0,0.0,1.0,880000.0,7040.0,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,186.0,4.0,5.0,4.0,0.0,4.0,1990000.0,10698.924731182795,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,100.0,3.0,3.0,3.0,0.0,2.0,890000.0,8900.0,False,False,True,False,False,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,70.0,3.0,3.0,2.0,0.0,2.0,620000.0,8857.142857142857,True,False,False,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Prefeito José Walter,160.0,4.0,5.0,4.0,0.0,4.0,820000.0,5125.0,False,False,True,True,False,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,341.0,4.0,5.0,4.0,0.0,6.0,4980000.0,14604.105571847507,True,True,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,50.0,1.0,1.0,1.0,0.0,2.0,730400.0,14608.0,False,False,False,True,False,False,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,122.0,3.0,3.0,3.0,0.0,4.0,1100000.0,9016.393442622952,True,False,True,False,False,True,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,39.0,1.0,1.0,1.0,0.0,1.0,600000.0,15384.615384615385,True,True,False,True,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,50.0,2.0,2.0,2.0,0.0,0.0,762000.0,15240.0,False,False,False,True,True,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cajazeiras,288.0,4.0,4.0,3.0,0.0,4.0,550000.0,1909.7222222222222,False,False,False,False,True,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,177.0,4.0,4.0,3.0,0.0,3.0,2200000.0,12429.378531073446,False,False,False,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,122.0,3.0,4.0,3.0,0.0,2.0,1100000.0,9016.393442622952,True,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia de Iracema,72.0,3.0,5.0,2.0,0.0,2.0,1150000.0,15972.222222222223,False,False,True,False,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,106.0,3.0,3.0,2.0,6.0,2.0,850000.0,8018.867924528302,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Eusébio,Itaoca,52.0,2.0,2.0,1.0,0.0,1.0,310000.0,5961.538461538462,False,False,True,True,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Lagoa Redonda,57.0,2.0,2.0,1.0,4.0,2.0,260000.0,4561.403508771929,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cidade dos Funcionários,161.0,4.0,4.0,4.0,0.0,3.0,603000.0,3745.341614906832,False,False,False,False,False,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,133.0,3.0,5.0,3.0,0.0,3.0,1710463.0,12860.624060150376,True,False,True,True,True,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jardim das Oliveiras,167.0,4.0,6.0,4.0,0.0,12.0,700000.0,4191.616766467066,False,False,False,True,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,117.0,3.0,4.0,3.0,0.0,3.0,1480000.0,12649.57264957265,False,False,False,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,339.0,4.0,5.0,4.0,0.0,6.0,4500000.0,13274.336283185841,True,True,False,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Paupina,44.0,2.0,2.0,1.0,3.0,2.0,248000.0,5636.363636363636,False,False,False,True,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,63.0,3.0,2.0,1.0,0.0,2.0,530000.0,8412.698412698413,True,False,True,False,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,55.0,2.0,2.0,2.0,6.0,1.0,621100.0,11292.727272727272,False,False,False,False,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,72.0,3.0,2.0,2.0,0.0,2.0,650000.0,9027.777777777777,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,134.0,3.0,4.0,3.0,0.0,3.0,1450000.0,10820.89552238806,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,68.0,2.0,2.0,2.0,0.0,1.0,940000.0,13823.529411764706,False,True,True,False,False,False,True,False,False,False,False,CE,kitchenette_studio,True,True,True
+casa,Fortaleza,Sapiranga-Coité,212.0,4.0,5.0,4.0,0.0,4.0,940000.0,4433.962264150943,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,191.0,4.0,5.0,4.0,0.0,3.0,1100000.0,5759.162303664922,True,False,True,True,False,False,True,False,True,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Passaré,53.0,2.0,2.0,1.0,0.0,1.0,285000.0,5377.358490566037,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Aquiraz,Parque Iracema,130.0,3.0,3.0,3.0,0.0,2.0,1390000.0,10692.307692307691,False,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,131.0,3.0,4.0,3.0,1.0,3.0,1511000.0,11534.351145038168,False,False,False,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,138.0,4.0,5.0,3.0,0.0,3.0,1900000.0,13768.115942028986,False,False,False,True,False,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Parque Dois Irmãos,495.0,4.0,3.0,2.0,0.0,5.0,1000000.0,2020.20202020202,False,False,False,True,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Centro,95.0,3.0,3.0,2.0,0.0,2.0,870000.0,9157.894736842105,False,False,False,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,83.0,3.0,3.0,2.0,0.0,2.0,900000.0,10843.373493975903,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Centro,85.0,3.0,3.0,2.0,21.0,2.0,849900.0,9998.823529411764,False,True,False,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,121.0,3.0,3.0,3.0,0.0,2.0,629000.0,5198.347107438017,False,False,True,True,True,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mucuripe,51.0,1.0,1.0,1.0,0.0,1.0,725000.0,14215.686274509804,True,True,True,True,False,False,True,True,False,False,False,CE,kitchenette_studio,True,True,True
+casa,Fortaleza,Maraponga,600.0,4.0,5.0,3.0,0.0,5.0,1800000.0,3000.0,False,False,False,True,False,False,False,False,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,119.0,3.0,4.0,3.0,0.0,3.0,1626378.0,13667.042016806723,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,70.0,3.0,2.0,1.0,0.0,2.0,720000.0,10285.714285714286,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,142.0,2.0,3.0,2.0,0.0,4.0,2190000.0,15422.535211267606,False,False,False,True,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,74.0,2.0,2.0,2.0,0.0,2.0,780000.0,10540.54054054054,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,65.0,3.0,2.0,2.0,0.0,2.0,750000.0,11538.461538461539,True,False,True,True,True,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,83.0,3.0,3.0,2.0,0.0,2.0,890000.0,10722.89156626506,False,False,False,True,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,219.0,4.0,5.0,4.0,0.0,4.0,3500000.0,15981.735159817352,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,194.0,4.0,4.0,3.0,17.0,3.0,1600000.0,8247.422680412372,True,True,False,True,True,True,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,204.0,3.0,4.0,3.0,16.0,4.0,3400000.0,16666.666666666668,False,False,False,True,False,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,112.0,3.0,4.0,3.0,0.0,2.0,1080000.0,9642.857142857143,False,False,False,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Maraponga,223.0,4.0,4.0,4.0,0.0,2.0,1950000.0,8744.394618834081,True,False,False,True,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,202.0,3.0,3.0,3.0,0.0,0.0,3100000.0,15346.534653465347,False,False,True,True,True,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,245.0,4.0,4.0,3.0,2.0,7.0,1300000.0,5306.122448979592,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,53.0,2.0,2.0,1.0,0.0,1.0,468000.0,8830.188679245282,False,False,True,True,True,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,301.0,4.0,5.0,4.0,0.0,5.0,4684482.0,15563.063122923588,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,72.0,3.0,2.0,2.0,5.0,2.0,760000.0,10555.555555555555,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,118.0,4.0,4.0,3.0,0.0,2.0,1395000.0,11822.033898305084,False,False,False,True,False,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,165.0,3.0,5.0,3.0,0.0,3.0,1999000.0,12115.151515151516,False,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,150.0,4.0,4.0,4.0,0.0,2.0,1950000.0,13000.0,False,False,False,True,True,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,126.0,3.0,5.0,3.0,0.0,2.0,720000.0,5714.285714285715,False,True,False,False,False,False,True,False,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,100.0,4.0,4.0,4.0,0.0,2.0,870000.0,8700.0,False,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,123.0,3.0,3.0,3.0,0.0,1.0,1300000.0,10569.105691056911,True,False,True,True,True,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,48.0,2.0,2.0,2.0,0.0,1.0,367775.0,7661.979166666667,False,False,False,True,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,63.0,2.0,2.0,1.0,0.0,1.0,650000.0,10317.460317460318,True,False,False,False,False,False,False,True,True,True,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Itaperi,457.0,4.0,3.0,2.0,0.0,5.0,550000.0,1203.5010940919037,False,False,False,False,False,False,False,False,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,211.0,3.0,4.0,3.0,0.0,3.0,1250000.0,5924.1706161137445,False,False,False,True,True,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,120.0,3.0,5.0,3.0,0.0,3.0,1600000.0,13333.333333333334,True,False,True,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Dois Irmãos,55.0,2.0,2.0,1.0,3.0,1.0,300000.0,5454.545454545455,False,False,True,True,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,83.0,3.0,4.0,3.0,2.0,2.0,901400.0,10860.240963855422,True,True,False,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,146.0,3.0,5.0,3.0,0.0,3.0,1500000.0,10273.972602739726,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Varjota,86.0,3.0,3.0,3.0,0.0,2.0,955000.0,11104.651162790698,False,False,False,True,False,False,False,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,153.0,3.0,3.0,3.0,0.0,3.0,1950000.0,12745.098039215687,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Benfica,55.0,2.0,2.0,1.0,0.0,1.0,6090000.0,110727.27272727272,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,127.0,3.0,3.0,2.0,0.0,2.0,720000.0,5669.291338582677,False,False,True,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,71.0,3.0,2.0,2.0,0.0,0.0,724139.0,10199.140845070422,False,False,False,True,True,False,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,146.0,3.0,4.0,3.0,9.0,3.0,1995000.0,13664.383561643835,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,130.0,3.0,3.0,3.0,0.0,2.0,610000.0,4692.307692307692,False,False,False,False,True,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,84.0,2.0,3.0,1.0,7.0,1.0,780000.0,9285.714285714286,True,False,False,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,95.0,3.0,3.0,3.0,2.0,2.0,1325527.0,13952.915789473684,False,False,False,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,69.0,3.0,2.0,1.0,0.0,2.0,685000.0,9927.536231884058,True,False,False,True,False,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,164.0,3.0,5.0,3.0,0.0,2.0,1450000.0,8841.463414634147,True,True,False,False,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,90.0,3.0,3.0,2.0,14.0,2.0,900000.0,10000.0,True,False,False,True,False,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,225.0,3.0,5.0,3.0,6.0,3.0,1990000.0,8844.444444444445,True,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,27.0,1.0,1.0,1.0,10.0,1.0,519000.0,19222.222222222223,False,False,False,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Messejana,48.0,2.0,2.0,1.0,3.0,1.0,270000.0,5625.0,False,False,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dias Macedo,50.0,2.0,2.0,1.0,1.0,1.0,229000.0,4580.0,False,False,False,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jardim das Oliveiras,127.0,3.0,3.0,1.0,0.0,2.0,620000.0,4881.889763779527,False,False,True,True,True,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,83.0,3.0,2.0,2.0,0.0,2.0,772175.0,9303.313253012047,False,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Tauape,222.0,4.0,4.0,3.0,0.0,2.0,990000.0,4459.459459459459,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro I,340.0,5.0,6.0,5.0,0.0,6.0,1300000.0,3823.529411764706,False,True,False,True,False,False,True,False,True,False,False,CE,cobertura,True,True,True
+apartamento,Fortaleza,Meireles,305.0,4.0,6.0,4.0,0.0,4.0,2100000.0,6885.245901639344,False,True,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Barroso,42.0,2.0,2.0,1.0,0.0,1.0,235000.0,5595.238095238095,False,False,True,True,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,156.0,4.0,5.0,3.0,0.0,3.0,950000.0,6089.74358974359,False,False,False,False,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,85.0,3.0,3.0,2.0,0.0,2.0,850000.0,10000.0,False,True,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,273.0,4.0,4.0,3.0,0.0,4.0,1750000.0,6410.25641025641,True,True,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Mondubim,300.0,3.0,3.0,3.0,0.0,12.0,1649990.0,5499.966666666666,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Parque Manibura,650.0,3.0,4.0,3.0,0.0,5.0,2200000.0,3384.6153846153848,False,False,False,True,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,90.0,2.0,3.0,2.0,0.0,2.0,900000.0,10000.0,True,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,199.0,4.0,9.0,4.0,0.0,4.0,740000.0,3718.592964824121,False,False,False,False,True,False,True,False,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,165.0,3.0,4.0,3.0,0.0,3.0,1900000.0,11515.151515151516,True,False,False,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,162.0,4.0,4.0,4.0,0.0,4.0,715000.0,4413.580246913581,False,False,False,True,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,165.0,3.0,3.0,3.0,0.0,3.0,2100000.0,12727.272727272728,False,False,False,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,97.0,3.0,4.0,2.0,0.0,2.0,1200000.0,12371.134020618556,True,False,True,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Eusébio,Itaoca,52.0,2.0,2.0,1.0,0.0,1.0,340000.0,6538.461538461538,False,False,True,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,70.0,3.0,2.0,1.0,0.0,1.0,590000.0,8428.57142857143,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Boa Vista/Castelão,272.0,3.0,3.0,1.0,0.0,0.0,690000.0,2536.764705882353,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Messejana,586.0,4.0,5.0,4.0,0.0,10.0,1500000.0,2559.726962457338,False,False,False,True,False,False,False,False,False,False,True,CE,casa_padrao,True,True,True
+casa,Fortaleza,Jardim das Oliveiras,580.0,5.0,4.0,4.0,0.0,8.0,700000.0,1206.896551724138,False,False,False,True,True,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Meireles,146.0,3.0,3.0,3.0,0.0,2.0,850000.0,5821.917808219178,True,False,False,True,True,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Lagoa Redonda,187.0,3.0,4.0,3.0,0.0,4.0,1070000.0,5721.92513368984,True,False,True,True,True,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,124.0,4.0,4.0,3.0,0.0,0.0,690000.0,5564.5161290322585,False,False,False,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,256.0,4.0,4.0,4.0,2.0,4.0,4412452.0,17236.140625,False,True,False,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,67.0,3.0,2.0,1.0,0.0,2.0,530000.0,7910.44776119403,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,107.0,3.0,3.0,3.0,4.0,2.0,580000.0,5420.560747663551,True,False,True,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,64.0,3.0,2.0,1.0,0.0,1.0,470000.0,7343.75,True,False,True,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,117.0,3.0,4.0,3.0,0.0,3.0,1660000.0,14188.034188034188,True,False,True,True,True,True,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jacarecanga,74.0,3.0,2.0,2.0,0.0,2.0,450000.0,6081.081081081081,True,False,True,True,False,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,48.0,2.0,1.0,1.0,0.0,1.0,839000.0,17479.166666666668,True,False,True,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,45.0,2.0,1.0,1.0,12.0,1.0,534291.0,11873.133333333333,True,False,False,False,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,São Gerardo,284.0,7.0,4.0,2.0,0.0,1.0,629000.0,2214.788732394366,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Vicente Pinzon,200.0,3.0,4.0,3.0,9.0,3.0,1190000.0,5950.0,False,True,False,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,117.0,2.0,3.0,2.0,0.0,2.0,1390000.0,11880.34188034188,True,False,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,183.0,3.0,5.0,3.0,10.0,4.0,2100000.0,11475.409836065573,False,False,False,False,False,True,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,119.0,3.0,3.0,3.0,0.0,0.0,998000.0,8386.55462184874,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,62.0,2.0,1.0,1.0,5.0,1.0,760000.0,12258.064516129032,False,False,False,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,105.0,2.0,2.0,2.0,4.0,2.0,1490000.0,14190.47619047619,False,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,54.0,2.0,2.0,2.0,0.0,1.0,648200.0,12003.703703703704,True,False,True,True,False,False,True,True,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,54.0,2.0,2.0,1.0,1.0,1.0,657000.0,12166.666666666666,False,False,False,True,False,False,True,True,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,243.0,3.0,5.0,3.0,0.0,4.0,1300000.0,5349.794238683127,False,False,True,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cidade 2000,75.0,2.0,2.0,1.0,0.0,2.0,650000.0,8666.666666666666,True,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,38.0,1.0,1.0,1.0,6.0,12.0,597025.0,15711.184210526315,False,False,False,True,True,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cajazeiras,238.0,4.0,4.0,4.0,0.0,2.0,1200000.0,5042.016806722689,True,False,True,False,False,True,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,78.0,3.0,3.0,2.0,0.0,2.0,837000.0,10730.76923076923,True,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,188.0,4.0,5.0,4.0,0.0,3.0,2400000.0,12765.95744680851,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Fátima,164.0,3.0,4.0,3.0,0.0,3.0,1850000.0,11280.487804878048,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,119.0,3.0,9.0,2.0,0.0,2.0,1579990.0,13277.226890756303,False,False,False,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Presidente Kennedy,300.0,5.0,4.0,4.0,0.0,4.0,1550000.0,5166.666666666667,True,False,True,True,True,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,230.0,3.0,4.0,3.0,0.0,3.0,1190000.0,5173.913043478261,False,False,False,True,True,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,130.0,3.0,2.0,1.0,3.0,1.0,780000.0,6000.0,False,False,False,True,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,152.0,4.0,4.0,4.0,0.0,3.0,1289000.0,8480.263157894737,True,False,True,True,False,True,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,130.0,3.0,3.0,3.0,0.0,3.0,1495000.0,11500.0,False,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,193.0,3.0,3.0,3.0,8.0,4.0,1100000.0,5699.481865284974,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,35.0,1.0,2.0,1.0,0.0,1.0,380000.0,10857.142857142857,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,117.0,3.0,3.0,3.0,2.0,2.0,760000.0,6495.726495726496,True,False,False,True,False,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Vicente Pinzon,60.0,2.0,2.0,1.0,0.0,2.0,298000.0,4966.666666666667,True,True,True,True,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,64.0,3.0,2.0,1.0,5.0,2.0,589000.0,9203.125,True,False,True,False,False,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Vicente Pinzon,165.0,4.0,5.0,3.0,3.0,2.0,420000.0,2545.4545454545455,True,False,False,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,113.0,3.0,4.0,3.0,3.0,0.0,1662430.0,14711.769911504425,False,False,False,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,145.0,4.0,4.0,4.0,0.0,2.0,628000.0,4331.0344827586205,False,False,False,True,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,134.0,3.0,4.0,2.0,2.0,1.0,570000.0,4253.731343283582,True,False,False,True,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,125.0,3.0,4.0,2.0,0.0,2.0,600000.0,4800.0,True,False,False,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,98.0,3.0,2.0,1.0,0.0,1.0,1048000.0,10693.877551020409,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Jardim Cearense,200.0,3.0,3.0,3.0,1.0,4.0,1600000.0,8000.0,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Presidente Kennedy,66.0,3.0,1.0,1.0,1.0,1.0,599000.0,9075.757575757576,False,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parangaba,38.0,2.0,1.0,1.0,6.0,1.0,55000.0,1447.3684210526317,True,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,145.0,4.0,4.0,3.0,0.0,3.0,1685000.0,11620.689655172413,False,False,False,True,True,True,True,True,False,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Parque Manibura,380.0,6.0,5.0,4.0,1.0,8.0,1500000.0,3947.3684210526317,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,José de Alencar,241.0,4.0,3.0,3.0,0.0,4.0,620000.0,2572.6141078838173,False,False,False,False,False,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,87.0,3.0,2.0,2.0,0.0,2.0,735000.0,8448.275862068966,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,José de Alencar,365.0,4.0,5.0,4.0,0.0,4.0,3800000.0,10410.95890410959,False,True,True,True,False,False,True,False,True,False,True,CE,casa_padrao,True,True,True
+casa,Fortaleza,Salinas,130.0,3.0,4.0,3.0,0.0,2.0,450000.0,3461.5384615384614,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Eusébio,São Bento,117.0,3.0,3.0,3.0,0.0,2.0,420000.0,3589.74358974359,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,110.0,3.0,3.0,3.0,0.0,2.0,569000.0,5172.727272727273,False,False,False,False,False,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,218.0,4.0,4.0,4.0,0.0,4.0,3260000.0,14954.128440366972,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Manuel Dias Branco,41.0,2.0,1.0,1.0,0.0,1.0,333990.0,8146.09756097561,False,False,True,True,True,False,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,205.0,4.0,5.0,4.0,0.0,4.0,3117000.0,15204.878048780487,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,87.0,3.0,2.0,2.0,3.0,2.0,680000.0,7816.091954022989,True,False,False,False,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,33.0,1.0,1.0,1.0,0.0,1.0,660000.0,20000.0,True,True,False,False,False,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,204.0,4.0,5.0,4.0,0.0,3.0,1299000.0,6367.64705882353,False,False,True,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Vicente Pinzon,340.0,4.0,6.0,4.0,0.0,5.0,3700000.0,10882.35294117647,False,False,False,True,True,False,True,False,True,True,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,47.0,2.0,2.0,1.0,0.0,1.0,444000.0,9446.808510638299,True,False,False,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,160.0,3.0,3.0,2.0,0.0,2.0,1100000.0,6875.0,True,True,False,False,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,59.0,1.0,1.0,1.0,0.0,1.0,500000.0,8474.57627118644,True,True,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,170.0,4.0,4.0,3.0,0.0,2.0,720000.0,4235.294117647059,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,122.0,3.0,3.0,2.0,0.0,3.0,1380000.0,11311.475409836066,True,False,True,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,116.0,3.0,4.0,3.0,4.0,2.0,1950000.0,16810.344827586207,False,True,False,True,False,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,121.0,3.0,3.0,3.0,0.0,3.0,1200000.0,9917.355371900827,True,False,False,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,133.0,3.0,4.0,3.0,8.0,2.0,1149000.0,8639.097744360903,True,False,False,False,False,True,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Mondubim,125.0,4.0,3.0,2.0,0.0,2.0,889000.0,7112.0,False,False,False,False,True,True,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,177.0,2.0,6.0,2.0,14.0,3.0,2190000.0,12372.881355932202,False,False,False,True,False,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,142.0,3.0,4.0,3.0,0.0,3.0,1625000.0,11443.661971830987,True,False,True,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,311.0,4.0,4.0,3.0,0.0,3.0,1050000.0,3376.2057877813504,False,False,False,True,True,False,True,True,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Passaré,59.0,3.0,2.0,1.0,0.0,2.0,370000.0,6271.186440677966,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Joaquim Távora,418.0,3.0,2.0,2.0,0.0,0.0,1250000.0,2990.4306220095696,False,False,False,False,False,False,False,False,False,False,True,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Varjota,89.0,2.0,2.0,2.0,0.0,2.0,1217256.0,13677.033707865168,False,True,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,72.0,3.0,2.0,1.0,0.0,2.0,499000.0,6930.555555555556,True,False,True,True,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,88.0,3.0,3.0,2.0,0.0,2.0,820000.0,9318.181818181818,False,False,False,True,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,32.0,3.0,2.0,1.0,6.0,1.0,508000.0,15875.0,True,False,False,True,False,True,True,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,36.0,2.0,2.0,1.0,3.0,1.0,570000.0,15833.333333333334,False,True,False,True,True,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,260.0,3.0,5.0,3.0,9.0,4.0,2250000.0,8653.846153846154,True,True,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cais do Porto,60.0,2.0,2.0,1.0,0.0,1.0,350000.0,5833.333333333333,True,False,False,True,True,False,True,False,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,92.0,3.0,3.0,3.0,0.0,3.0,1200000.0,13043.478260869566,False,False,False,True,False,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,113.0,3.0,3.0,2.0,0.0,2.0,1440000.0,12743.362831858407,True,False,True,False,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,119.0,3.0,4.0,3.0,0.0,2.0,1880000.0,15798.319327731093,True,False,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,73.0,2.0,2.0,1.0,0.0,2.0,599000.0,8205.479452054795,True,False,True,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Manibura,52.0,2.0,2.0,1.0,0.0,1.0,250000.0,4807.692307692308,False,False,True,True,False,True,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,111.0,3.0,4.0,3.0,3.0,2.0,1500000.0,13513.513513513513,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,199.0,3.0,4.0,3.0,0.0,2.0,990000.0,4974.874371859297,True,False,True,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,64.0,3.0,2.0,2.0,0.0,2.0,580000.0,9062.5,True,False,True,True,True,False,True,True,True,True,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Tauape,93.0,3.0,3.0,1.0,2.0,1.0,350000.0,3763.440860215054,True,False,False,True,False,False,False,False,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Edson Queiroz,236.0,4.0,4.0,4.0,0.0,2.0,550000.0,2330.508474576271,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,81.0,3.0,2.0,1.0,2.0,2.0,699500.0,8635.802469135802,False,False,False,True,False,False,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Papicu,116.0,3.0,3.0,3.0,0.0,2.0,650000.0,5603.448275862069,False,False,True,True,True,False,False,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Carlito Pamplona,110.0,5.0,2.0,1.0,0.0,2.0,350000.0,3181.818181818182,False,False,True,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Maraponga,200.0,3.0,3.0,3.0,0.0,2.0,600000.0,3000.0,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Maraponga,140.0,4.0,4.0,3.0,0.0,4.0,879000.0,6278.571428571428,False,False,False,False,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+casa,Fortaleza,Coaçu,204.0,4.0,4.0,1.0,0.0,3.0,700000.0,3431.372549019608,False,False,False,True,True,False,True,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Cocó,97.0,3.0,4.0,3.0,0.0,2.0,980000.0,10103.092783505155,True,True,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,243.0,4.0,5.0,4.0,0.0,4.0,3663000.0,15074.074074074075,True,True,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Jangurussu,60.0,2.0,1.0,1.0,0.0,0.0,115000.0,1916.6666666666667,False,False,False,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Meireles,65.0,2.0,2.0,1.0,0.0,2.0,770000.0,11846.153846153846,True,True,True,False,False,False,True,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,122.0,3.0,4.0,3.0,0.0,3.0,1650871.0,13531.72950819672,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,203.0,4.0,5.0,4.0,0.0,4.0,3500000.0,17241.379310344826,False,False,False,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Cidade dos Funcionários,180.0,2.0,2.0,1.0,0.0,4.0,650000.0,3611.1111111111113,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Joaquim Távora,65.0,2.0,2.0,1.0,0.0,2.0,630000.0,9692.307692307691,False,False,True,True,True,True,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+casa,Fortaleza,Meireles,392.0,8.0,6.0,3.0,0.0,3.0,2500000.0,6377.551020408163,False,False,False,False,False,False,False,False,False,False,False,CE,casa_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,150.0,3.0,5.0,3.0,0.0,4.0,1490000.0,9933.333333333334,True,False,False,True,True,False,False,True,False,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,117.0,3.0,3.0,3.0,0.0,2.0,1500000.0,12820.51282051282,True,True,True,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,77.0,2.0,3.0,2.0,0.0,2.0,699000.0,9077.922077922078,False,False,True,True,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Iracema,55.0,2.0,2.0,2.0,0.0,1.0,649000.0,11800.0,False,False,True,True,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Sapiranga-Coité,12.0,2.0,4.0,2.0,0.0,1.0,255000.0,21250.0,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,93.0,3.0,3.0,3.0,1.0,2.0,919000.0,9881.720430107527,False,False,False,True,False,True,True,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Guararapes,70.0,3.0,3.0,2.0,0.0,2.0,650000.0,9285.714285714286,True,False,True,True,False,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,128.0,3.0,4.0,3.0,0.0,3.0,1350000.0,10546.875,True,False,True,True,False,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,71.0,3.0,2.0,2.0,0.0,2.0,699000.0,9845.070422535211,True,False,True,True,True,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Tauape,135.0,3.0,4.0,3.0,0.0,3.0,1478000.0,10948.148148148148,False,False,False,True,True,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,189.0,4.0,4.0,4.0,0.0,4.0,2400000.0,12698.412698412698,False,True,True,True,True,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,40.0,1.0,1.0,1.0,0.0,0.0,641760.0,16044.0,False,False,False,True,False,False,False,True,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Salinas,109.0,3.0,4.0,3.0,9.0,2.0,1120000.0,10275.229357798165,False,False,False,True,True,True,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,De Lourdes,70.0,3.0,3.0,2.0,0.0,2.0,800000.0,11428.57142857143,False,False,True,False,True,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,68.0,2.0,2.0,2.0,0.0,2.0,389000.0,5720.588235294118,True,True,False,True,True,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,José de Alencar,87.0,2.0,2.0,1.0,2.0,2.0,320000.0,3678.1609195402298,False,False,True,True,True,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dom Lustosa,56.0,2.0,2.0,1.0,2.0,1.0,175000.0,3125.0,True,False,True,False,False,False,False,False,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cocó,146.0,3.0,4.0,3.0,0.0,3.0,990000.0,6780.821917808219,False,False,False,True,True,False,False,True,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,220.0,3.0,4.0,3.0,0.0,4.0,1140000.0,5181.818181818182,False,False,False,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Centro,126.0,3.0,3.0,2.0,2.0,2.0,480000.0,3809.5238095238096,True,False,False,False,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parquelândia,78.0,3.0,3.0,2.0,0.0,2.0,838000.0,10743.589743589744,True,False,True,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Engenheiro Luciano Cavalcante,73.0,3.0,2.0,1.0,8.0,2.0,729000.0,9986.301369863013,True,False,False,True,False,True,True,True,True,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Tauape,93.0,3.0,2.0,1.0,0.0,1.0,330000.0,3548.3870967741937,False,False,False,True,False,False,False,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Cajazeiras,52.0,2.0,2.0,1.0,0.0,1.0,235000.0,4519.2307692307695,True,False,False,True,True,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,52.0,2.0,2.0,1.0,2.0,1.0,299000.0,5750.0,True,False,True,True,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,65.0,3.0,2.0,2.0,0.0,1.0,440000.0,6769.2307692307695,False,False,False,False,False,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Parque Santa Maria,66.0,3.0,2.0,1.0,3.0,2.0,190000.0,2878.787878787879,True,False,False,True,True,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,49.0,2.0,2.0,1.0,8.0,1.0,75000.0,1530.6122448979593,True,False,True,True,False,False,True,False,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Prefeito José Walter,50.0,2.0,2.0,1.0,0.0,1.0,230000.0,4600.0,True,False,True,True,False,False,False,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Álvaro Weyne,65.0,3.0,2.0,1.0,0.0,1.0,280000.0,4307.692307692308,False,False,False,True,True,False,False,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Álvaro Weyne,55.0,2.0,2.0,1.0,1.0,1.0,229000.0,4163.636363636364,False,False,True,True,True,True,True,False,False,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Aldeota,150.0,3.0,6.0,3.0,0.0,3.0,870000.0,5800.0,False,False,True,False,False,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Mondubim,66.0,3.0,1.0,1.0,8.0,1.0,375000.0,5681.818181818182,True,False,False,True,False,False,True,True,True,False,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Planalto Ayrton Senna,54.0,2.0,1.0,1.0,0.0,1.0,229000.0,4240.740740740741,False,False,False,True,True,False,True,False,False,False,False,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Dionísio Torres,58.0,2.0,3.0,2.0,0.0,1.0,740000.0,12758.620689655172,False,False,False,True,False,False,False,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Edson Queiroz,54.0,2.0,2.0,2.0,3.0,1.0,585000.0,10833.333333333334,False,False,False,True,True,False,True,True,True,True,True,CE,apartamento_padrao,True,True,True
+apartamento,Fortaleza,Praia do Futuro II,53.0,2.0,2.0,1.0,0.0,1.0,461000.0,8698.11320754717,True,False,False,True,False,False,True,True,True,False,False,CE,apartamento_padrao,True,True,True

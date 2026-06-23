@@ -1,0 +1,2 @@
+model_key,modelo,rmse,mae,r2,best_params
+catboost,CatBoost,438707.3879011573,251630.09375100266,0.675835544874677,"{'iterations': 1392, 'learning_rate': 0.1737335808780536, 'depth': 5, 'l2_leaf_reg': 1.028842981543892, 'bagging_temperature': 0.906163168963365, 'random_strength': 1.6257397571499628}"

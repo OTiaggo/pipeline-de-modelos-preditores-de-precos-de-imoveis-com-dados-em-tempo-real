@@ -1,0 +1,2 @@
+model_key,modelo,rmse,mae,r2,best_params
+ridge,Ridge,522598.97261959844,320852.32757750066,0.5413746162568333,{'alpha': 10.0}

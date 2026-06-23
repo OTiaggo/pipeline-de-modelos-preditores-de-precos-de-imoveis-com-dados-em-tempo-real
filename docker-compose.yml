@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: dados_imobiliarios_fortaleza
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d dados_imobiliarios_fortaleza"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: imoveis_api
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://admin:admin@db:5432/dados_imobiliarios_fortaleza
+      CAMINHO_MODELO: /app/api/artifacts/modelo_campeao.pkl
+    volumes:
+      - ./api/artifacts:/app/api/artifacts
+      - ./api:/app/api
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./front_end
+      dockerfile: Dockerfile
+    container_name: imoveis_frontend
+    restart: always
+    ports:
+      - "4173:80"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
