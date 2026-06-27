@@ -42,7 +42,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -167,7 +168,8 @@ button {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   min-height: 48px;
   padding: 12px 14px;
@@ -175,6 +177,13 @@ select {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.03);
   color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 150px;
+  font-family: "Cascadia Code", "Consolas", monospace;
+  line-height: 1.45;
 }
 
 select {
@@ -237,6 +246,12 @@ input::placeholder {
   gap: 10px;
 }
 
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .switch {
   display: inline-flex;
   align-items: center;
@@ -271,6 +286,23 @@ input::placeholder {
   text-decoration: none;
 }
 
+.compact-button {
+  min-height: 34px;
+  padding: 0 12px;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
 .primary-button {
   background: linear-gradient(135deg, var(--accent), var(--accent-deep));
   border-color: transparent;
@@ -292,7 +324,12 @@ input::placeholder {
 .upload-box,
 .table-wrap,
 .metrics-grid,
-.status-stack {
+.status-stack,
+.config-panel,
+.terminal,
+.list-stack,
+.mini-grid,
+.metric-note {
   margin-top: 18px;
 }
 
@@ -318,9 +355,90 @@ input::placeholder {
 
 .result-summary,
 .metrics-grid,
-.status-stack {
+.status-stack,
+.list-stack,
+.config-panel {
   display: grid;
   gap: 12px;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 12px;
+  align-items: start;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.info-row strong,
+.info-row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.info-row small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.metric-note {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(121, 213, 208, 0.18);
+  border-radius: 8px;
+  background: rgba(121, 213, 208, 0.06);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.metric-note strong {
+  color: var(--text);
+}
+
+.metric-note span {
+  overflow-wrap: anywhere;
+}
+
+.config-panel {
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.config-panel h3 {
+  margin: 0;
+}
+
+.json-editor {
+  display: grid;
+  gap: 8px;
+}
+
+.terminal {
+  display: grid;
+  gap: 5px;
+  max-height: 210px;
+  overflow: auto;
+  padding: 14px;
+  border: 1px solid rgba(121, 213, 208, 0.18);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.38);
+  color: #c7f5df;
+  font-family: "Cascadia Code", "Consolas", monospace;
+  font-size: 0.86rem;
+  line-height: 1.45;
 }
 
 .status-stack + .primary-button {
@@ -455,7 +573,9 @@ tbody tr + tr td {
   }
 
   .field-grid,
-  .amenity-grid {
+  .amenity-grid,
+  .checkbox-grid,
+  .mini-grid {
     grid-template-columns: 1fr;
   }
 

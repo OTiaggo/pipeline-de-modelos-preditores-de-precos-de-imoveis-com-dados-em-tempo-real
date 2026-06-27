@@ -69,6 +69,50 @@ System users can trigger training. The model pipeline owns dataset selection, mo
 
 **Traceability:** [CAP-PREDICT-001](price-prediction.md#cap-predict-001), [QUAL-RELIABILITY-001](../quality.md#qual-reliability-001)
 
+<a id="cap-model-004"></a>
+
+### CAP-MODEL-004: Training History and Active Model Selection
+
+**Description:** The system shall persist training experiments, individual trained models, metrics, logs, and the active production model selection.
+
+**Priority:** Must
+
+**Rationale:** Operators need auditable model history, metric comparison, long-running training visibility, and a safe way to return to a previous model.
+
+**Acceptance Criteria:**
+
+1. WHEN a training request starts THEN the system SHALL create an experiment with requested models, search strategy, status, start time, and training window.
+2. WHEN a model finishes training inside an experiment THEN the system SHALL persist its algorithm, parameters, artifact location, metrics, duration, and champion flag.
+3. WHEN an experiment completes successfully THEN the system SHALL activate the experiment champion automatically.
+4. WHEN an experiment fails THEN the system SHALL preserve the previously active model.
+5. WHEN a system user activates a previously trained model THEN subsequent predictions SHALL use that model.
+6. WHEN a system user asks for training status or logs THEN the system SHALL return the persisted experiment state and log lines.
+
+**Verification:** Automated API and model-pipeline tests
+
+**Traceability:** [CAP-MODEL-001](#cap-model-001), [CAP-MODEL-002](#cap-model-002), [CAP-MODEL-003](#cap-model-003), [CAP-PREDICT-001](price-prediction.md#cap-predict-001)
+
+<a id="cap-model-005"></a>
+
+### CAP-MODEL-005: Configurable Training Runs
+
+**Description:** The system shall let system users choose candidate models and either Bayesian search or manual grid parameters for a new training run.
+
+**Priority:** Must
+
+**Rationale:** Operators need control over training cost and model families without editing code.
+
+**Acceptance Criteria:**
+
+1. WHEN a training request names candidate models THEN the system SHALL train only supported requested models.
+2. WHEN Bayesian search is requested THEN the system SHALL use the configured number of optimization trials where the candidate supports that strategy.
+3. WHEN manual grid search is requested THEN the system SHALL use validated grid parameters supplied for each candidate model.
+4. IF the request names an unsupported model or unsupported hyperparameter THEN the system SHALL reject the request before creating a running experiment.
+
+**Verification:** Automated API and model-pipeline tests
+
+**Traceability:** [CAP-MODEL-002](#cap-model-002), [QUAL-MODEL-001](../quality.md#qual-model-001)
+
 ## Business Rules
 
 The approved candidate model families are:
