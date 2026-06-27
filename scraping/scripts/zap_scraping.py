@@ -1,7 +1,7 @@
 """Scraper do ZAP Imoveis para venda de apartamentos e casas em Fortaleza.
 
 Saida final do CSV:
-listing_id,titulo,apartamento_ou_casa,tipo_imovel,estado,cidade,bairro,rua,numero,endereco,metragem,quartos,banheiros,suites,andar,estacionamentos,preco_anuncio,latitude,longitude,tem_portaria_24h,tem_vista_pro_mar,tem_condominio_fechado,tem_piscina,tem_deck,tem_varanda_gourmet,tem_varanda,tem_academia,tem_salao_festas,tem_salao_jogos,tem_quadra_campo,descricao,anuncio_criado,corretora,nota_media,url,imagem_url
+listing_id,titulo,apartamento_ou_casa,tipo_imovel,estado,cidade,bairro,rua,numero,endereco,metragem,quartos,banheiros,suites,andar,estacionamentos,preco_anuncio,latitude,longitude,tem_portaria_24h,tem_vista_pro_mar,tem_condominio_fechado,tem_piscina,tem_deck,tem_varanda,tem_academia,tem_salao_festas,tem_salao_jogos,tem_quadra_campo,descricao,anuncio_criado,corretora,nota_media,url,imagem_url
 
 O site bloqueia requests diretos, entao este scraper usa Playwright.
 """
@@ -53,7 +53,6 @@ OUTPUT_COLUMNS = [
     "tem_condominio_fechado",
     "tem_piscina",
     "tem_deck",
-    "tem_varanda_gourmet",
     "tem_varanda",
     "tem_academia",
     "tem_salao_festas",
@@ -450,7 +449,6 @@ def _extract_feature_flags(text: str) -> dict[str, str]:
         "tem_condominio_fechado": str(int("condominio fechado" in normalized)),
         "tem_piscina": str(int("piscina" in normalized)),
         "tem_deck": str(int("deck" in normalized)),
-        "tem_varanda_gourmet": str(int("varanda gourmet" in normalized)),
         "tem_varanda": str(int("varanda" in normalized)),
         "tem_academia": str(int(any(term in normalized for term in ["academia", "fitness"]))),
         "tem_salao_festas": str(int(any(term in normalized for term in ["salao de festa", "salao de festas"]))),
@@ -526,7 +524,6 @@ class ListingRecord:
     tem_condominio_fechado: str = "0"
     tem_piscina: str = "0"
     tem_deck: str = "0"
-    tem_varanda_gourmet: str = "0"
     tem_varanda: str = "0"
     tem_academia: str = "0"
     tem_salao_festas: str = "0"
@@ -572,7 +569,6 @@ class ListingRecord:
             "tem_condominio_fechado": self.tem_condominio_fechado,
             "tem_piscina": self.tem_piscina,
             "tem_deck": self.tem_deck,
-            "tem_varanda_gourmet": self.tem_varanda_gourmet,
             "tem_varanda": self.tem_varanda,
             "tem_academia": self.tem_academia,
             "tem_salao_festas": self.tem_salao_festas,

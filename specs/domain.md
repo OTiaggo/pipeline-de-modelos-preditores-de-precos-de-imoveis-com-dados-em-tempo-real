@@ -85,7 +85,6 @@ The approved features from `AGENTS.md` are:
 - `condominio_fechado`
 - `piscina`
 - `deck`
-- `varanda_gourmet`
 - `varanda`
 - `academia`
 - `salao_festa`

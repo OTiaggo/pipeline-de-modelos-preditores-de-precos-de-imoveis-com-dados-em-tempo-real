@@ -59,7 +59,6 @@ DB_COLUMNS = [
     "condominio_fechado",
     "piscina",
     "deck",
-    "varanda_gourmet",
     "varanda",
     "academia",
     "salao_festa",
@@ -111,7 +110,6 @@ class ImovelInput(BaseModel):
     condominio_fechado: bool = False
     piscina: bool = False
     deck: bool = False
-    varanda_gourmet: bool = False
     varanda: bool = False
     academia: bool = False
     salao_festa: bool = False
@@ -163,7 +161,6 @@ def _ensure_schema() -> None:
         condominio_fechado BOOLEAN,
         piscina BOOLEAN,
         deck BOOLEAN,
-        varanda_gourmet BOOLEAN,
         varanda BOOLEAN,
         academia BOOLEAN,
         salao_festa BOOLEAN,

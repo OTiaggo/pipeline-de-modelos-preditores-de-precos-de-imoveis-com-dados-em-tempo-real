@@ -28,6 +28,22 @@ const modelOptions = [
   { key: "mlp", label: "Rede neural" },
 ];
 
+const paramGridPlaceholder = `{
+  "ridge": {
+    "alpha": [0.1, 1.0, 10.0]
+  },
+  "random_forest": {
+    "n_estimators": [200, 500],
+    "max_depth": [8, 14, null],
+    "min_samples_leaf": [1, 3]
+  },
+  "xgboost": {
+    "n_estimators": [300, 700],
+    "learning_rate": [0.03, 0.08],
+    "max_depth": [4, 8]
+  }
+}`;
+
 const propertyTypeOptions = [
   { value: "apartamento_padrao", label: "Apartamento", icon: Building2 },
   { value: "casa_padrao", label: "Casa", icon: Home },
@@ -58,7 +74,6 @@ const amenityFields = [
   { key: "condominio_fechado", label: "Condominio fechado" },
   { key: "piscina", label: "Piscina" },
   { key: "deck", label: "Deck" },
-  { key: "varanda_gourmet", label: "Varanda gourmet" },
   { key: "varanda", label: "Varanda" },
   { key: "academia", label: "Academia" },
   { key: "salao_festa", label: "Salao de festa" },
@@ -86,7 +101,6 @@ const initialForm = {
   condominio_fechado: true,
   piscina: true,
   deck: false,
-  varanda_gourmet: true,
   varanda: true,
   academia: true,
   salao_festa: true,
@@ -430,7 +444,7 @@ function ModelView() {
   const [selectedModels, setSelectedModels] = useState(["xgboost", "lightgbm", "random_forest", "ridge"]);
   const [searchType, setSearchType] = useState("bayesiana");
   const [nTrials, setNTrials] = useState(10);
-  const [gridJson, setGridJson] = useState("{}");
+  const [gridJson, setGridJson] = useState("");
   const [activeModel, setActiveModel] = useState(null);
   const [leaderboard, setLeaderboard] = useState([]);
   const [experiments, setExperiments] = useState([]);
@@ -529,7 +543,7 @@ function ModelView() {
         <div className="metrics-grid">
           <StatPill icon={CheckCircle2} label="Modelo ativo" value={activeModel?.algoritmo || "Nenhum"} tone={activeModel ? "success" : "error"} />
           <StatPill icon={Activity} label="Drift" value={drift?.status || "-"} tone={drift?.status === "verde" ? "success" : "error"} />
-          <StatPill icon={BarChart3} label="RMSE ativo" value={activeModel?.rmse ? Number(activeModel.rmse).toFixed(2) : "-"} />
+          <StatPill icon={BarChart3} label="MAE ativo" value={activeModel?.mae ? Number(activeModel.mae).toFixed(2) : "-"} />
         </div>
         <div className="metric-note">
           <strong>Drift:</strong> {drift?.motivo || "Aguardando avaliacao do modelo ativo."}
@@ -573,7 +587,12 @@ function ModelView() {
           </div>
           <label className="json-editor">
             <span>Param grids JSON</span>
-            <textarea value={gridJson} onChange={(event) => setGridJson(event.target.value)} rows={6} />
+            <textarea
+              value={gridJson}
+              onChange={(event) => setGridJson(event.target.value)}
+              placeholder={paramGridPlaceholder}
+              rows={10}
+            />
           </label>
           <button className="primary-button" type="button" onClick={handleTrain} disabled={training || selectedModels.length === 0}>
             {training ? <LoaderCircle className="spin" size={18} /> : <Play size={18} />}

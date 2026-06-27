@@ -50,7 +50,6 @@ class Imovel:
     condominio_fechado: Optional[bool] = None
     piscina: Optional[bool] = None
     deck: Optional[bool] = None
-    varanda_gourmet: Optional[bool] = None
     varanda: Optional[bool] = None
     academia: Optional[bool] = None
     salao_festa: Optional[bool] = None
@@ -321,7 +320,7 @@ def _merge_items(preferred, other):
     for f in [
         "descricao", "endereco", "rua", "numero", "numero_endereco", "condominio", "iptu", "area_m2",
         "quartos", "banheiros", "vagas", "suites", "andar", "portaria", "vista_mar",
-        "condominio_fechado", "piscina", "deck", "varanda_gourmet", "varanda",
+        "condominio_fechado", "piscina", "deck", "varanda",
         "academia", "salao_festa", "salao_jogos", "quadra_campo", "anuncio_criado",
         "corretora", "nota_media", "imagem_url",
     ]:
@@ -1300,7 +1299,6 @@ def _extract_features(text: str) -> dict:
         "condominio_fechado": ["condominio fechado", "condomínio fechado", "residencial fechado", "empreendimento fechado"],
         "piscina": ["piscina", "piscinas", "hidromassagem"],
         "deck": ["deck"],
-        "varanda_gourmet": ["varanda gourmet", "terraço gourmet", "terraco gourmet"],
         "varanda": ["varanda", "sacada", "terraço", "terraco"],
         "academia": ["academia", "fitness", "gym"],
         "salao_festa": ["salao de festa", "salão de festa", "salao de festas", "salão de festas"],
@@ -1309,8 +1307,6 @@ def _extract_features(text: str) -> dict:
     }
     for field, needles in bool_map.items():
         value = has(*needles)
-        if field == "varanda" and not value:
-            value = bool(out.get("varanda_gourmet")) or has("sacada", "terraço", "terraco")
         out[field] = value
 
     return out
@@ -1410,7 +1406,7 @@ def _apply_detail_fields(item: Imovel, parsed: dict) -> Imovel:
 
     bool_fields = [
         "portaria", "vista_mar", "condominio_fechado", "piscina", "deck",
-        "varanda_gourmet", "varanda", "academia", "salao_festa",
+        "varanda", "academia", "salao_festa",
         "salao_jogos", "quadra_campo",
     ]
     for field in bool_fields:

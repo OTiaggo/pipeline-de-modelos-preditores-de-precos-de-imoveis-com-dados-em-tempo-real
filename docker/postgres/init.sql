@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS imoveis_tratados (
     condominio_fechado BOOLEAN,
     piscina BOOLEAN,
     deck BOOLEAN,
-    varanda_gourmet BOOLEAN,
     varanda BOOLEAN,
     academia BOOLEAN,
     salao_festa BOOLEAN,

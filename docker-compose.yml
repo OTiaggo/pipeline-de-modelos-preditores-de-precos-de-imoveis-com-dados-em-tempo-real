@@ -39,7 +39,7 @@ services:
   frontend:
     build:
       context: ./front_end
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: imoveis_frontend
     restart: always
     ports:
