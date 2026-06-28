@@ -26,7 +26,7 @@ services:
     restart: always
     environment:
       DATABASE_URL: postgresql://admin:admin@db:5432/dados_imobiliarios_fortaleza
-      CAMINHO_MODELO: /app/api/artifacts/modelo_campeao.pkl
+      CAMINHO_MODELO: /app/api/artifacts/modelos/2/catboost.pkl
     volumes:
       - ./api/artifacts:/app/api/artifacts
       - ./api:/app/api
