@@ -59,6 +59,7 @@ DB_COLUMNS = [
     "condominio_fechado",
     "piscina",
     "deck",
+    "varanda_gourmet",
     "varanda",
     "academia",
     "salao_festa",
@@ -110,6 +111,7 @@ class ImovelInput(BaseModel):
     condominio_fechado: bool = False
     piscina: bool = False
     deck: bool = False
+    varanda_gourmet: bool = False
     varanda: bool = False
     academia: bool = False
     salao_festa: bool = False
@@ -161,6 +163,7 @@ def _ensure_schema() -> None:
         condominio_fechado BOOLEAN,
         piscina BOOLEAN,
         deck BOOLEAN,
+        varanda_gourmet BOOLEAN,
         varanda BOOLEAN,
         academia BOOLEAN,
         salao_festa BOOLEAN,
@@ -173,6 +176,8 @@ def _ensure_schema() -> None:
         id_lote INTEGER REFERENCES tb_lotes_ingestao(id_lote),
         ativo BOOLEAN NOT NULL DEFAULT TRUE
     );
+    ALTER TABLE {TABELA_IMOVEIS}
+        ADD COLUMN IF NOT EXISTS varanda_gourmet BOOLEAN;
     ALTER TABLE {TABELA_IMOVEIS}
         ADD COLUMN IF NOT EXISTS data_salvamento TIMESTAMPTZ NOT NULL DEFAULT NOW();
     ALTER TABLE {TABELA_IMOVEIS}
