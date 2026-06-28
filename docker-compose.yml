@@ -43,7 +43,7 @@ services:
     container_name: imoveis_frontend
     restart: always
     ports:
-      - "4173:80"
+      - "4173:5173"
     depends_on:
       - api
 
