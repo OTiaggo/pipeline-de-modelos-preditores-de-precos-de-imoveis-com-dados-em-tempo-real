@@ -1,3 +1,6 @@
+# Artigo
+O artigo se encontra no arquivo `artigo final.pdf`
+
 # Predicao de Precos de Imoveis em Fortaleza
 
 Plataforma para ingestao, tratamento, treinamento e uso de modelos preditores de precos de imoveis em Fortaleza/CE. O projeto combina pipeline de dados, pipeline de modelos, API FastAPI, banco PostgreSQL e interface React para operar o fluxo completo: carregar dados, treinar modelos, acompanhar metricas e estimar o preco de um imovel.
