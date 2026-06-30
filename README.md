@@ -1,129 +1,96 @@
-# Plataforma de Predição de Preços de Imóveis em Fortaleza
+# Artigo
+O artigo se encontra no arquivo `artigo final.pdf`
 
-Projeto final da disciplina **Aprendizagem de Máquina - 2026.1**, orientado pelo professor César Lincoln Cavalcante Mattos. O trabalho atende à proposta de desenvolver, em grupo, uma solução com dados reais, preparação criteriosa dos dados, comparação entre múltiplos modelos de aprendizagem de máquina e entrega das implementações junto ao artigo.
+# Predicao de Precos de Imoveis em Fortaleza
 
-Este repositório contém uma plataforma completa para estimar preços de imóveis residenciais em Fortaleza/CE a partir de dados coletados por web scraping. O sistema integra pipeline de dados, pipeline de modelos, API, banco PostgreSQL e interface web para ingestão de dados, retreinamento e predição.
+Plataforma para ingestao, tratamento, treinamento e uso de modelos preditores de precos de imoveis em Fortaleza/CE. O projeto combina pipeline de dados, pipeline de modelos, API FastAPI, banco PostgreSQL e interface React para operar o fluxo completo: carregar dados, treinar modelos, acompanhar metricas e estimar o preco de um imovel.
 
-## Objetivo
+## Visao geral
 
-Construir um sistema de regressão para predizer o valor de venda de imóveis com base em características estruturais, localização e amenidades. A motivação é apoiar análises do mercado imobiliário usando dados reais e atualizados, mantendo o modelo alinhado ao comportamento recente de preços.
+O sistema recebe dados brutos de imoveis em CSV, trata e padroniza as informacoes, persiste os registros em PostgreSQL e treina modelos usando apenas dados ativos do ultimo ano. A API mantem historico de ingestao, experimentos de treinamento, leaderboard dos modelos, modelo ativo e um indicador simples de drift baseado na variacao recente de precos.
 
-O sistema permite:
+Fluxo principal:
 
-- Inserir novos dados brutos extraídos por scraping.
-- Tratar, padronizar e persistir os dados em PostgreSQL.
-- Treinar e comparar diferentes modelos de regressão.
-- Selecionar automaticamente o melhor modelo com base em métricas de desempenho.
-- Predizer o preço de um imóvel informado pelo usuário.
-- Retreinar o modelo com dados recentes, considerando apenas registros do último ano.
+1. Upload de dados brutos pela interface ou pela rota `/insertData`.
+2. Tratamento dos dados pela pipeline de dados.
+3. Persistencia dos dados tratados no PostgreSQL.
+4. Treinamento de modelos pela rota `/trainModels`.
+5. Selecao e ativacao do melhor modelo.
+6. Predicao de preco pela interface ou pela rota `/predict`.
 
-## Relação com as instruções do trabalho
+## Contexto academico
 
-O PDF do projeto final solicita um trabalho de aprendizagem de máquina com dados reais, fundamentação, metodologia, experimentos, comparação de modelos e entrega do código. Este repositório se encaixa nesse escopo da seguinte forma:
+Este repositorio tambem documenta um estudo aplicado de aprendizagem de maquina para precificacao imobiliaria. O problema foi formulado como uma tarefa de regressao supervisionada: dado um conjunto de atributos fisicos, locacionais e de infraestrutura de um imovel, o objetivo e estimar seu preco anunciado de venda.
 
-| Exigência do trabalho | Como aparece no projeto |
-| --- | --- |
-| Uso de dados reais | Dados de imóveis obtidos por scraping de portais imobiliários. |
-| Problema de aprendizagem de máquina | Regressão para predição de preço (`preco`). |
-| Preparação criteriosa dos dados | Pipeline de limpeza, padronização, filtros, deduplicação e tratamento de outliers. |
-| Mais de um modelo | XGBoost, LightGBM, CatBoost, Random Forest, Ridge, Lasso, SVR e MLP. |
-| Comparação de desempenho | Ranking por RMSE, com MAE e R² retornados pela API. |
-| Implementação entregue | Código da API, pipelines, scraping, frontend, Docker e testes. |
-| Discussão de resultados | Artefatos e rankings salvos em `modelos de aprendizagem/artifacts_modelagem/`. |
+A motivacao academica vem da natureza nao linear do mercado imobiliario. O preco nao varia apenas com area ou quantidade de quartos; ele tambem depende de bairro, tipo do imovel, vagas, infraestrutura do condominio, atributos de lazer e padrao percebido da regiao. Por isso, o projeto compara modelos lineares, SVM, redes neurais e principalmente ensembles baseados em arvores, que tendem a representar melhor interacoes e efeitos em patamares.
 
-## Features usadas no modelo
+O trabalho completo esta descrito em `artigo.tex`, incluindo fundamentacao teorica, metodologia, experimentos, analise dos resultados e possibilidades de trabalhos futuros.
 
-As variáveis preditoras seguem o escopo definido para o trabalho:
+## Metodologia do estudo
 
-- `bairro`
-- `area_m2`
-- `quartos`
-- `banheiros`
-- `suites`
-- `andar`
-- `vagas`
-- `portaria`
-- `vista_mar`
-- `condominio_fechado`
-- `piscina`
-- `deck`
-- `varanda_gourmet`
-- `varanda`
-- `academia`
-- `salao_festa`
-- `salao_jogos`
-- `quadra_campo`
-- `tipo_imovel_padronizado`
+A base experimental foi construida a partir de dados obtidos por web scraping de anuncios imobiliarios. A pipeline de dados padroniza o esquema de entrada, normaliza bairros e tipos de imovel, converte variaveis booleanas, calcula preco por metro quadrado e remove registros inconsistentes, duplicados, sem preco, sem metragem, nao residenciais ou fora dos cortes esperados de outliers.
 
-Variável alvo:
+No experimento principal, executado em `modelagem_busca_bayesiana.ipynb`, a base final usada na modelagem teve 3.711 imoveis validos. Foram usados atributos categoricos, numericos e booleanos para predizer `preco`. O pre-processamento combina imputacao, normalizacao de variaveis numericas e one-hot encoding para variaveis categoricas, mantendo compatibilidade com modelos sensiveis a escala e modelos baseados em arvores.
 
-- `preco`
+A selecao de modelos foi feita com otimizacao bayesiana de hiperparametros usando Optuna. Cada modelo foi avaliado por validacao cruzada K-Fold com tres folds, embaralhamento e semente aleatoria fixa. O objetivo de otimizacao foi minimizar o RMSE medio nos folds.
 
-## Arquitetura
+Metricas usadas:
 
-```mermaid
-flowchart LR
-    Scraping[Web scraping] --> CSV[Dados brutos CSV]
-    CSV --> API[FastAPI]
-    API --> DataPipeline[Pipeline de dados]
-    DataPipeline --> Postgres[(PostgreSQL)]
-    Postgres --> ModelPipeline[Pipeline de modelos]
-    ModelPipeline --> Artifact[Modelo campeão .pkl]
-    Frontend[Interface React] --> API
-    API --> Artifact
-```
+- MAE: erro absoluto medio em reais, facil de interpretar operacionalmente.
+- RMSE: erro quadratico medio em reais, penalizando mais fortemente erros grandes.
+- R2: proporcao da variabilidade do preco explicada pelo modelo.
 
-Componentes principais:
+## Resultados experimentais
 
-- **Scraping:** scripts para coleta de dados de anúncios imobiliários.
-- **Pipeline de dados:** normaliza schemas, padroniza bairros e tipos de imóvel, remove duplicidades, filtra outliers e prepara as features.
-- **PostgreSQL:** armazena os dados tratados com `data_salvamento`.
-- **Pipeline de modelos:** executa busca de hiperparâmetros, validação cruzada, comparação de métricas e salva o modelo campeão.
-- **API FastAPI:** expõe endpoints para ingestão, treinamento e predição.
-- **Frontend React/Vite:** interface para predição, envio de dados e retreinamento.
+O experimento bayesiano comparou principalmente modelos baseados em arvores: XGBoost, LightGBM, CatBoost e Random Forest. O XGBoost obteve o melhor resultado, com desempenho muito proximo ao LightGBM, caracterizando empate tecnico na escala de precos do problema.
 
-## Modelos avaliados
+| Modelo | RMSE (R$) | MAE (R$) | R2 |
+| --- | ---: | ---: | ---: |
+| XGBoost | 414.288,80 | 232.003,72 | 0,7236 |
+| LightGBM | 414.976,29 | 234.524,12 | 0,7227 |
+| CatBoost | 422.171,53 | 234.471,00 | 0,7133 |
+| Random Forest | 431.852,03 | 236.597,69 | 0,6999 |
 
-A pipeline de modelos está organizada em `api/src/models/` e registrada em `api/src/models/registry.py`. Os modelos atualmente comparados são:
+Os resultados reforcam a hipotese de que modelos de arvores sao adequados para dados tabulares heterogeneos do mercado imobiliario. A analise do artigo mostra que o modelo acompanha bem a tendencia central dos precos, especialmente em imoveis ate aproximadamente R$ 3 milhoes, mas apresenta maior dispersao em imoveis de alto valor, sugerindo heterocedasticidade e possivel subestimacao de casos caros ou atipicos.
 
-- XGBoost
-- LightGBM
-- CatBoost
-- Random Forest
-- Regressão Ridge
-- Regressão Lasso
-- SVR
-- MLP Regressor
+Trabalhos futuros indicados no artigo incluem transformacao logaritmica do alvo, enriquecimento geografico com distancias a pontos de interesse, modelos especializados por segmento ou faixa de preco, testes estatisticos de drift por feature e validacao temporal para simular dados futuros.
 
-A seleção do modelo campeão é feita pelo menor **RMSE** médio em validação cruzada. A API também retorna **MAE** e **R²** para análise dos resultados.
+## Tecnologias
 
-## Estrutura do repositório
+- Python 3.12
+- FastAPI
+- PostgreSQL 16
+- Pandas e scikit-learn
+- Optuna para busca bayesiana
+- XGBoost, LightGBM, CatBoost, Random Forest, Ridge, Lasso, SVR e MLP
+- React, Vite e lucide-react
+- Docker e Docker Compose
+
+## Estrutura do repositorio
 
 ```text
 .
-|-- api/
-|   |-- app.py                         # API FastAPI
-|   |-- src/
-|   |   |-- pipeline_dados.py           # Limpeza e preparação dos dados
-|   |   |-- pipeline_modelos.py         # Treinamento e seleção do modelo
-|   |   |-- models/                     # Configurações dos modelos
-|   |   `-- utils/training.py           # Busca, validação e métricas
-|   |-- tests/                          # Testes automatizados
-|   `-- artifacts/modelo_campeao.pkl    # Modelo selecionado
-|-- front_end/
-|   `-- src/App.jsx                     # Interface web
-|-- scraping/
-|   `-- scripts/                        # Scripts de scraping
-|-- dados_tratados/                     # Bases tratadas e notebooks
-|-- modelos de aprendizagem/            # Notebooks e artefatos de modelagem
-|-- docker/postgres/init.sql            # Schema inicial do banco
-|-- docker-compose.yml                  # Orquestração dos serviços
+|-- api/                         # API FastAPI, pipelines e modelos
+|   |-- app.py                   # Rotas HTTP e orquestracao do sistema
+|   |-- src/pipeline_dados.py    # Tratamento e pre-processamento dos dados
+|   |-- src/pipeline_modelos.py  # Treinamento e selecao de modelos
+|   `-- src/models/              # Registro e configuracao dos algoritmos
+|-- docker/postgres/init.sql     # Schema inicial do PostgreSQL
+|-- front_end/                   # Interface React/Vite
+|-- dados_tratados/              # Dados tratados e artefatos de dados
+|-- scraping/                    # Coleta/scraping de dados
+|-- figures/                     # Graficos usados na analise experimental
+|-- specs/                       # Especificacoes do produto e arquitetura
+|-- artigo.tex                   # Artigo academico do projeto
+|-- modelagem_busca_bayesiana.ipynb
+|-- modelagem_com_analises.ipynb
+|-- docker-compose.yml           # Orquestracao local
 `-- README.md
 ```
 
 ## Como executar com Docker
 
-Pré-requisitos:
+Requisitos:
 
 - Docker
 - Docker Compose
@@ -134,14 +101,14 @@ Na raiz do projeto, execute:
 docker compose up --build
 ```
 
-Serviços disponíveis:
+Servicos disponiveis apos a subida:
 
-- Frontend: `http://localhost:4173`
+- Interface: `http://localhost:4173`
 - API: `http://localhost:8000`
-- Documentação Swagger da API: `http://localhost:8000/docs`
+- Documentacao Swagger: `http://localhost:8000/docs`
 - PostgreSQL: `localhost:5432`
 
-Credenciais padrão do banco:
+Credenciais padrao do banco local:
 
 ```text
 POSTGRES_USER=admin
@@ -149,84 +116,7 @@ POSTGRES_PASSWORD=admin
 POSTGRES_DB=dados_imobiliarios_fortaleza
 ```
 
-## Endpoints da API
-
-### `GET /health`
-
-Verifica se a API está online.
-
-```bash
-curl http://localhost:8000/health
-```
-
-### `POST /insertData`
-
-Recebe um CSV bruto, executa a pipeline de tratamento e salva os dados tratados no PostgreSQL.
-
-```bash
-curl -X POST http://localhost:8000/insertData \
-  -F "file=@scraping/outputs/vivareal_live_10k.csv"
-```
-
-Resposta esperada:
-
-```json
-{
-  "status": "sucesso",
-  "linhas_recebidas": 10000,
-  "linhas_tratadas": 8500,
-  "linhas_salvas": 8500,
-  "resumo_filtros": []
-}
-```
-
-### `POST /trainModels`
-
-Carrega do PostgreSQL os dados salvos no último ano, treina os modelos candidatos, seleciona o campeão e salva o artefato em `api/artifacts/modelo_campeao.pkl`.
-
-```bash
-curl -X POST http://localhost:8000/trainModels
-```
-
-### `POST /predict`
-
-Recebe as características de um imóvel e retorna o preço estimado pelo modelo campeão.
-
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "bairro": "Aldeota",
-    "area_m2": 85,
-    "quartos": 3,
-    "banheiros": 2,
-    "suites": 1,
-    "andar": 5,
-    "vagas": 2,
-    "tipo_imovel_padronizado": "apartamento_padrao",
-    "portaria": true,
-    "vista_mar": false,
-    "condominio_fechado": true,
-    "piscina": true,
-    "deck": false,
-    "varanda_gourmet": true,
-    "varanda": true,
-    "academia": true,
-    "salao_festa": true,
-    "salao_jogos": false,
-    "quadra_campo": false
-  }'
-```
-
-## Interface
-
-A interface web possui três áreas principais:
-
-- **Predição:** formulário para preencher as características do imóvel e consultar `/predict`.
-- **Inserção de dados:** upload de CSV bruto para `/insertData`.
-- **Modelo:** botão de retreinamento via `/trainModels` e visualização do modelo campeão, RMSE, MAE, R² e ranking.
-
-## Execução local sem Docker
+## Como executar localmente sem Docker
 
 ### API
 
@@ -238,14 +128,21 @@ pip install -r requirements.txt
 uvicorn app:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Para usar a API localmente com PostgreSQL fora do Docker, configure:
+Por padrao, a API espera um PostgreSQL em:
 
-```bash
-$env:DATABASE_URL="postgresql://admin:admin@localhost:5432/dados_imobiliarios_fortaleza"
-$env:CAMINHO_MODELO="artifacts/modelo_campeao.pkl"
+```text
+postgresql://admin:admin@localhost:5432/dados_imobiliarios_fortaleza
 ```
 
-### Frontend
+Tambem e possivel configurar via variaveis de ambiente:
+
+```text
+DATABASE_URL=postgresql://admin:admin@localhost:5432/dados_imobiliarios_fortaleza
+CAMINHO_MODELO=artifacts/modelo_campeao.pkl
+ARTIFACTS_MODELOS_DIR=artifacts/modelos
+```
+
+### Front-end
 
 ```bash
 cd front_end
@@ -253,39 +150,149 @@ npm install
 npm run dev
 ```
 
-Se necessário, configure a URL da API:
+O front-end usa `http://127.0.0.1:8000` como API padrao. Para mudar:
 
-```bash
-$env:VITE_API_BASE_URL="http://127.0.0.1:8000"
+```text
+VITE_API_BASE_URL=http://localhost:8000
 ```
 
-## Testes
+## Funcionalidades
 
-Os testes ficam em `api/tests/` e cobrem partes da API, pipeline de dados e pipeline de modelos.
+### Predicao de preco
+
+A interface possui uma pagina para informar atributos do imovel e consultar o preco estimado pelo modelo ativo. A API retorna o valor estimado e uma explicacao simples baseada nas features mais importantes do modelo ativo.
+
+### Ingestao de dados
+
+Permite upload de arquivos CSV com dados brutos. A pipeline trata os registros, salva os dados tratados no PostgreSQL e registra metadados do lote, como arquivo, quantidade de linhas recebidas, linhas tratadas, linhas salvas e status.
+
+### Treinamento de modelos
+
+Permite iniciar experimentos de treinamento com modelos selecionados, busca bayesiana ou grid manual e numero configuravel de tentativas. O treinamento usa dados ativos do ultimo ano, salva artefatos versionados, registra metricas e ativa o modelo campeao.
+
+### Operacao de modelos
+
+A plataforma exibe modelo ativo, historico de experimentos, leaderboard, logs de treinamento, importancia de features e indicador de drift. Tambem permite ativar modelos anteriores ja treinados.
+
+## Features usadas no modelo
+
+Alvo:
+
+- `preco`
+
+Features categoricas:
+
+- `bairro`
+- `tipo_imovel_padronizado`
+
+Features numericas:
+
+- `area_m2`
+- `quartos`
+- `banheiros`
+- `suites`
+- `andar`
+- `vagas`
+
+Features booleanas:
+
+- `portaria`
+- `vista_mar`
+- `condominio_fechado`
+- `piscina`
+- `deck`
+- `varanda_gourmet`
+- `varanda`
+- `academia`
+- `salao_festa`
+- `salao_jogos`
+- `quadra_campo`
+
+## Principais rotas da API
+
+| Metodo | Rota | Descricao |
+| --- | --- | --- |
+| `GET` | `/health` | Verifica se a API esta online. |
+| `POST` | `/insertData` | Recebe um CSV bruto, trata e salva os dados no PostgreSQL. |
+| `GET` | `/data/status` | Retorna resumo dos dados ativos. |
+| `GET` | `/data/ingestions` | Lista lotes de ingestao. |
+| `POST` | `/data/ingestions/{id_lote}/rollback` | Desativa registros de um lote de ingestao. |
+| `POST` | `/trainModels` | Inicia treinamento assincrono de modelos. |
+| `GET` | `/training/{id_experimento}` | Consulta status e resultados de um experimento. |
+| `GET` | `/training/{id_experimento}/logs` | Consulta logs de treinamento. |
+| `GET` | `/models/history` | Lista historico de experimentos. |
+| `GET` | `/models/leaderboard` | Lista modelos treinados ordenados por desempenho. |
+| `GET` | `/models/active` | Retorna o modelo atualmente ativo. |
+| `POST` | `/models/{id_modelo}/activate` | Ativa um modelo treinado. |
+| `GET` | `/models/{id_modelo}/feature-importance` | Retorna importancia de features do modelo. |
+| `GET` | `/model-health/drift` | Retorna indicador de drift/preco recente. |
+| `POST` | `/predict` | Prediz o preco de um imovel com o modelo ativo. |
+
+## Exemplo de predicao
 
 ```bash
-cd api
-pytest
+curl -X POST http://localhost:8000/predict ^
+  -H "Content-Type: application/json" ^
+  -d "{
+    \"bairro\": \"Aldeota\",
+    \"area_m2\": 85,
+    \"quartos\": 3,
+    \"banheiros\": 2,
+    \"suites\": 1,
+    \"andar\": 5,
+    \"vagas\": 2,
+    \"tipo_imovel_padronizado\": \"apartamento_padrao\",
+    \"portaria\": true,
+    \"vista_mar\": false,
+    \"condominio_fechado\": true,
+    \"piscina\": true,
+    \"deck\": false,
+    \"varanda_gourmet\": false,
+    \"varanda\": true,
+    \"academia\": true,
+    \"salao_festa\": true,
+    \"salao_jogos\": false,
+    \"quadra_campo\": false
+  }"
 ```
 
-## Metodologia resumida
+Antes de usar `/predict`, e necessario existir um modelo ativo. Caso ainda nao exista, envie dados e execute `/trainModels`.
 
-1. Coleta de dados reais de anúncios imobiliários via scraping.
-2. Normalização dos nomes de colunas vindos de diferentes fontes.
-3. Padronização de bairros, tipo de imóvel e amenidades.
-4. Remoção de duplicidades por identificador e por conteúdo.
-5. Filtragem de imóveis fora do escopo residencial.
-6. Tratamento de outliers de preço, área, quartos, banheiros e andar.
-7. Persistência dos dados tratados no PostgreSQL com data de salvamento.
-8. Seleção dos registros do último ano para treinamento.
-9. Treinamento com validação cruzada e busca de hiperparâmetros.
-10. Comparação por RMSE, MAE e R².
-11. Salvamento do modelo campeão para uso em produção pela API.
+## Modelos disponiveis
 
-## Próximos passos
+O registro atual de modelos inclui:
 
-- Implementar painel de detecção de drift ou mudança significativa de preços.
-- Registrar histórico de treinamentos em tabela própria.
-- Adicionar autenticação para operações de ingestão e retreinamento.
-- Expandir a avaliação experimental no artigo com gráficos, tabelas e análise de erro por bairro/tipo de imóvel.
-- Incluir GWR com stack espacial apropriado para comparar modelos globais e locais.
+- XGBoost
+- LightGBM
+- CatBoost
+- Random Forest
+- Ridge
+- Lasso
+- SVR
+- MLP
+
+GWR aparece como possibilidade futura, mas depende de uma stack espacial especifica e ainda nao esta ativo no registro de treinamento.
+
+## Documentacao do projeto
+
+As especificacoes funcionais e arquiteturais ficam em `specs/`, incluindo:
+
+- `specs/product.md`
+- `specs/architecture.md`
+- `specs/domain.md`
+- `specs/quality.md`
+- `specs/capabilities/`
+
+Artefatos academicos e experimentais:
+
+- `artigo.tex`: texto academico do projeto.
+- `artigo final.pdf`: versao renderizada do artigo.
+- `modelagem_busca_bayesiana.ipynb`: experimento principal com Optuna.
+- `modelagem_com_analises.ipynb`: analises exploratorias e diagnosticos.
+- `figures/`: graficos comparativos, valores reais versus previstos e residuos.
+
+## Apresentacao
+
+Link da apresentacao:
+
+https://gamma.app/docs/Predicao-de-Precos-de-Imoveis-em-Fortaleza-uztc2kmhj4e9twl

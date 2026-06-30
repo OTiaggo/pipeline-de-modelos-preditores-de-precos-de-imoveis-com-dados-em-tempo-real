@@ -68,6 +68,28 @@ System users can submit raw data. The data pipeline owns cleaning, normalization
 
 **Traceability:** [DOM-DATA-002](../domain.md#dom-data-002), [ARCH-DATA-001](../architecture.md#arch-data-001), [CAP-MODEL-001](model-training.md#cap-model-001)
 
+<a id="cap-data-004"></a>
+
+### CAP-DATA-004: Ingestion State and Logical Rollback
+
+**Description:** The system shall expose the current treated-data state and the history of uploaded ingestion batches.
+
+**Priority:** Must
+
+**Rationale:** System users need to understand how much active data is available, when it was updated, and whether a bad upload should be excluded.
+
+**Acceptance Criteria:**
+
+1. WHEN a CSV upload is accepted THEN the system SHALL record an ingestion batch with filename, upload date, row counts, status, and error message when applicable.
+2. WHEN treated records are saved THEN each record SHALL be associated with the ingestion batch that created it and marked active.
+3. WHEN a system user requests the data status THEN the system SHALL return active-record counts, latest upload date, price aggregates, property-type distribution, and top neighborhoods without reprocessing source files.
+4. WHEN a system user rolls back an ingestion batch THEN the system SHALL mark the batch and its records inactive without physically deleting the records.
+5. WHEN training data is queried THEN inactive records SHALL be excluded.
+
+**Verification:** Automated API test and integration test
+
+**Traceability:** [ARCH-DATA-001](../architecture.md#arch-data-001), [QUAL-RELIABILITY-001](../quality.md#qual-reliability-001)
+
 ## Business Rules
 
 - Raw data comes from web scraping sources.

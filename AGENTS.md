@@ -23,7 +23,6 @@ Por meio da interface o usuario pode inserir atributos sobre um imovel e predize
 - condominio_fechado
 - piscina
 - deck
-- varanda_gourmet
 - varanda
 - academia
 - salao_festa
