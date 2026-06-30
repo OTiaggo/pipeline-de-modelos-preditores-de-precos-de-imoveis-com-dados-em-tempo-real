@@ -29,7 +29,7 @@ O PDF do projeto final solicita um trabalho de aprendizagem de máquina com dado
 | Mais de um modelo | XGBoost, LightGBM, CatBoost, Random Forest, Ridge, Lasso, SVR e MLP. |
 | Comparação de desempenho | Ranking por RMSE, com MAE e R² retornados pela API. |
 | Implementação entregue | Código da API, pipelines, scraping, frontend, Docker e testes. |
-| Discussão de resultados | Artefatos e rankings salvos em `modelos de aprendizagem/artifacts_modelagem/`. |
+| Discussão de resultados | Artefatos e rankings salvos em `modelagem/artifacts_modelagem/`. |
 
 ## Features usadas no modelo
 
@@ -101,23 +101,44 @@ A seleção do modelo campeão é feita pelo menor **RMSE** médio em validaçã
 
 ```text
 .
-|-- api/
-|   |-- app.py                         # API FastAPI
+|-- api/                                # Backend FastAPI e pipeline em produção
+|   |-- app.py                          # Endpoints de saúde, ingestão, treino e predição
 |   |-- src/
-|   |   |-- pipeline_dados.py           # Limpeza e preparação dos dados
-|   |   |-- pipeline_modelos.py         # Treinamento e seleção do modelo
-|   |   |-- models/                     # Configurações dos modelos
-|   |   `-- utils/training.py           # Busca, validação e métricas
-|   |-- tests/                          # Testes automatizados
-|   `-- artifacts/modelo_campeao.pkl    # Modelo selecionado
-|-- front_end/
-|   `-- src/App.jsx                     # Interface web
-|-- scraping/
-|   `-- scripts/                        # Scripts de scraping
-|-- dados_tratados/                     # Bases tratadas e notebooks
-|-- modelos de aprendizagem/            # Notebooks e artefatos de modelagem
-|-- docker/postgres/init.sql            # Schema inicial do banco
-|-- docker-compose.yml                  # Orquestração dos serviços
+|   |   |-- pipeline_dados.py            # Limpeza, padronização e filtros dos dados
+|   |   |-- pipeline_modelos.py          # Treinamento, comparação e persistência do campeão
+|   |   |-- models/                      # Definições dos modelos candidatos
+|   |   `-- utils/training.py            # Busca de hiperparâmetros, validação e métricas
+|   |-- artifacts/                       # Modelos gerados pela API
+|   |-- dataset/                         # Dados de referência usados pelo backend
+|   |-- tests/                           # Testes automatizados da API e dos pipelines
+|   |-- Dockerfile
+|   |-- pyproject.toml
+|   `-- requirements.txt
+|-- front_end/                           # Interface React/Vite
+|   |-- src/
+|   |   |-- App.jsx                      # Tela de predição, ingestão e retreinamento
+|   |   |-- main.jsx
+|   |   `-- styles.css
+|   |-- Dockerfile
+|   |-- package.json
+|   `-- vite.config.js
+|-- scraping/                            # Coleta de anúncios imobiliários
+|   |-- scripts/                         # Scrapers e utilitários principais
+|   |-- outputs/                         # CSVs gerados por scraping
+|   |-- html_scraping/                   # Páginas HTML de apoio à coleta
+|   `-- imov-scraper-v1/                 # Versão alternativa/experimental do scraper
+|-- tratamento de dados/                 # Notebooks e bases tratadas da etapa de limpeza
+|   |-- dados_tratados/                  # Bases intermediárias de tratamento
+|   `-- *.ipynb / *.csv
+|-- modelagem/                           # Experimentos, notebooks e artefatos de modelos
+|   |-- artifacts_modelagem/             # Rankings e modelos exportados por algoritmo
+|   `-- *.ipynb
+|-- specs/                               # Documentação técnica e requisitos do projeto
+|   `-- capabilities/                    # Especificações por capacidade do sistema
+|-- docker/
+|   `-- postgres/init.sql                # Schema inicial do banco
+|-- docker-compose.yml                   # Orquestração de API, frontend e PostgreSQL
+|-- requirements.txt                     # Dependências Python de nível raiz
 `-- README.md
 ```
 
