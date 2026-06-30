@@ -42,7 +42,6 @@ def _raw_row(**overrides):
         "tem_condominio_fechado": True,
         "tem_piscina": True,
         "tem_deck": False,
-        "tem_varanda_gourmet": True,
         "tem_varanda": True,
         "tem_academia": True,
         "tem_salao_festas": True,

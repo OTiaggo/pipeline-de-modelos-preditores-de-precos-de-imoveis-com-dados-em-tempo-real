@@ -36,7 +36,7 @@ AMENITY_MAP = {
     "SEA_VIEW": "tem_vista_pro_mar",
     "GATED_COMMUNITY": "tem_condominio_fechado",
     "POOL": "tem_piscina",
-    "GOURMET_BALCONY": "tem_varanda_gourmet",
+    "GOURMET_BALCONY": "tem_varanda",
     "BALCONY": "tem_varanda",
     "GYM": "tem_academia",
     "PARTY_HALL": "tem_salao_festas",
@@ -444,7 +444,6 @@ def parse_detail_page(text: str) -> Optional[Dict[str, object]]:
     result["tem_vista_pro_mar"] = result.get("tem_vista_pro_mar", False)
     result["tem_condominio_fechado"] = result.get("tem_condominio_fechado", False)
     result["tem_piscina"] = result.get("tem_piscina", False)
-    result["tem_varanda_gourmet"] = result.get("tem_varanda_gourmet", False)
     result["tem_varanda"] = result.get("tem_varanda", False)
     result["tem_academia"] = result.get("tem_academia", False)
     result["tem_salao_festas"] = result.get("tem_salao_festas", False)
@@ -529,7 +528,6 @@ def field_order() -> List[str]:
         "tem_condominio_fechado",
         "tem_piscina",
         "tem_deck",
-        "tem_varanda_gourmet",
         "tem_varanda",
         "tem_academia",
         "tem_salao_festas",

@@ -13,7 +13,7 @@ FIELDS = [
     "area_m2", "quartos", "banheiros", "vagas", "suites", "andar", "numero_endereco",
     "bairro", "cidade", "estado", "condominio", "iptu", "endereco", "descricao",
     "portaria", "vista_mar", "condominio_fechado", "piscina", "deck",
-    "varanda_gourmet", "varanda", "academia", "salao_festa", "salao_jogos",
+    "varanda", "academia", "salao_festa", "salao_jogos",
     "quadra_campo", "latitude", "longitude", "is_lancamento", "data_coleta", "url",
 ]
 
@@ -23,7 +23,7 @@ OLX_LIVE_FIELDS = [
     "banheiros", "suites", "andar", "estacionamentos", "preco_anuncio",
     "latitude", "longitude", "tem_portaria_24h", "tem_vista_pro_mar",
     "tem_condominio_fechado", "tem_piscina", "tem_deck",
-    "tem_varanda_gourmet", "tem_varanda", "tem_academia",
+    "tem_varanda", "tem_academia",
     "tem_salao_festas", "tem_salao_jogos", "tem_quadra_campo", "descricao",
     "anuncio_criado", "corretora", "nota_media", "url", "imagem_url",
 ]
@@ -74,7 +74,6 @@ def _olx_live_row(item):
         "tem_condominio_fechado": _bool_cell(r.get("condominio_fechado")),
         "tem_piscina": _bool_cell(r.get("piscina")),
         "tem_deck": _bool_cell(r.get("deck")),
-        "tem_varanda_gourmet": _bool_cell(r.get("varanda_gourmet")),
         "tem_varanda": _bool_cell(r.get("varanda")),
         "tem_academia": _bool_cell(r.get("academia")),
         "tem_salao_festas": _bool_cell(r.get("salao_festa")),

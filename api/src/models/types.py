@@ -41,3 +41,5 @@ class ModelSearchResult:
     mae: float
     r2: float
     estimator: BaseEstimator
+    search_strategy: SearchStrategy = "grid"
+    duration_seconds: float = 0.0

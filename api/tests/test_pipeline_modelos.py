@@ -70,8 +70,47 @@ def test_treinar_modelos_salva_campeao_com_registro_reduzido(tmp_path):
     )
 
     assert champion.model_key in model_registry
+    assert "model_key" in ranking.columns
     assert list(ranking["rmse"]) == sorted(ranking["rmse"])
     assert (tmp_path / "campeao.pkl").exists()
+
+
+def test_treinar_modelos_aceita_subconjunto_e_grid_manual(tmp_path):
+    X = pd.DataFrame(
+        {
+            "bairro": ["Aldeota", "Meireles", "Centro", "Aldeota", "Centro", "Meireles"],
+            "tipo_imovel_padronizado": ["apartamento_padrao", "casa_padrao"] * 3,
+            "area_m2": [60, 90, 45, 80, 55, 100],
+            "quartos": [2, 3, 1, 3, 2, 4],
+        }
+    )
+    y = pd.Series([420000, 650000, 250000, 590000, 310000, 760000])
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ("categorical", OneHotEncoder(handle_unknown="ignore"), ["bairro", "tipo_imovel_padronizado"]),
+            ("numeric", "passthrough", ["area_m2", "quartos"]),
+        ]
+    )
+
+    champion, ranking = pipeline_modelos.treinar_modelos(
+        X,
+        y,
+        preprocessor,
+        caminho_modelo=tmp_path / "campeao.pkl",
+        model_registry={
+            "ridge": pipeline_modelos.MODEL_REGISTRY["ridge"],
+            "lasso": pipeline_modelos.MODEL_REGISTRY["lasso"],
+        },
+        model_keys=["ridge"],
+        search_strategy="grid",
+        param_grids={"ridge": {"alpha": [0.1, 1.0]}},
+        n_splits=3,
+        n_trials=1,
+    )
+
+    assert champion.model_key == "ridge"
+    assert set(ranking["model_key"]) == {"ridge"}
+    assert ranking.attrs["results"][0].search_strategy == "grid"
 
 
 def test_treino_final_de_producao_refita_campeao_com_todos_os_dados(tmp_path):

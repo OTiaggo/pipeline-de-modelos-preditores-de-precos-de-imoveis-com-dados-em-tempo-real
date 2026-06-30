@@ -21,7 +21,7 @@ FIELDS = [
     "banheiros", "suites", "andar", "estacionamentos", "preco_anuncio",
     "latitude", "longitude", "tem_portaria_24h", "tem_vista_pro_mar",
     "tem_condominio_fechado", "tem_piscina", "tem_deck",
-    "tem_varanda_gourmet", "tem_varanda", "tem_academia",
+    "tem_varanda", "tem_academia",
     "tem_salao_festas", "tem_salao_jogos", "tem_quadra_campo", "descricao",
     "anuncio_criado", "corretora", "nota_media", "url", "imagem_url",
 ]
@@ -164,7 +164,6 @@ def normalize_row(ad: dict, kind: str) -> dict:
         "tem_condominio_fechado": bool_cell(feats.get("condominio_fechado")),
         "tem_piscina": bool_cell(feats.get("piscina")),
         "tem_deck": bool_cell(feats.get("deck")),
-        "tem_varanda_gourmet": bool_cell(feats.get("varanda_gourmet")),
         "tem_varanda": bool_cell(feats.get("varanda")),
         "tem_academia": bool_cell(feats.get("academia")),
         "tem_salao_festas": bool_cell(feats.get("salao_festa")),

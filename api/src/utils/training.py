@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from pathlib import Path
+from dataclasses import replace
+import time
 from typing import Any
 
 import joblib
@@ -274,38 +276,61 @@ def treinar_modelos(
     *,
     caminho_modelo: str | Path,
     model_registry: dict[str, ModelConfig] | None = None,
+    model_keys: list[str] | None = None,
+    search_strategy: str | None = None,
+    param_grids: dict[str, dict[str, list[Any]]] | None = None,
     n_splits: int = DEFAULT_N_SPLITS,
     n_trials: int = DEFAULT_N_TRIALS,
 ) -> tuple[ModelSearchResult, pd.DataFrame]:
     registry = model_registry or MODEL_REGISTRY
+    if model_keys:
+        missing = [model_key for model_key in model_keys if model_key not in registry]
+        if missing:
+            raise ValueError(f"Modelos nao suportados: {missing}")
+        registry = {model_key: registry[model_key] for model_key in model_keys}
+
     cv = KFold(n_splits=n_splits, shuffle=True, random_state=DEFAULT_RANDOM_STATE)
     results: list[ModelSearchResult] = []
+    grids = param_grids or {}
 
     for model_key, config in registry.items():
         print(f"\n=== Otimizando {config.display_name} ===")
+        started_at = time.perf_counter()
         try:
-            if config.search_strategy == "optuna":
+            effective_config = config
+            if model_key in grids:
+                effective_config = replace(config, search_strategy="grid", param_grid=grids[model_key])
+
+            requested_strategy = (search_strategy or effective_config.search_strategy).lower()
+            if requested_strategy in {"bayesiana", "bayesian", "optuna"} and effective_config.suggest_params is not None:
+                effective_config = replace(effective_config, search_strategy="optuna")
+            elif requested_strategy in {"grid", "manual", "grid_manual"}:
+                effective_config = replace(effective_config, search_strategy="grid")
+
+            if effective_config.search_strategy == "optuna":
                 best_params, best_metrics = _optimize_with_optuna(
                     model_key,
                     X,
                     y,
                     preprocessor,
-                    config,
+                    effective_config,
                     cv,
                     n_trials,
                 )
             else:
-                best_params, best_metrics = _optimize_with_grid(X, y, preprocessor, config, cv)
+                best_params, best_metrics = _optimize_with_grid(X, y, preprocessor, effective_config, cv)
 
-            final_estimator = _fit_final_estimator(X, y, preprocessor, config, best_params)
+            final_estimator = _fit_final_estimator(X, y, preprocessor, effective_config, best_params)
             result = ModelSearchResult(
                 model_key=model_key,
-                display_name=config.display_name,
+                display_name=effective_config.display_name,
                 best_params=best_params,
                 rmse=best_metrics["rmse"],
                 mae=best_metrics["mae"],
                 r2=best_metrics["r2"],
                 estimator=final_estimator,
+                search_strategy=effective_config.search_strategy,
+                duration_seconds=time.perf_counter() - started_at,
             )
             results.append(result)
             print(
@@ -321,15 +346,19 @@ def treinar_modelos(
     ranking = pd.DataFrame(
         [
             {
+                "model_key": result.model_key,
                 "modelo": result.display_name,
                 "rmse": result.rmse,
                 "mae": result.mae,
                 "r2": result.r2,
                 "best_params": result.best_params,
+                "search_strategy": result.search_strategy,
+                "duration_seconds": result.duration_seconds,
             }
             for result in results
         ]
     ).sort_values("rmse", ascending=True, ignore_index=True)
+    ranking.attrs["results"] = results
 
     print("\n=== Ranking final por RMSE ===")
     print(ranking[["modelo", "rmse", "mae", "r2"]].to_string(index=False))

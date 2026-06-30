@@ -26,7 +26,7 @@ services:
     restart: always
     environment:
       DATABASE_URL: postgresql://admin:admin@db:5432/dados_imobiliarios_fortaleza
-      CAMINHO_MODELO: /app/api/artifacts/modelo_campeao.pkl
+      CAMINHO_MODELO: /app/api/artifacts/modelos/2/catboost.pkl
     volumes:
       - ./api/artifacts:/app/api/artifacts
       - ./api:/app/api
@@ -39,11 +39,11 @@ services:
   frontend:
     build:
       context: ./front_end
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: imoveis_frontend
     restart: always
     ports:
-      - "4173:80"
+      - "4173:5173"
     depends_on:
       - api
 
